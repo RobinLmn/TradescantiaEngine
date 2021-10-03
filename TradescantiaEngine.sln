@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Playground", "Playground\Playground.vcxproj", "{23231CD5-E173-4BA1-B18D-73407D21B290}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TradescantiaEngine", "TradescantiaEngine\TradescantiaEngine.vcxproj", "{BC1C1CEB-E3E9-4EE1-9400-407520D5EDEB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BC1C1CEB-E3E9-4EE1-9400-407520D5EDEB}.Debug|x64.ActiveCfg = Debug|x64
+		{BC1C1CEB-E3E9-4EE1-9400-407520D5EDEB}.Debug|x64.Build.0 = Debug|x64
+		{BC1C1CEB-E3E9-4EE1-9400-407520D5EDEB}.Release|x64.ActiveCfg = Release|x64
+		{BC1C1CEB-E3E9-4EE1-9400-407520D5EDEB}.Release|x64.Build.0 = Release|x64
+		{23231CD5-E173-4BA1-B18D-73407D21B290}.Debug|x64.ActiveCfg = Debug|x64
+		{23231CD5-E173-4BA1-B18D-73407D21B290}.Debug|x64.Build.0 = Debug|x64
+		{23231CD5-E173-4BA1-B18D-73407D21B290}.Release|x64.ActiveCfg = Release|x64
+		{23231CD5-E173-4BA1-B18D-73407D21B290}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1FC9159D-C9CF-456C-84A5-39231D89CD44}
+	EndGlobalSection
+EndGlobal
