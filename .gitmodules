@@ -1,0 +1,3 @@
+[submodule "TradescantiaEngine/vendor/spdlog"]
+	path = TradescantiaEngine/vendor/spdlog
+	url = https://github.com/gabime/spdlog
