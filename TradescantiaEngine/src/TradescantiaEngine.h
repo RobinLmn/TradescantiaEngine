@@ -1,7 +1,7 @@
 #pragma once
 
 #include "TradescantiaEngine/Application.h"
-#include <iostream>
+#include "TradescantiaEngine/Log.h"
 
 // -------------------- ENTRY POINT ------------------------
 
