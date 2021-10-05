@@ -1,31 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="TradescantiaEngine">
-      <UniqueIdentifier>{EED9F408-DABD-B55E-431E-B0B12F21A0E0}</UniqueIdentifier>
+    <Filter Include="Core">
+      <UniqueIdentifier>{2EB4837C-1AEB-840D-C3D7-6A10AFED000F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{DBC7D3B0-C769-FE86-B024-12DB9C6585D7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EventSystem">
+      <UniqueIdentifier>{CCE875DF-389E-EED4-C192-E8AB2D47E5D8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EventSystem\Events">
+      <UniqueIdentifier>{3037AC02-1C1B-6D58-857B-67AB717E57DA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{F68B420E-62A0-6ABF-2B22-0E1F97F566F0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\TradescantiaEngine.h" />
-    <ClInclude Include="src\TradescantiaEngine\Application.h">
-      <Filter>TradescantiaEngine</Filter>
+    <ClInclude Include="Source\Core\Core.h">
+      <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\TradescantiaEngine\Core.h">
-      <Filter>TradescantiaEngine</Filter>
+    <ClInclude Include="Source\Core\EntryPoint.h">
+      <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\TradescantiaEngine\EntryPoint.h">
-      <Filter>TradescantiaEngine</Filter>
+    <ClInclude Include="Source\Engine\Engine.h">
+      <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="src\TradescantiaEngine\Log.h">
-      <Filter>TradescantiaEngine</Filter>
+    <ClInclude Include="Source\EventSystem\Event.h">
+      <Filter>EventSystem</Filter>
     </ClInclude>
+    <ClInclude Include="Source\EventSystem\Events\KeyEvent.h">
+      <Filter>EventSystem\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EventSystem\Events\MouseEvent.h">
+      <Filter>EventSystem\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EventSystem\Events\WindowEvent.h">
+      <Filter>EventSystem\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TradescantiaEngine.h" />
+    <ClInclude Include="Source\Utils\Log.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\tscpch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\TradescantiaEngine\Application.cpp">
-      <Filter>TradescantiaEngine</Filter>
+    <ClCompile Include="Source\Engine\Engine.cpp">
+      <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="src\TradescantiaEngine\Log.cpp">
-      <Filter>TradescantiaEngine</Filter>
+    <ClCompile Include="Source\Utils\Log.cpp">
+      <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="Source\tscpch.cpp" />
   </ItemGroup>
 </Project>

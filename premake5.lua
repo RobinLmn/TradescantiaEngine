@@ -18,15 +18,19 @@ project "TradescantiaEngine"
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+	pchheader "tscpch.h"
+	pchsource "TradescantiaEngine/Source/tscpch.cpp"
+
 	files
 	{
-		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp",
+		"TradescantiaEngine/Source/**.h",
+		"TradescantiaEngine/Source/**.cpp",
 	}
 
 	includedirs
 	{
-		"TradescantiaEngine/vendor/spdlog/include"
+		"TradescantiaEngine/ThirdParty/spdlog/include",
+		"TradescantiaEngine/Source"
 	}
 
 	filter "system:windows"
@@ -67,14 +71,14 @@ project "Playground"
 
 	files
 	{
-		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp",
+		"Playground/Source/**.h",
+		"Playground/Source/**.cpp",
 	}
 
 	includedirs
 	{
-		"TradescantiaEngine/vendor/spdlog/include",
-		"TradescantiaEngine/src"
+		"TradescantiaEngine/ThirdParty/spdlog/include",
+		"TradescantiaEngine/Source"
 	}
 
 	links
