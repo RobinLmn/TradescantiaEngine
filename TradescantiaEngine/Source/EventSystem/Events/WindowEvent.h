@@ -13,7 +13,9 @@ namespace TradescantiaEngine
 	
 		virtual std::string ToString() const override
 		{
-			return std::string("WindowClose");
+			std::stringstream ss;
+			ss << "MouseCloseEvent";
+			return ss.str();;
 		}
 	};
 

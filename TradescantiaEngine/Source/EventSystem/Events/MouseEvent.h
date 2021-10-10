@@ -17,7 +17,9 @@ namespace TradescantiaEngine
 
 		virtual std::string ToString() const override
 		{
-			return std::string("MouseMoved to (%f, %f)", m_X, m_Y);
+			std::stringstream ss;
+			ss << "MouseMovedEvent: " << m_X << ", " << m_Y;
+			return ss.str();
 		}
 
 		SET_EVENTTYPE(EventType::MouseMoved);
@@ -29,7 +31,7 @@ namespace TradescantiaEngine
 	class TSC_API MouseScrolledEvent : public Event
 	{
 	public:
-		MouseScrolledEvent(float xOffset, float yOffset)
+		MouseScrolledEvent(double xOffset, double yOffset)
 			: m_XOffset(xOffset), m_YOffset(yOffset) {}
 
 		virtual int GetCategoryFlags() const override
@@ -41,11 +43,13 @@ namespace TradescantiaEngine
 
 		virtual std::string ToString() const override
 		{
-			return std::string("MouseScrolled by (%f, %f)", m_XOffset, m_YOffset);
+			std::stringstream ss;
+			ss << "MouseScrolledEvent: " << m_XOffset << ", " << m_YOffset;
+			return ss.str();
 		}
 
-		float m_XOffset;
-		float m_YOffset;
+		double m_XOffset;
+		double m_YOffset;
 	};
 
 	class TSC_API MouseButtonEvent : public Event
@@ -65,12 +69,16 @@ namespace TradescantiaEngine
 	class TSC_API MouseButtonReleasedEvent : public MouseButtonEvent
 	{
 	public:
+		MouseButtonReleasedEvent(int button)
+			: MouseButtonEvent(button) {}
 
 		SET_EVENTTYPE(EventType::MouseButtonReleased);
 
 		virtual std::string ToString() const override
 		{
-			return std::string("MouseButtonReleased key=%", m_Button);
+			std::stringstream ss;
+			ss << "MouseButtonReleasedEvent: " << m_Button;
+			return ss.str();
 		}
 	};
 
@@ -84,7 +92,9 @@ namespace TradescantiaEngine
 
 		virtual std::string ToString() const override
 		{
-			return std::string("MouseButtonPressed key=% ; count=%f", m_Button, m_RepeatedCount);
+			std::stringstream ss;
+			ss << "MouseButtonPressedEvent: " << m_Button;
+			return ss.str();
 		}
 
 		int m_RepeatedCount;

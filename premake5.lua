@@ -10,6 +10,11 @@ workspace "TradescantiaEngine"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+IncludeDir = {}
+IncludeDir["GLFW"] = "TradescantiaEngine/ThirdParty/GLFW/include"
+
+include "TradescantiaEngine/ThirdParty/GLFW"
+
 project "TradescantiaEngine"
 	location "TradescantiaEngine"
 	kind "SharedLib"
@@ -30,7 +35,14 @@ project "TradescantiaEngine"
 	includedirs
 	{
 		"TradescantiaEngine/ThirdParty/spdlog/include",
-		"TradescantiaEngine/Source"
+		"TradescantiaEngine/Source",
+		"%{IncludeDir.GLFW}"
+	}
+
+	links
+	{
+		"GLFW",
+		"opengl32.lib"
 	}
 
 	filter "system:windows"

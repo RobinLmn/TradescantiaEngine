@@ -25,7 +25,9 @@ namespace TradescantiaEngine
 
 		virtual std::string ToString() const override
 		{
-			return std::string("KeyPressed key=%d ; count=%d", m_KeyCode, m_RepeatedCount);
+			std::stringstream ss;
+			ss << "KeyPressedEvent: " << m_KeyCode << " (" << m_RepeatedCount << " repeats)";
+			return ss.str();
 		}
 
 		SET_EVENTTYPE(EventType::KeyPressed);
@@ -35,9 +37,15 @@ namespace TradescantiaEngine
 
 	class TSC_API KeyReleasedEvent: public KeyEvent
 	{
+	public:
+		KeyReleasedEvent(int keycode)
+			: KeyEvent(keycode) {}
+
 		virtual std::string ToString() const override
 		{
-			return std::string("KeyReleased key=%d", m_KeyCode);
+			std::stringstream ss;
+			ss << "KeyReleasedEvent: " << m_KeyCode;
+			return ss.str();
 		}
 
 		SET_EVENTTYPE(EventType::KeyReleased);
