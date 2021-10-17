@@ -12,8 +12,10 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 IncludeDir = {}
 IncludeDir["GLFW"] = "TradescantiaEngine/ThirdParty/GLFW/include"
+IncludeDir["glad"] = "TradescantiaEngine/ThirdParty/glad/include"
 
 include "TradescantiaEngine/ThirdParty/GLFW"
+include "TradescantiaEngine/ThirdParty/glad"
 
 project "TradescantiaEngine"
 	location "TradescantiaEngine"
@@ -36,11 +38,13 @@ project "TradescantiaEngine"
 	{
 		"TradescantiaEngine/ThirdParty/spdlog/include",
 		"TradescantiaEngine/Source",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.glad}"
 	}
 
 	links
 	{
+		"glad",
 		"GLFW",
 		"opengl32.lib"
 	}
@@ -53,7 +57,8 @@ project "TradescantiaEngine"
 		defines
 		{
 			"TSC_PLATFORM_WINDOWS",
-			"TSC_BUILD_DLL"
+			"TSC_BUILD_DLL",
+			"GLFW_INCLUDE_NONE"
 		}
 
 		postbuildcommands
@@ -63,14 +68,17 @@ project "TradescantiaEngine"
 
 	filter "configurations:Debug"
 		defines "TSC_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 	
 	filter "configurations:Release"
 		defines "TSC_RELEASE"
+		buildoptions "/MD"
 		symbols "On"
 
 	filter "configurations:Dist"
 		defines "TSC_DIST"
+		buildoptions "/MD"
 		symbols "On"
 
 project "Playground"
@@ -110,12 +118,15 @@ project "Playground"
 
 	filter "configurations:Debug"
 		defines "TSC_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 	
 	filter "configurations:Release"
 		defines "TSC_RELEASE"
+		buildoptions "/MD"
 		symbols "On"
 
 	filter "configurations:Dist"
 		defines "TSC_DIST"
+		buildoptions "/MD"
 		symbols "On"

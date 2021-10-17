@@ -32,6 +32,8 @@ namespace TradescantiaEngine
 		virtual std::string ToString() const = 0;
 		virtual int GetCategoryFlags() const = 0;
 
+		const bool isHandled() const { return m_Handled; }
+
 		inline bool IsInCategory(EventCategory category)
 		{
 			return GetCategoryFlags() & category;

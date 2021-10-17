@@ -5,6 +5,8 @@
 #include "EventSystem/Events/MouseEvent.h"
 #include "EventSystem/Events/WindowEvent.h"
 
+#include <glad/glad.h>
+
 namespace TradescantiaEngine
 {
 	static bool s_GLFWInitialized = false;
@@ -46,6 +48,10 @@ namespace TradescantiaEngine
 
 		m_Window = glfwCreateWindow(static_cast<int>(props.Width), static_cast<int>(props.Height), m_Data.Title.c_str(), /*monitor = */ nullptr, /*window = */ nullptr);
 		glfwMakeContextCurrent(m_Window);
+
+		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		TSC_CORE_ASSERT(status, "Failed to initialize glad.");
+
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 
