@@ -5,10 +5,14 @@
 namespace TradescantiaEngine 
 {
 
+	Engine* Engine::s_Instance = nullptr;
+	
 #define BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
 
 	Engine::Engine() 
 	{
+		TSC_ASSERT(!s_Instance, "Engine instance was already created");
+		s_Instance = this;
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(BIND_EVENT_FN(Engine::OnEvent));
 	}
@@ -37,11 +41,13 @@ namespace TradescantiaEngine
 	void Engine::PushLayer(Layer* layer)
 	{
 		m_LayerStack.PushLayer(layer);
+		layer->OnAttach();
 	}
 
 	void Engine::PushOverlay(Layer* layer)
 	{
 		m_LayerStack.PushOverlay(layer);
+		layer->OnAttach();
 	}
 
 	void Engine::Run()

@@ -80,7 +80,7 @@
       <PrecompiledHeaderFile>tscpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>TSC_PLATFORM_WINDOWS;TSC_BUILD_DLL;GLFW_INCLUDE_NONE;TSC_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>ThirdParty\spdlog\include;Source;ThirdParty\GLFW\include;ThirdParty\glad\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>ThirdParty\spdlog\include;Source;ThirdParty\GLFW\include;ThirdParty\glad\include;ThirdParty\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -103,7 +103,7 @@
       <PrecompiledHeaderFile>tscpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>TSC_PLATFORM_WINDOWS;TSC_BUILD_DLL;GLFW_INCLUDE_NONE;TSC_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>ThirdParty\spdlog\include;Source;ThirdParty\GLFW\include;ThirdParty\glad\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>ThirdParty\spdlog\include;Source;ThirdParty\GLFW\include;ThirdParty\glad\include;ThirdParty\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -126,7 +126,7 @@
       <PrecompiledHeaderFile>tscpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>TSC_PLATFORM_WINDOWS;TSC_BUILD_DLL;GLFW_INCLUDE_NONE;TSC_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>ThirdParty\spdlog\include;Source;ThirdParty\GLFW\include;ThirdParty\glad\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>ThirdParty\spdlog\include;Source;ThirdParty\GLFW\include;ThirdParty\glad\include;ThirdParty\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -146,6 +146,7 @@
   <ItemGroup>
     <ClInclude Include="Source\Core\Core.h" />
     <ClInclude Include="Source\Core\EntryPoint.h" />
+    <ClInclude Include="Source\Editor\ImGuiLayer.h" />
     <ClInclude Include="Source\Engine\Engine.h" />
     <ClInclude Include="Source\EventSystem\Event.h" />
     <ClInclude Include="Source\EventSystem\Events\KeyEvent.h" />
@@ -155,15 +156,18 @@
     <ClInclude Include="Source\Layers\LayerStack.h" />
     <ClInclude Include="Source\TradescantiaEngine.h" />
     <ClInclude Include="Source\Utils\Log.h" />
+    <ClInclude Include="Source\Window\Platform\OpenGL\ImGuiOpenGlRenderer.h" />
     <ClInclude Include="Source\Window\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="Source\Window\Window.h" />
     <ClInclude Include="Source\tscpch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Editor\ImGuiLayer.cpp" />
     <ClCompile Include="Source\Engine\Engine.cpp" />
     <ClCompile Include="Source\Layers\Layer.cpp" />
     <ClCompile Include="Source\Layers\LayerStack.cpp" />
     <ClCompile Include="Source\Utils\Log.cpp" />
+    <ClCompile Include="Source\Window\Platform\OpenGL\ImGuiOpenGlRenderer.cpp" />
     <ClCompile Include="Source\Window\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="Source\tscpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
@@ -175,6 +179,9 @@
     </ProjectReference>
     <ProjectReference Include="ThirdParty\GLFW\GLFW.vcxproj">
       <Project>{154B857C-0182-860D-AA6E-6C109684020F}</Project>
+    </ProjectReference>
+    <ProjectReference Include="ThirdParty\ImGui\ImGui.vcxproj">
+      <Project>{C0FF640D-2C14-8DBE-F595-301E616989EF}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

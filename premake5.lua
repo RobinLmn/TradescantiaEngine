@@ -13,9 +13,11 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 IncludeDir = {}
 IncludeDir["GLFW"] = "TradescantiaEngine/ThirdParty/GLFW/include"
 IncludeDir["glad"] = "TradescantiaEngine/ThirdParty/glad/include"
+IncludeDir["ImGui"] = "TradescantiaEngine/ThirdParty/ImGui"
 
 include "TradescantiaEngine/ThirdParty/GLFW"
 include "TradescantiaEngine/ThirdParty/glad"
+include "TradescantiaEngine/ThirdParty/ImGui"
 
 project "TradescantiaEngine"
 	location "TradescantiaEngine"
@@ -39,14 +41,16 @@ project "TradescantiaEngine"
 		"TradescantiaEngine/ThirdParty/spdlog/include",
 		"TradescantiaEngine/Source",
 		"%{IncludeDir.GLFW}",
-		"%{IncludeDir.glad}"
+		"%{IncludeDir.glad}",
+		"%{IncludeDir.ImGui}"
 	}
 
 	links
 	{
 		"glad",
 		"GLFW",
-		"opengl32.lib"
+		"opengl32.lib",
+		"ImGui"
 	}
 
 	filter "system:windows"
