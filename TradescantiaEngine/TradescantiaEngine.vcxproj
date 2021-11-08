@@ -80,7 +80,7 @@
       <PrecompiledHeaderFile>tscpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>TSC_PLATFORM_WINDOWS;TSC_BUILD_DLL;GLFW_INCLUDE_NONE;TSC_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>ThirdParty\spdlog\include;Source;ThirdParty\GLFW\include;ThirdParty\glad\include;ThirdParty\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>ThirdParty\spdlog\include;Source;ThirdParty\GLFW\include;ThirdParty\glad\include;ThirdParty\ImGui;ThirdParty\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -103,7 +103,7 @@
       <PrecompiledHeaderFile>tscpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>TSC_PLATFORM_WINDOWS;TSC_BUILD_DLL;GLFW_INCLUDE_NONE;TSC_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>ThirdParty\spdlog\include;Source;ThirdParty\GLFW\include;ThirdParty\glad\include;ThirdParty\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>ThirdParty\spdlog\include;Source;ThirdParty\GLFW\include;ThirdParty\glad\include;ThirdParty\ImGui;ThirdParty\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -126,7 +126,7 @@
       <PrecompiledHeaderFile>tscpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>TSC_PLATFORM_WINDOWS;TSC_BUILD_DLL;GLFW_INCLUDE_NONE;TSC_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>ThirdParty\spdlog\include;Source;ThirdParty\GLFW\include;ThirdParty\glad\include;ThirdParty\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>ThirdParty\spdlog\include;Source;ThirdParty\GLFW\include;ThirdParty\glad\include;ThirdParty\ImGui;ThirdParty\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -152,11 +152,15 @@
     <ClInclude Include="Source\EventSystem\Events\KeyEvent.h" />
     <ClInclude Include="Source\EventSystem\Events\MouseEvent.h" />
     <ClInclude Include="Source\EventSystem\Events\WindowEvent.h" />
+    <ClInclude Include="Source\Input\Input.h" />
+    <ClInclude Include="Source\Input\KeyCodes.h" />
+    <ClInclude Include="Source\Input\MouseButtonCodes.h" />
     <ClInclude Include="Source\Layers\Layer.h" />
     <ClInclude Include="Source\Layers\LayerStack.h" />
     <ClInclude Include="Source\TradescantiaEngine.h" />
     <ClInclude Include="Source\Utils\Log.h" />
     <ClInclude Include="Source\Window\Platform\OpenGL\ImGuiOpenGlRenderer.h" />
+    <ClInclude Include="Source\Window\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="Source\Window\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="Source\Window\Window.h" />
     <ClInclude Include="Source\tscpch.h" />
@@ -168,6 +172,7 @@
     <ClCompile Include="Source\Layers\LayerStack.cpp" />
     <ClCompile Include="Source\Utils\Log.cpp" />
     <ClCompile Include="Source\Window\Platform\OpenGL\ImGuiOpenGlRenderer.cpp" />
+    <ClCompile Include="Source\Window\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="Source\Window\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="Source\tscpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

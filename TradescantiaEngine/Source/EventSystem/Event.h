@@ -8,7 +8,7 @@ namespace TradescantiaEngine
 	{
 		None = 0,
 		WindowClose, WindowResize,
-		KeyPressed, KeyReleased,
+		KeyPressed, KeyReleased, KeyTyped,
 		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled
 	};
 

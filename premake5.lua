@@ -14,6 +14,7 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "TradescantiaEngine/ThirdParty/GLFW/include"
 IncludeDir["glad"] = "TradescantiaEngine/ThirdParty/glad/include"
 IncludeDir["ImGui"] = "TradescantiaEngine/ThirdParty/ImGui"
+IncludeDir["glm"] = "TradescantiaEngine/ThirdParty/glm"
 
 include "TradescantiaEngine/ThirdParty/GLFW"
 include "TradescantiaEngine/ThirdParty/glad"
@@ -42,7 +43,8 @@ project "TradescantiaEngine"
 		"TradescantiaEngine/Source",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.glad}",
-		"%{IncludeDir.ImGui}"
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.glm}"
 	}
 
 	links
@@ -102,7 +104,8 @@ project "Playground"
 	includedirs
 	{
 		"TradescantiaEngine/ThirdParty/spdlog/include",
-		"TradescantiaEngine/Source"
+		"TradescantiaEngine/Source",
+		"%{IncludeDir.glm}"
 	}
 
 	links

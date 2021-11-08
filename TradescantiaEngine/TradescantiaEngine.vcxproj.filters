@@ -16,6 +16,9 @@
     <Filter Include="EventSystem\Events">
       <UniqueIdentifier>{3037AC02-1C1B-6D58-857B-67AB717E57DA}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{953A660D-014F-8EBE-CAD0-311E36A48AEF}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Layers">
       <UniqueIdentifier>{157446C0-0116-7196-EAD0-84EAD611F8E6}</UniqueIdentifier>
     </Filter>
@@ -60,6 +63,15 @@
     <ClInclude Include="Source\EventSystem\Events\WindowEvent.h">
       <Filter>EventSystem\Events</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Input\Input.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Input\KeyCodes.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Input\MouseButtonCodes.h">
+      <Filter>Input</Filter>
+    </ClInclude>
     <ClInclude Include="Source\Layers\Layer.h">
       <Filter>Layers</Filter>
     </ClInclude>
@@ -72,6 +84,9 @@
     </ClInclude>
     <ClInclude Include="Source\Window\Platform\OpenGL\ImGuiOpenGlRenderer.h">
       <Filter>Window\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Window\Platform\Windows\WindowsInput.h">
+      <Filter>Window\Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="Source\Window\Platform\Windows\WindowsWindow.h">
       <Filter>Window\Platform\Windows</Filter>
@@ -99,6 +114,9 @@
     </ClCompile>
     <ClCompile Include="Source\Window\Platform\OpenGL\ImGuiOpenGlRenderer.cpp">
       <Filter>Window\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Window\Platform\Windows\WindowsInput.cpp">
+      <Filter>Window\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="Source\Window\Platform\Windows\WindowsWindow.cpp">
       <Filter>Window\Platform\Windows</Filter>

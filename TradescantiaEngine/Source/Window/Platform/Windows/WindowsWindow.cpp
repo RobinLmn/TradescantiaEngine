@@ -57,6 +57,14 @@ namespace TradescantiaEngine
 
 		// Set glfw callbacks
 
+		glfwSetCharCallback(m_Window, [](GLFWwindow* window, unsigned int keycode)
+		{
+			WindowData& data = *static_cast<WindowData*>(glfwGetWindowUserPointer(window));
+
+			KeyTypedEvent event(keycode);
+			data.EventCallback(event);
+		});
+
 		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height) 
 		{
 			WindowData& data = *static_cast<WindowData*>(glfwGetWindowUserPointer(window));

@@ -50,4 +50,20 @@ namespace TradescantiaEngine
 
 		SET_EVENTTYPE(EventType::KeyReleased);
 	};
+
+	class TSC_API KeyTypedEvent : public KeyEvent
+	{
+	public:
+		KeyTypedEvent(int keycode)
+			: KeyEvent(keycode) {}
+
+		virtual std::string ToString() const override
+		{
+			std::stringstream ss;
+			ss << "KeyTypedEvent: " << m_KeyCode;
+			return ss.str();
+		}
+
+		SET_EVENTTYPE(EventType::KeyTyped);
+	};
 }
