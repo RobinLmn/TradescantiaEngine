@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Engine/Engine.h"
-#include "Utils/Log.h"
+#include "Core/Engine.h"
+#include "Core/Log.h"
 #include "Layers/Layer.h"
-#include "Editor/ImGuiLayer.h"
-#include "Input/Input.h"
-#include "Input/KeyCodes.h"
-#include "Input/MouseButtonCodes.h"
+#include "ImGui/ImGuiLayer.h"
+#include "Core/Input.h"
+#include "Core/KeyCodes.h"
+#include "Core/MouseButtonCodes.h"
 
 // -------------------- ENTRY POINT ------------------------
 

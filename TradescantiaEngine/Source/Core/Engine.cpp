@@ -1,28 +1,32 @@
 #include "tscpch.h"
 #include "Engine.h"
-#include "Input/Input.h"
+#include "Input.h"
+#include "Log.h"
 #include <glad/glad.h>
 
 namespace TradescantiaEngine 
 {
 
-	Engine* Engine::s_Instance = nullptr;
+	Engine* Engine::_Instance = nullptr;
 	
 #define BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
 
 	Engine::Engine() 
 	{
-		TSC_ASSERT(!s_Instance, "Engine instance was already created");
-		s_Instance = this;
-		m_Window = std::unique_ptr<Window>(Window::Create());
-		m_Window->SetEventCallback(BIND_EVENT_FN(Engine::OnEvent));
+		TSC_ASSERT(!_Instance, "Engine instance was already created");
+		_Instance = this;
+		_Window = std::unique_ptr<Window>(Window::Create());
+		_Window->SetEventCallback(BIND_EVENT_FN(Engine::OnEvent));
+
+		ImGuiLayer* m_ImGuiLayer = new ImGuiLayer();
+		PushOverlay(m_ImGuiLayer);
 	}
 
 	Engine::~Engine() {}
 
 	bool Engine::OnWindowClose(WindowCloseEvent& e)
 	{
-		m_Running = false;
+		_Running = false;
 		return true;
 	}
 
@@ -31,7 +35,7 @@ namespace TradescantiaEngine
 		EventDispatcher  dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Engine::OnWindowClose));
 
-		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();)
+		for (auto it = _LayerStack.end(); it != _LayerStack.begin();)
 		{
 			(*--it)->OnEvent(e);
 			if (e.isHandled())
@@ -41,27 +45,32 @@ namespace TradescantiaEngine
 
 	void Engine::PushLayer(Layer* layer)
 	{
-		m_LayerStack.PushLayer(layer);
+		_LayerStack.PushLayer(layer);
 		layer->OnAttach();
 	}
 
 	void Engine::PushOverlay(Layer* layer)
 	{
-		m_LayerStack.PushOverlay(layer);
+		_LayerStack.PushOverlay(layer);
 		layer->OnAttach();
 	}
 
 	void Engine::Run()
 	{
-		while (m_Running)
+		while (_Running)
 		{
 			glClearColor(1, 1, 1, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
 
-			for (Layer* layer : m_LayerStack)
+			for (Layer* layer : _LayerStack)
 				layer->OnUpdate();
 
-			m_Window->OnUpdate();
+			_ImGuiLayer->Begin();
+			for (Layer* layer : _LayerStack)
+				layer->OnImGuiRender();
+			_ImGuiLayer->End();
+
+			_Window->OnUpdate();
 		}
 	}
 }

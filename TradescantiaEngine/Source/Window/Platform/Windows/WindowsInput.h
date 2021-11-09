@@ -1,6 +1,6 @@
 #pragma once
 #include "Core/Core.h"
-#include "Input/Input.h"
+#include "Core/Input.h"
 
 namespace TradescantiaEngine
 {

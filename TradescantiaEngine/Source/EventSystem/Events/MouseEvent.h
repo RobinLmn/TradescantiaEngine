@@ -8,7 +8,7 @@ namespace TradescantiaEngine
 	{
 	public:
 		MouseMovedEvent(float x, float y)
-			: m_X(x), m_Y(y) {}
+			: X(x), Y(y) {}
 
 		virtual int GetCategoryFlags() const override
 		{
@@ -18,21 +18,21 @@ namespace TradescantiaEngine
 		virtual std::string ToString() const override
 		{
 			std::stringstream ss;
-			ss << "MouseMovedEvent: " << m_X << ", " << m_Y;
+			ss << "MouseMovedEvent: " << X << ", " << Y;
 			return ss.str();
 		}
 
 		SET_EVENTTYPE(EventType::MouseMoved);
 
-		float m_X;
-		float m_Y;
+		float X;
+		float Y;
 	};
 
 	class TSC_API MouseScrolledEvent : public Event
 	{
 	public:
 		MouseScrolledEvent(double xOffset, double yOffset)
-			: m_XOffset(xOffset), m_YOffset(yOffset) {}
+			: XOffset(xOffset), YOffset(yOffset) {}
 
 		virtual int GetCategoryFlags() const override
 		{
@@ -44,26 +44,26 @@ namespace TradescantiaEngine
 		virtual std::string ToString() const override
 		{
 			std::stringstream ss;
-			ss << "MouseScrolledEvent: " << m_XOffset << ", " << m_YOffset;
+			ss << "MouseScrolledEvent: " <<XOffset << ", " << YOffset;
 			return ss.str();
 		}
 
-		double m_XOffset;
-		double m_YOffset;
+		double XOffset;
+		double YOffset;
 	};
 
 	class TSC_API MouseButtonEvent : public Event
 	{
 	public:
 		MouseButtonEvent(int button)
-			: m_Button(button) {}
+			: Button(button) {}
 
 		virtual int GetCategoryFlags() const override
 		{
 			return EventCategoryInput | EventCategoryMouse | EventCategoryMouseButton;
 		}
 
-		int m_Button;
+		int Button;
 	};
 
 	class TSC_API MouseButtonReleasedEvent : public MouseButtonEvent
@@ -77,7 +77,7 @@ namespace TradescantiaEngine
 		virtual std::string ToString() const override
 		{
 			std::stringstream ss;
-			ss << "MouseButtonReleasedEvent: " << m_Button;
+			ss << "MouseButtonReleasedEvent: " << Button;
 			return ss.str();
 		}
 	};
@@ -86,17 +86,17 @@ namespace TradescantiaEngine
 	{
 	public:
 		MouseButtonPressedEvent(int button, int repeatedCount)
-			: MouseButtonEvent(button), m_RepeatedCount(repeatedCount) {}
+			: MouseButtonEvent(button), RepeatedCount(repeatedCount) {}
 
 		SET_EVENTTYPE(EventType::MouseButtonPressed);
-
+		
 		virtual std::string ToString() const override
 		{
 			std::stringstream ss;
-			ss << "MouseButtonPressedEvent: " << m_Button;
+			ss << "MouseButtonPressedEvent: " << Button;
 			return ss.str();
 		}
 
-		int m_RepeatedCount;
+		int RepeatedCount;
 	};
 }

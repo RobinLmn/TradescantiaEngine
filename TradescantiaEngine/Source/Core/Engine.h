@@ -1,10 +1,11 @@
 #pragma once
 
-#include "Core/Core.h"
+#include "Core.h"
 
 #include "Window/Window.h"
 #include "Layers/LayerStack.h"
 #include "EventSystem/Events/WindowEvent.h"
+#include "ImGui/ImGuiLayer.h"
 
 namespace TradescantiaEngine {
 	class TSC_API Engine
@@ -20,17 +21,18 @@ namespace TradescantiaEngine {
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* layer);
 
-		inline Window& GetWindow() { return *m_Window; }
-		inline static Engine& Get() { return *s_Instance; }
+		inline Window& GetWindow() { return *_Window; }
+		inline static Engine& Get() { return *_Instance; }
 
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
 
-		std::unique_ptr<Window> m_Window;
-		bool m_Running = true;
-		LayerStack m_LayerStack;
+		std::unique_ptr<Window> _Window;
+		std::unique_ptr<ImGuiLayer> _ImGuiLayer;
+		bool _Running = true;
+		LayerStack _LayerStack;
 
-		static Engine* s_Instance;
+		static Engine* _Instance;
 	};
 
 	Engine* CreateEngine();

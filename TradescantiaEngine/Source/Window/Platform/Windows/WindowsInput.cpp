@@ -2,12 +2,12 @@
 #include "WindowsInput.h"
 
 #include <GLFW/glfw3.h>
-#include "Engine/Engine.h"
+#include "Core/Engine.h"
 
 namespace TradescantiaEngine
 {
 
-	Input* Input::s_Instance = new WindowsInput();
+	Input* Input::_Instance = new WindowsInput();
 
 	bool WindowsInput::IsKeyPressedImpl(int keycode)
 	{

@@ -15,8 +15,9 @@ namespace TradescantiaEngine
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
 		virtual void OnUpdate() {}
+		virtual void OnImGuiRender() {}
 		virtual void OnEvent(Event& event) {}
 
-		std::string debugName;
+		std::string DebugName;
 	};
 }

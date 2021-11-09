@@ -32,7 +32,7 @@ namespace TradescantiaEngine
 		virtual std::string ToString() const = 0;
 		virtual int GetCategoryFlags() const = 0;
 
-		const bool isHandled() const { return m_Handled; }
+		const bool isHandled() const { return _Handled; }
 
 		inline bool IsInCategory(EventCategory category)
 		{
@@ -40,7 +40,7 @@ namespace TradescantiaEngine
 		}
 
 	protected:
-		bool m_Handled = false;
+		bool _Handled = false;
 	};
 
 	class TSC_API EventDispatcher
@@ -50,21 +50,21 @@ namespace TradescantiaEngine
 
 	public:
 
-		EventDispatcher(Event& e) : m_Event(e) {}
+		EventDispatcher(Event& e) : _Event(e) {}
 
 		template<typename T>
 		bool Dispatch(EventFn<T> func)
 		{
-			if (m_Event.GetEventType() == T::GetStaticEventType())
+			if (_Event.GetEventType() == T::GetStaticEventType())
 			{
-				m_Event.m_Handled = func(*(T*)&m_Event);
+				_Event._Handled = func(*(T*)&_Event);
 				return true;
 			}
 			return false;
 		}
 
 	private:
-		 Event& m_Event;
+		 Event& _Event;
 	};
 
 	inline std::ostream& operator<<(std::ostream& os, const Event& e)

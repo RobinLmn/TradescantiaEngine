@@ -9,7 +9,7 @@
 
 namespace TradescantiaEngine
 {
-	static bool s_GLFWInitialized = false;
+	static bool _GLFWInitialized = false;
 
 	static void GLFWErrorCallback(int error, const char* description)
 	{
@@ -33,31 +33,31 @@ namespace TradescantiaEngine
 
 	void WindowsWindow::Init(const WindowProperties& props)
 	{
-		m_Data.Title = props.Title;
-		m_Data.Height = props.Height;
-		m_Data.Width = props.Width;
+		_Data.Title = props.Title;
+		_Data.Height = props.Height;
+		_Data.Width = props.Width;
 
 		TSC_CORE_INFO("Creating Window {0} ({1}, {2})", props.Title, props.Width, props.Height);
 
-		if (!s_GLFWInitialized)
+		if (!_GLFWInitialized)
 		{
 			int success = glfwInit();
 			TSC_CORE_ASSERT(success, "Could not initialize GLFW");
-			s_GLFWInitialized = true;
+			_GLFWInitialized = true;
 		}
 
-		m_Window = glfwCreateWindow(static_cast<int>(props.Width), static_cast<int>(props.Height), m_Data.Title.c_str(), /*monitor = */ nullptr, /*window = */ nullptr);
-		glfwMakeContextCurrent(m_Window);
+		_Window = glfwCreateWindow(static_cast<int>(props.Width), static_cast<int>(props.Height), _Data.Title.c_str(), /*monitor = */ nullptr, /*window = */ nullptr);
+		glfwMakeContextCurrent(_Window);
 
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		TSC_CORE_ASSERT(status, "Failed to initialize glad.");
 
-		glfwSetWindowUserPointer(m_Window, &m_Data);
+		glfwSetWindowUserPointer(_Window, &_Data);
 		SetVSync(true);
 
 		// Set glfw callbacks
 
-		glfwSetCharCallback(m_Window, [](GLFWwindow* window, unsigned int keycode)
+		glfwSetCharCallback(_Window, [](GLFWwindow* window, unsigned int keycode)
 		{
 			WindowData& data = *static_cast<WindowData*>(glfwGetWindowUserPointer(window));
 
@@ -65,7 +65,7 @@ namespace TradescantiaEngine
 			data.EventCallback(event);
 		});
 
-		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height) 
+		glfwSetWindowSizeCallback(_Window, [](GLFWwindow* window, int width, int height) 
 		{
 			WindowData& data = *static_cast<WindowData*>(glfwGetWindowUserPointer(window));
 			
@@ -76,7 +76,7 @@ namespace TradescantiaEngine
 			data.EventCallback(event);
 		});
 
-		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window)
+		glfwSetWindowCloseCallback(_Window, [](GLFWwindow* window)
 		{
 			WindowData& data = *static_cast<WindowData*>(glfwGetWindowUserPointer(window));
 
@@ -84,7 +84,7 @@ namespace TradescantiaEngine
 			data.EventCallback(event);
 		});
 
-		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
+		glfwSetKeyCallback(_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
 		{
 			WindowData& data = *static_cast<WindowData*>(glfwGetWindowUserPointer(window));
 
@@ -111,7 +111,7 @@ namespace TradescantiaEngine
 			}
 		});
 
-		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods)
+		glfwSetMouseButtonCallback(_Window, [](GLFWwindow* window, int button, int action, int mods)
 		{
 			WindowData& data = *static_cast<WindowData*>(glfwGetWindowUserPointer(window));
 
@@ -138,7 +138,7 @@ namespace TradescantiaEngine
 			}
 		});
 
-		glfwSetScrollCallback(m_Window, [](GLFWwindow* window, double xOffset, double yOffset)
+		glfwSetScrollCallback(_Window, [](GLFWwindow* window, double xOffset, double yOffset)
 		{
 			WindowData& data = *static_cast<WindowData*>(glfwGetWindowUserPointer(window));
 
@@ -146,7 +146,7 @@ namespace TradescantiaEngine
 			data.EventCallback(event);
 		});
 
-		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, double xPos, double yPos)
+		glfwSetCursorPosCallback(_Window, [](GLFWwindow* window, double xPos, double yPos)
 		{
 			WindowData& data = *static_cast<WindowData*>(glfwGetWindowUserPointer(window));
 
@@ -157,23 +157,23 @@ namespace TradescantiaEngine
 
 	void WindowsWindow::Shutdown()
 	{
-		glfwDestroyWindow(m_Window);
+		glfwDestroyWindow(_Window);
 	}
 
 	void WindowsWindow::OnUpdate()
 	{
 		glfwPollEvents();
-		glfwSwapBuffers(m_Window);
+		glfwSwapBuffers(_Window);
 	}
 
 	void WindowsWindow::SetVSync(bool isEnabled)
 	{
 		glfwSwapInterval(isEnabled);
-		m_Data.VSync = isEnabled;
+		_Data.VSync = isEnabled;
 	}
 
 	bool WindowsWindow::IsVSync() const
 	{
-		return m_Data.VSync;
+		return _Data.VSync;
 	}
 }

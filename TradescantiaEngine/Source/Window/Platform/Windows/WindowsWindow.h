@@ -13,20 +13,20 @@ namespace TradescantiaEngine
 
 		void OnUpdate() override;
 	
-		inline unsigned int GetWidth() const override { return m_Data.Width; }
-		inline unsigned int GetHeight() const override { return m_Data.Height; }
+		inline unsigned int GetWidth() const override { return _Data.Width; }
+		inline unsigned int GetHeight() const override { return _Data.Height; }
 
-		inline void SetEventCallback(const EventCallbackFn& callback) override { m_Data.EventCallback = callback; }
+		inline void SetEventCallback(const EventCallbackFn& callback) override { _Data.EventCallback = callback; }
 		void SetVSync(bool isEnabled) override;
 		bool IsVSync() const override;
 
-		inline virtual void* GetNativeWindow() const override { return m_Window; }
+		inline virtual void* GetNativeWindow() const override { return _Window; }
 
 	private:
 		virtual void Init(const WindowProperties& props);
 		virtual void Shutdown();
 
-		GLFWwindow* m_Window;
+		GLFWwindow* _Window;
 
 		struct WindowData
 		{
@@ -37,7 +37,7 @@ namespace TradescantiaEngine
 			EventCallbackFn EventCallback;
 		};
 
-		WindowData m_Data;
+		WindowData _Data;
 	};
 }
 

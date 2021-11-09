@@ -23,7 +23,7 @@ namespace TradescantiaEngine
 	{
 	public:
 		WindowResizeEvent(float width, float height)
-			: m_Width(width), m_Height(height) {}
+			: Width(width), Height(height) {}
 
 		SET_EVENTTYPE(EventType::WindowResize);
 		virtual int GetCategoryFlags() const override { return EventCategoryWindow; }
@@ -31,11 +31,11 @@ namespace TradescantiaEngine
 		virtual std::string ToString() const override
 		{
 			std::stringstream ss;
-			ss << "WindowResize (" << m_Width << ";" << m_Height << ")";
+			ss << "WindowResize (" << Width << ";" << Height << ")";
 			return ss.str();
 		}
 
-		float m_Width;
-		float m_Height;
+		float Width;
+		float Height;
 	};
 }

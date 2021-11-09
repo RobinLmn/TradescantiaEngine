@@ -8,7 +8,6 @@ class Playground : public TradescantiaEngine::Engine
 public:
 	Playground() 
 	{
-		PushOverlay(new ImGuiLayer());
 	};
 
 	~Playground() {};

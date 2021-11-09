@@ -12,7 +12,7 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include "Utils/Log.h"
+#include "Core/Log.h"
 
 #ifdef TSC_PLATFORM_WINDOWS
 	#include <Windows.h>

@@ -4,9 +4,8 @@
 namespace TradescantiaEngine
 {
 	Layer::Layer(const std::string& name) 
-		: debugName(name) 
+		: DebugName(name) 
 	{
-
 	}
 	
 	Layer::~Layer() 

@@ -5,12 +5,11 @@ namespace TradescantiaEngine
 {
 	LayerStack::LayerStack()
 	{
-		m_LayerInsert = m_Layers.begin();
 	}
 
 	LayerStack::~LayerStack()
 	{
-		for (Layer* layer : m_Layers)
+		for (Layer* layer : _Layers)
 		{
 			delete layer;
 		}
@@ -18,30 +17,31 @@ namespace TradescantiaEngine
 
 	void LayerStack::PushLayer(Layer* layer)
 	{
-		m_LayerInsert = m_Layers.emplace(m_LayerInsert, layer);
+		_Layers.emplace(_Layers.begin() + _LayerInsertIndex, layer);
+		_LayerInsertIndex++;
 	}
 
 	void LayerStack::PushOverlay(Layer* layer)
 	{
-		m_Layers.emplace_back(layer);
+		_Layers.emplace_back(layer);
 	}
 
 	void LayerStack::PopLayer(Layer* layer)
 	{
-		auto it = std::find(m_Layers.begin(), m_Layers.end(), layer);
-		if (it != m_Layers.end())
+		auto it = std::find(_Layers.begin(), _Layers.end(), layer);
+		if (it != _Layers.end())
 		{
-			m_Layers.erase(it);
-			m_LayerInsert--;
+			_Layers.erase(it);
+			_LayerInsertIndex--;
 		}
 	}
 
 	void LayerStack::PopOverlay(Layer* overlay)
 	{
-		auto it = std::find(m_Layers.begin(), m_Layers.end(), overlay);
-		if (it != m_Layers.end())
+		auto it = std::find(_Layers.begin(), _Layers.end(), overlay);
+		if (it != _Layers.end())
 		{
-			m_Layers.erase(it);
+			_Layers.erase(it);
 		}
 	}
 }

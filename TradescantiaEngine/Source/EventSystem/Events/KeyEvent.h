@@ -7,32 +7,32 @@ namespace TradescantiaEngine
 	{
 	public:
 		KeyEvent(int keycode) 
-			: m_KeyCode(keycode) {}
+			: KeyCode(keycode) {}
 
 		virtual int GetCategoryFlags() const override
 		{
 			return EventCategoryInput | EventCategoryKeyboard;
 		}
 
-		int m_KeyCode;
+		int KeyCode;
 	};
 
 	class TSC_API KeyPressedEvent : public KeyEvent
 	{
 	public:
 		KeyPressedEvent(int keycode, int repeatedCount) 
-			: KeyEvent(keycode), m_RepeatedCount(repeatedCount) {}
+			: KeyEvent(keycode), RepeatedCount(repeatedCount) {}
 
 		virtual std::string ToString() const override
 		{
 			std::stringstream ss;
-			ss << "KeyPressedEvent: " << m_KeyCode << " (" << m_RepeatedCount << " repeats)";
+			ss << "KeyPressedEvent: " << KeyCode << " (" << RepeatedCount << " repeats)";
 			return ss.str();
 		}
 
 		SET_EVENTTYPE(EventType::KeyPressed);
 
-		int m_RepeatedCount;
+		int RepeatedCount;
 	};
 
 	class TSC_API KeyReleasedEvent: public KeyEvent
@@ -44,7 +44,7 @@ namespace TradescantiaEngine
 		virtual std::string ToString() const override
 		{
 			std::stringstream ss;
-			ss << "KeyReleasedEvent: " << m_KeyCode;
+			ss << "KeyReleasedEvent: " << KeyCode;
 			return ss.str();
 		}
 
@@ -60,7 +60,7 @@ namespace TradescantiaEngine
 		virtual std::string ToString() const override
 		{
 			std::stringstream ss;
-			ss << "KeyTypedEvent: " << m_KeyCode;
+			ss << "KeyTypedEvent: " << KeyCode;
 			return ss.str();
 		}
 

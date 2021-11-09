@@ -4,35 +4,23 @@
     <Filter Include="Core">
       <UniqueIdentifier>{2EB4837C-1AEB-840D-C3D7-6A10AFED000F}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Editor">
-      <UniqueIdentifier>{8C1A20B0-78BC-4A86-6177-5EDA4DB8D1D6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine">
-      <UniqueIdentifier>{DBC7D3B0-C769-FE86-B024-12DB9C6585D7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="EventSystem">
       <UniqueIdentifier>{CCE875DF-389E-EED4-C192-E8AB2D47E5D8}</UniqueIdentifier>
     </Filter>
     <Filter Include="EventSystem\Events">
       <UniqueIdentifier>{3037AC02-1C1B-6D58-857B-67AB717E57DA}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Input">
-      <UniqueIdentifier>{953A660D-014F-8EBE-CAD0-311E36A48AEF}</UniqueIdentifier>
+    <Filter Include="ImGui">
+      <UniqueIdentifier>{C0FF640D-2C14-8DBE-F595-301E616989EF}</UniqueIdentifier>
     </Filter>
     <Filter Include="Layers">
       <UniqueIdentifier>{157446C0-0116-7196-EAD0-84EAD611F8E6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Utils">
-      <UniqueIdentifier>{F68B420E-62A0-6ABF-2B22-0E1F97F566F0}</UniqueIdentifier>
     </Filter>
     <Filter Include="Window">
       <UniqueIdentifier>{3DEA79DA-298C-A4B0-1247-B804FE872B01}</UniqueIdentifier>
     </Filter>
     <Filter Include="Window\Platform">
       <UniqueIdentifier>{31FB73ED-9D86-E1B1-A697-64A612A23DB2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Window\Platform\OpenGL">
-      <UniqueIdentifier>{4503C294-31FD-EAE6-1A6A-81F706035153}</UniqueIdentifier>
     </Filter>
     <Filter Include="Window\Platform\Windows">
       <UniqueIdentifier>{6B461E85-D77D-661C-E087-CA3F4C3E8D15}</UniqueIdentifier>
@@ -42,14 +30,23 @@
     <ClInclude Include="Source\Core\Core.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Core\Engine.h">
+      <Filter>Core</Filter>
+    </ClInclude>
     <ClInclude Include="Source\Core\EntryPoint.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Editor\ImGuiLayer.h">
-      <Filter>Editor</Filter>
+    <ClInclude Include="Source\Core\Input.h">
+      <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Engine\Engine.h">
-      <Filter>Engine</Filter>
+    <ClInclude Include="Source\Core\KeyCodes.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\Log.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\MouseButtonCodes.h">
+      <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="Source\EventSystem\Event.h">
       <Filter>EventSystem</Filter>
@@ -63,14 +60,11 @@
     <ClInclude Include="Source\EventSystem\Events\WindowEvent.h">
       <Filter>EventSystem\Events</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Input\Input.h">
-      <Filter>Input</Filter>
+    <ClInclude Include="Source\ImGui\ImGuiBuild.h">
+      <Filter>ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Input\KeyCodes.h">
-      <Filter>Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Input\MouseButtonCodes.h">
-      <Filter>Input</Filter>
+    <ClInclude Include="Source\ImGui\ImGuiLayer.h">
+      <Filter>ImGui</Filter>
     </ClInclude>
     <ClInclude Include="Source\Layers\Layer.h">
       <Filter>Layers</Filter>
@@ -79,12 +73,6 @@
       <Filter>Layers</Filter>
     </ClInclude>
     <ClInclude Include="Source\TradescantiaEngine.h" />
-    <ClInclude Include="Source\Utils\Log.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Window\Platform\OpenGL\ImGuiOpenGlRenderer.h">
-      <Filter>Window\Platform\OpenGL</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Window\Platform\Windows\WindowsInput.h">
       <Filter>Window\Platform\Windows</Filter>
     </ClInclude>
@@ -97,23 +85,20 @@
     <ClInclude Include="Source\tscpch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Editor\ImGuiLayer.cpp">
-      <Filter>Editor</Filter>
+    <ClCompile Include="Source\Core\Engine.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Engine\Engine.cpp">
-      <Filter>Engine</Filter>
+    <ClCompile Include="Source\Core\Log.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ImGui\ImGuiLayer.cpp">
+      <Filter>ImGui</Filter>
     </ClCompile>
     <ClCompile Include="Source\Layers\Layer.cpp">
       <Filter>Layers</Filter>
     </ClCompile>
     <ClCompile Include="Source\Layers\LayerStack.cpp">
       <Filter>Layers</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Utils\Log.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Window\Platform\OpenGL\ImGuiOpenGlRenderer.cpp">
-      <Filter>Window\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="Source\Window\Platform\Windows\WindowsInput.cpp">
       <Filter>Window\Platform\Windows</Filter>
