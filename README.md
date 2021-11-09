@@ -1,2 +1,2 @@
 # TradescantiaEngine
- A small game engine to learn about graphics, engine programming, project structure and more. Based on TheCherno's Game Engine series.
+Custom 2D Particle Engine. Based from TheCherno "Game Engine" series.
