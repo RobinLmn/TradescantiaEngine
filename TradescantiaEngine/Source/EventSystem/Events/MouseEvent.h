@@ -4,7 +4,7 @@
 
 namespace TradescantiaEngine
 {
-	class TSC_API MouseMovedEvent : public Event
+	class MouseMovedEvent : public Event
 	{
 	public:
 		MouseMovedEvent(float x, float y)
@@ -28,7 +28,7 @@ namespace TradescantiaEngine
 		float Y;
 	};
 
-	class TSC_API MouseScrolledEvent : public Event
+	class MouseScrolledEvent : public Event
 	{
 	public:
 		MouseScrolledEvent(double xOffset, double yOffset)
@@ -52,7 +52,7 @@ namespace TradescantiaEngine
 		double YOffset;
 	};
 
-	class TSC_API MouseButtonEvent : public Event
+	class MouseButtonEvent : public Event
 	{
 	public:
 		MouseButtonEvent(int button)
@@ -66,7 +66,7 @@ namespace TradescantiaEngine
 		int Button;
 	};
 
-	class TSC_API MouseButtonReleasedEvent : public MouseButtonEvent
+	class MouseButtonReleasedEvent : public MouseButtonEvent
 	{
 	public:
 		MouseButtonReleasedEvent(int button)
@@ -82,7 +82,7 @@ namespace TradescantiaEngine
 		}
 	};
 
-	class TSC_API MouseButtonPressedEvent : public MouseButtonEvent
+	class MouseButtonPressedEvent : public MouseButtonEvent
 	{
 	public:
 		MouseButtonPressedEvent(int button, int repeatedCount)

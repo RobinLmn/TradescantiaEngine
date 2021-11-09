@@ -30,9 +30,10 @@ namespace TradescantiaEngine
 
 		struct WindowData
 		{
-			unsigned int Width, Height;
+			unsigned int Width = 0;
+			unsigned int Height = 0;
 			std::string Title;
-			bool VSync;
+			bool VSync = false;
 			
 			EventCallbackFn EventCallback;
 		};

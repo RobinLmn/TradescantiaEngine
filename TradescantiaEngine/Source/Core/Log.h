@@ -5,7 +5,7 @@
 
 namespace TradescantiaEngine
 {
-	class TSC_API Log
+	class Log
 	{
 	public:
 		static void Init();

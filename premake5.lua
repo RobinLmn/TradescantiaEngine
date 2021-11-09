@@ -22,8 +22,10 @@ include "TradescantiaEngine/ThirdParty/ImGui"
 
 project "TradescantiaEngine"
 	location "TradescantiaEngine"
-	kind "SharedLib"
+	kind "StaticLib"
+	cppdialect "C++17"
 	language "C++"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -55,42 +57,41 @@ project "TradescantiaEngine"
 		"ImGui"
 	}
 
+	defines
+	{
+		"_CRT_SECURE_NO_WARNINGS"
+	}
+
 	filter "system:windows"
-		cppdialect "C++17"
-		staticruntime "on"
 		systemversion "10.0"
 
 		defines
 		{
 			"TSC_PLATFORM_WINDOWS",
-			"TSC_BUILD_DLL",
 			"GLFW_INCLUDE_NONE"
-		}
-
-		postbuildcommands
-		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Playground")
 		}
 
 	filter "configurations:Debug"
 		defines "TSC_DEBUG"
-		buildoptions "/MDd"
-		symbols "On"
+		runtime "Debug"
+		symbols "on"
 	
 	filter "configurations:Release"
 		defines "TSC_RELEASE"
-		buildoptions "/MD"
-		symbols "On"
+		runtime "Release"
+		optimize "on"
 
 	filter "configurations:Dist"
 		defines "TSC_DIST"
-		buildoptions "/MD"
-		symbols "On"
+		runtime "Release"
+		optimize "on"
 
 project "Playground"
 	location "Playground"
 	kind "ConsoleApp"
 	language "C++"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -114,8 +115,6 @@ project "Playground"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
-		staticruntime "on"
 		systemversion "10.0"
 
 		defines
@@ -125,15 +124,15 @@ project "Playground"
 
 	filter "configurations:Debug"
 		defines "TSC_DEBUG"
-		buildoptions "/MDd"
-		symbols "On"
+		runtime "Debug"
+		symbols "on"
 	
 	filter "configurations:Release"
 		defines "TSC_RELEASE"
-		buildoptions "/MD"
-		symbols "On"
+		runtime "Release"
+		optimize "on"
 
 	filter "configurations:Dist"
 		defines "TSC_DIST"
-		buildoptions "/MD"
-		symbols "On"
+		runtime "Release"
+		optimize "on"

@@ -4,7 +4,7 @@
 
 namespace TradescantiaEngine
 {
-	class TSC_API WindowCloseEvent : public Event
+	class WindowCloseEvent : public Event
 	{
 	public:
 		WindowCloseEvent() = default;
@@ -19,10 +19,10 @@ namespace TradescantiaEngine
 		}
 	};
 
-	class TSC_API WindowResizeEvent : public Event
+	class WindowResizeEvent : public Event
 	{
 	public:
-		WindowResizeEvent(float width, float height)
+		WindowResizeEvent(unsigned int width, unsigned int height)
 			: Width(width), Height(height) {}
 
 		SET_EVENTTYPE(EventType::WindowResize);
@@ -35,7 +35,7 @@ namespace TradescantiaEngine
 			return ss.str();
 		}
 
-		float Width;
-		float Height;
+		unsigned int Width;
+		unsigned int Height;
 	};
 }

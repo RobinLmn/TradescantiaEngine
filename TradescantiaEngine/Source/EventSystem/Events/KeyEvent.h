@@ -3,7 +3,7 @@
 
 namespace TradescantiaEngine
 {
-	class TSC_API KeyEvent : public Event
+	class KeyEvent : public Event
 	{
 	public:
 		KeyEvent(int keycode) 
@@ -17,7 +17,7 @@ namespace TradescantiaEngine
 		int KeyCode;
 	};
 
-	class TSC_API KeyPressedEvent : public KeyEvent
+	class KeyPressedEvent : public KeyEvent
 	{
 	public:
 		KeyPressedEvent(int keycode, int repeatedCount) 
@@ -35,7 +35,7 @@ namespace TradescantiaEngine
 		int RepeatedCount;
 	};
 
-	class TSC_API KeyReleasedEvent: public KeyEvent
+	class KeyReleasedEvent: public KeyEvent
 	{
 	public:
 		KeyReleasedEvent(int keycode)
@@ -51,7 +51,7 @@ namespace TradescantiaEngine
 		SET_EVENTTYPE(EventType::KeyReleased);
 	};
 
-	class TSC_API KeyTypedEvent : public KeyEvent
+	class KeyTypedEvent : public KeyEvent
 	{
 	public:
 		KeyTypedEvent(int keycode)
