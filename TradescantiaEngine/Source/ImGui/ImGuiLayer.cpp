@@ -21,7 +21,7 @@ namespace TradescantiaEngine
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		Engine& engine = Engine::Get();
-		io.DisplaySize = ImVec2(engine.GetWindow().GetWidth(), engine.GetWindow().GetHeight());
+		io.DisplaySize = ImVec2(static_cast<float>(engine.GetWindow().GetWidth()), static_cast<float>(engine.GetWindow().GetHeight()));
 		// Rendering
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

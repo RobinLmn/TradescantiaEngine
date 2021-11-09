@@ -8,7 +8,7 @@
 #include "ImGui/ImGuiLayer.h"
 
 namespace TradescantiaEngine {
-	class TSC_API Engine
+	class Engine
 	{
 	public:
 		Engine();

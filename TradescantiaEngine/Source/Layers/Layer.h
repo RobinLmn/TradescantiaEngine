@@ -5,7 +5,7 @@
 
 namespace TradescantiaEngine
 {
-	class TSC_API Layer
+	class Layer
 	{
 	public:
 

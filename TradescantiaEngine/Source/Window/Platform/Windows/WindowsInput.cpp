@@ -21,11 +21,11 @@ namespace TradescantiaEngine
 		auto state = glfwGetMouseButton(window, button);
 		return state == GLFW_PRESS;
 	}
-	std::tuple<float, float> WindowsInput::GetMousePosImpl()
+	std::tuple<double, double> WindowsInput::GetMousePosImpl()
 	{
 		auto window = static_cast<GLFWwindow*>(Engine::Get().GetWindow().GetNativeWindow());
 		double xpos, ypos;
 		glfwGetCursorPos(window, &xpos, &ypos);
-		return std::tuple<float, float>(xpos, ypos);
+		return std::tuple<double, double>(xpos, ypos);
 	}
 }

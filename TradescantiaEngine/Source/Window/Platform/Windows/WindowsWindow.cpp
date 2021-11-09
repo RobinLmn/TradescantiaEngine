@@ -65,12 +65,12 @@ namespace TradescantiaEngine
 			data.EventCallback(event);
 		});
 
-		glfwSetWindowSizeCallback(_Window, [](GLFWwindow* window, int width, int height) 
+		glfwSetWindowSizeCallback(_Window, [](GLFWwindow* window, int width, int height)
 		{
 			WindowData& data = *static_cast<WindowData*>(glfwGetWindowUserPointer(window));
 			
-			data.Width = width;
-			data.Height = height;
+			data.Width = static_cast<unsigned int>(width);
+			data.Height = static_cast<unsigned int>(height);
 
 			WindowResizeEvent event(width, height);
 			data.EventCallback(event);

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "tscpch.h"
 #include "Core/Core.h"
 
 namespace TradescantiaEngine
@@ -24,7 +25,7 @@ namespace TradescantiaEngine
 
 #define SET_EVENTTYPE(type) static EventType GetStaticEventType() { return  type; } virtual EventType GetEventType() const override { return GetStaticEventType(); }
 
-	class TSC_API Event
+	class Event
 	{
 		friend class EventDispatcher;
 	public:
@@ -43,7 +44,7 @@ namespace TradescantiaEngine
 		bool _Handled = false;
 	};
 
-	class TSC_API EventDispatcher
+	class EventDispatcher
 	{
 		template<typename T>
 		using EventFn = std::function<bool(T&)>;
