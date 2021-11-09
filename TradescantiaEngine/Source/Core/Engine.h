@@ -3,7 +3,7 @@
 #include "Core.h"
 
 #include "Window/Window.h"
-#include "Layers/LayerStack.h"
+#include "LayerStack.h"
 #include "EventSystem/Events/WindowEvent.h"
 #include "ImGui/ImGuiLayer.h"
 
@@ -27,12 +27,13 @@ namespace TradescantiaEngine {
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
 
+		bool _Running = true;
 		std::unique_ptr<Window> _Window;
 		std::unique_ptr<ImGuiLayer> _ImGuiLayer;
-		bool _Running = true;
 		LayerStack _LayerStack;
-
 		static Engine* _Instance;
+
+		unsigned int _VertexArray, _VertexBuffer, _IndexBuffer;
 	};
 
 	Engine* CreateEngine();

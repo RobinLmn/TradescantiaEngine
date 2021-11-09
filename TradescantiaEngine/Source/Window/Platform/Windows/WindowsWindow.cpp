@@ -47,10 +47,8 @@ namespace TradescantiaEngine
 		}
 
 		_Window = glfwCreateWindow(static_cast<int>(props.Width), static_cast<int>(props.Height), _Data.Title.c_str(), /*monitor = */ nullptr, /*window = */ nullptr);
-		glfwMakeContextCurrent(_Window);
-
-		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		TSC_CORE_ASSERT(status, "Failed to initialize glad.");
+		_Context = new OpenGLContext(_Window);
+		_Context->Init();
 
 		glfwSetWindowUserPointer(_Window, &_Data);
 		SetVSync(true);
@@ -163,7 +161,7 @@ namespace TradescantiaEngine
 	void WindowsWindow::OnUpdate()
 	{
 		glfwPollEvents();
-		glfwSwapBuffers(_Window);
+		_Context->SwapBuffers();
 	}
 
 	void WindowsWindow::SetVSync(bool isEnabled)

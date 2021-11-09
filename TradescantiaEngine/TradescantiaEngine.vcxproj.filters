@@ -66,12 +66,6 @@
     <ClInclude Include="Source\ImGui\ImGuiLayer.h">
       <Filter>ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Layers\Layer.h">
-      <Filter>Layers</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Layers\LayerStack.h">
-      <Filter>Layers</Filter>
-    </ClInclude>
     <ClInclude Include="Source\TradescantiaEngine.h" />
     <ClInclude Include="Source\Window\Platform\Windows\WindowsInput.h">
       <Filter>Window\Platform\Windows</Filter>
@@ -83,6 +77,14 @@
       <Filter>Window</Filter>
     </ClInclude>
     <ClInclude Include="Source\tscpch.h" />
+    <ClInclude Include="Source\Renderer\GraphicsContext.h" />
+    <ClInclude Include="Source\Renderer\OpenGLContext.h" />
+    <ClInclude Include="Source\Core\Layer.h">
+      <Filter>Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\LayerStack.h">
+      <Filter>Layers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Core\Engine.cpp">
@@ -94,12 +96,6 @@
     <ClCompile Include="Source\ImGui\ImGuiLayer.cpp">
       <Filter>ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Layers\Layer.cpp">
-      <Filter>Layers</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Layers\LayerStack.cpp">
-      <Filter>Layers</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Window\Platform\Windows\WindowsInput.cpp">
       <Filter>Window\Platform\Windows</Filter>
     </ClCompile>
@@ -107,5 +103,12 @@
       <Filter>Window\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="Source\tscpch.cpp" />
+    <ClCompile Include="Source\Renderer\OpenGLContext.cpp" />
+    <ClCompile Include="Source\Core\Layer.cpp">
+      <Filter>Layers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Core\LayerStack.cpp">
+      <Filter>Layers</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

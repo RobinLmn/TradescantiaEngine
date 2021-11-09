@@ -153,8 +153,10 @@
     <ClInclude Include="Source\EventSystem\Events\WindowEvent.h" />
     <ClInclude Include="Source\ImGui\ImGuiBuild.h" />
     <ClInclude Include="Source\ImGui\ImGuiLayer.h" />
-    <ClInclude Include="Source\Layers\Layer.h" />
-    <ClInclude Include="Source\Layers\LayerStack.h" />
+    <ClInclude Include="Source\Core\Layer.h" />
+    <ClInclude Include="Source\Core\LayerStack.h" />
+    <ClInclude Include="Source\Renderer\GraphicsContext.h" />
+    <ClInclude Include="Source\Renderer\OpenGLContext.h" />
     <ClInclude Include="Source\TradescantiaEngine.h" />
     <ClInclude Include="Source\Window\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="Source\Window\Platform\Windows\WindowsWindow.h" />
@@ -165,8 +167,9 @@
     <ClCompile Include="Source\Core\Engine.cpp" />
     <ClCompile Include="Source\Core\Log.cpp" />
     <ClCompile Include="Source\ImGui\ImGuiLayer.cpp" />
-    <ClCompile Include="Source\Layers\Layer.cpp" />
-    <ClCompile Include="Source\Layers\LayerStack.cpp" />
+    <ClCompile Include="Source\Core\Layer.cpp" />
+    <ClCompile Include="Source\Core\LayerStack.cpp" />
+    <ClCompile Include="Source\Renderer\OpenGLContext.cpp" />
     <ClCompile Include="Source\Window\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="Source\Window\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="Source\tscpch.cpp">
