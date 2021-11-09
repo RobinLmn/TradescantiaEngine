@@ -1,5 +1,5 @@
-[submodule "TradescantiaEngine/vendor/spdlog"]
-	path = TradescantiaEngine/vendor/spdlog
+[submodule "TradescantiaEngine/ThirdParty/spdlog"]
+	path = TradescantiaEngine/ThirdParty/spdlog
 	url = https://github.com/gabime/spdlog
 [submodule "TradescantiaEngine/ThirdParty/GLFW"]
 	path = TradescantiaEngine/ThirdParty/GLFW
