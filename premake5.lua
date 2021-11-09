@@ -10,6 +10,16 @@ workspace "TradescantiaEngine"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+IncludeDir = {}
+IncludeDir["GLFW"] = "TradescantiaEngine/ThirdParty/GLFW/include"
+IncludeDir["glad"] = "TradescantiaEngine/ThirdParty/glad/include"
+IncludeDir["ImGui"] = "TradescantiaEngine/ThirdParty/ImGui"
+IncludeDir["glm"] = "TradescantiaEngine/ThirdParty/glm"
+
+include "TradescantiaEngine/ThirdParty/GLFW"
+include "TradescantiaEngine/ThirdParty/glad"
+include "TradescantiaEngine/ThirdParty/ImGui"
+
 project "TradescantiaEngine"
 	location "TradescantiaEngine"
 	kind "SharedLib"
@@ -18,15 +28,31 @@ project "TradescantiaEngine"
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+	pchheader "tscpch.h"
+	pchsource "TradescantiaEngine/Source/tscpch.cpp"
+
 	files
 	{
-		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp",
+		"TradescantiaEngine/Source/**.h",
+		"TradescantiaEngine/Source/**.cpp",
 	}
 
 	includedirs
 	{
-		"TradescantiaEngine/vendor/spdlog/include"
+		"TradescantiaEngine/ThirdParty/spdlog/include",
+		"TradescantiaEngine/Source",
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.glad}",
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.glm}"
+	}
+
+	links
+	{
+		"glad",
+		"GLFW",
+		"opengl32.lib",
+		"ImGui"
 	}
 
 	filter "system:windows"
@@ -37,7 +63,8 @@ project "TradescantiaEngine"
 		defines
 		{
 			"TSC_PLATFORM_WINDOWS",
-			"TSC_BUILD_DLL"
+			"TSC_BUILD_DLL",
+			"GLFW_INCLUDE_NONE"
 		}
 
 		postbuildcommands
@@ -47,14 +74,17 @@ project "TradescantiaEngine"
 
 	filter "configurations:Debug"
 		defines "TSC_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 	
 	filter "configurations:Release"
 		defines "TSC_RELEASE"
+		buildoptions "/MD"
 		symbols "On"
 
 	filter "configurations:Dist"
 		defines "TSC_DIST"
+		buildoptions "/MD"
 		symbols "On"
 
 project "Playground"
@@ -67,14 +97,15 @@ project "Playground"
 
 	files
 	{
-		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp",
+		"Playground/Source/**.h",
+		"Playground/Source/**.cpp",
 	}
 
 	includedirs
 	{
-		"TradescantiaEngine/vendor/spdlog/include",
-		"TradescantiaEngine/src"
+		"TradescantiaEngine/ThirdParty/spdlog/include",
+		"TradescantiaEngine/Source",
+		"%{IncludeDir.glm}"
 	}
 
 	links
@@ -94,12 +125,15 @@ project "Playground"
 
 	filter "configurations:Debug"
 		defines "TSC_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 	
 	filter "configurations:Release"
 		defines "TSC_RELEASE"
+		buildoptions "/MD"
 		symbols "On"
 
 	filter "configurations:Dist"
 		defines "TSC_DIST"
+		buildoptions "/MD"
 		symbols "On"

@@ -76,18 +76,21 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>tscpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>TSC_PLATFORM_WINDOWS;TSC_BUILD_DLL;TSC_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TSC_PLATFORM_WINDOWS;TSC_BUILD_DLL;GLFW_INCLUDE_NONE;TSC_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>ThirdParty\spdlog\include;Source;ThirdParty\GLFW\include;ThirdParty\glad\include;ThirdParty\ImGui;ThirdParty\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalOptions>/MDd %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>..\bin\Debug-windows-x86_64\TradescantiaEngine\TradescantiaEngine.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
@@ -96,18 +99,21 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>tscpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>TSC_PLATFORM_WINDOWS;TSC_BUILD_DLL;TSC_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TSC_PLATFORM_WINDOWS;TSC_BUILD_DLL;GLFW_INCLUDE_NONE;TSC_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>ThirdParty\spdlog\include;Source;ThirdParty\GLFW\include;ThirdParty\glad\include;ThirdParty\ImGui;ThirdParty\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalOptions>/MD %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>..\bin\Release-windows-x86_64\TradescantiaEngine\TradescantiaEngine.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
@@ -116,18 +122,21 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>tscpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>TSC_PLATFORM_WINDOWS;TSC_BUILD_DLL;TSC_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TSC_PLATFORM_WINDOWS;TSC_BUILD_DLL;GLFW_INCLUDE_NONE;TSC_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>ThirdParty\spdlog\include;Source;ThirdParty\GLFW\include;ThirdParty\glad\include;ThirdParty\ImGui;ThirdParty\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalOptions>/MD %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>..\bin\Dist-windows-x86_64\TradescantiaEngine\TradescantiaEngine.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
@@ -135,15 +144,49 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\TradescantiaEngine.h" />
-    <ClInclude Include="src\TradescantiaEngine\Application.h" />
-    <ClInclude Include="src\TradescantiaEngine\Core.h" />
-    <ClInclude Include="src\TradescantiaEngine\EntryPoint.h" />
-    <ClInclude Include="src\TradescantiaEngine\Log.h" />
+    <ClInclude Include="Source\Core\Core.h" />
+    <ClInclude Include="Source\Core\Engine.h" />
+    <ClInclude Include="Source\Core\EntryPoint.h" />
+    <ClInclude Include="Source\Core\Input.h" />
+    <ClInclude Include="Source\Core\KeyCodes.h" />
+    <ClInclude Include="Source\Core\Log.h" />
+    <ClInclude Include="Source\Core\MouseButtonCodes.h" />
+    <ClInclude Include="Source\EventSystem\Event.h" />
+    <ClInclude Include="Source\EventSystem\Events\KeyEvent.h" />
+    <ClInclude Include="Source\EventSystem\Events\MouseEvent.h" />
+    <ClInclude Include="Source\EventSystem\Events\WindowEvent.h" />
+    <ClInclude Include="Source\ImGui\ImGuiBuild.h" />
+    <ClInclude Include="Source\ImGui\ImGuiLayer.h" />
+    <ClInclude Include="Source\Layers\Layer.h" />
+    <ClInclude Include="Source\Layers\LayerStack.h" />
+    <ClInclude Include="Source\TradescantiaEngine.h" />
+    <ClInclude Include="Source\Window\Platform\Windows\WindowsInput.h" />
+    <ClInclude Include="Source\Window\Platform\Windows\WindowsWindow.h" />
+    <ClInclude Include="Source\Window\Window.h" />
+    <ClInclude Include="Source\tscpch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\TradescantiaEngine\Application.cpp" />
-    <ClCompile Include="src\TradescantiaEngine\Log.cpp" />
+    <ClCompile Include="Source\Core\Engine.cpp" />
+    <ClCompile Include="Source\Core\Log.cpp" />
+    <ClCompile Include="Source\ImGui\ImGuiLayer.cpp" />
+    <ClCompile Include="Source\Layers\Layer.cpp" />
+    <ClCompile Include="Source\Layers\LayerStack.cpp" />
+    <ClCompile Include="Source\Window\Platform\Windows\WindowsInput.cpp" />
+    <ClCompile Include="Source\Window\Platform\Windows\WindowsWindow.cpp" />
+    <ClCompile Include="Source\tscpch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="ThirdParty\glad\glad.vcxproj">
+      <Project>{DD62977C-C999-980D-7286-7E105E9C140F}</Project>
+    </ProjectReference>
+    <ProjectReference Include="ThirdParty\GLFW\GLFW.vcxproj">
+      <Project>{154B857C-0182-860D-AA6E-6C109684020F}</Project>
+    </ProjectReference>
+    <ProjectReference Include="ThirdParty\ImGui\ImGui.vcxproj">
+      <Project>{C0FF640D-2C14-8DBE-F595-301E616989EF}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
