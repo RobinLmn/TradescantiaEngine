@@ -4,7 +4,9 @@
 #include "Input.h"
 #include "Log.h"
 
-#include <glad/glad.h>
+#include "Renderer/Shader.h"
+#include "Platforms/OpenGL/OpenGLBuffer.h"
+
 
 namespace TradescantiaEngine 
 {
@@ -20,29 +22,37 @@ namespace TradescantiaEngine
 		_Window = std::unique_ptr<Window>(Window::Create());
 		_Window->SetEventCallback(BIND_EVENT_FN(Engine::OnEvent));
 
-		ImGuiLayer* m_ImGuiLayer = new ImGuiLayer();
-		PushOverlay(m_ImGuiLayer);
+		_ImGuiLayer = new ImGuiLayer();
+		PushOverlay(_ImGuiLayer);
 
 		glGenVertexArrays(1, &_VertexArray);
 		glBindVertexArray(_VertexArray);
 
-		glGenBuffers(1, &_VertexBuffer);
-		glBindBuffer(GL_ARRAY_BUFFER, _VertexBuffer);
-
-		float vertices[9] = { -0.5f, -0.5f, 0.0f, 0.5f, -0.5f, 0.0f, 0.f, 0.5f, 0.5f };
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), &vertices, GL_STATIC_DRAW);
-
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
-
-		glGenBuffers(1, &_IndexBuffer);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _IndexBuffer);
+		float vertices[] = {
+			// positions         // colors
+			 0.5f, -0.5f, 0.0f,  1.0f, 0.5f, 1.0f,  // bottom right
+			-0.5f, -0.5f, 0.0f,  0.5f, 1.0f, 1.0f,  // bottom left
+			 0.0f,  0.5f, 0.0f,  1.0f, 0.5f, 1.0f   // top 
+		};
 
 		unsigned int indices[3] = { 0, 1, 2 };
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+		_VertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
+		_IndexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices)));
+
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0); 
+
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+
+		_Shader = std::unique_ptr<Shader>(new Shader("C:/Users/Shadow/Documents/GitHub/TradescantiaEngine/TradescantiaEngine/Content/VertexShader.vs", 
+								"C:/Users/Shadow/Documents/GitHub/TradescantiaEngine/TradescantiaEngine/Content/FragmentShader.fs"));
 	}
 
-	Engine::~Engine() {}
+	Engine::~Engine() 
+	{
+	}
 
 	bool Engine::OnWindowClose(WindowCloseEvent& e)
 	{
@@ -79,11 +89,13 @@ namespace TradescantiaEngine
 	{
 		while (_Running)
 		{
+			_Shader->Use();
+
 			glClearColor(0.1f, 0.1f, 0.1f, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
 
 			glBindVertexArray(_VertexArray);
-			glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
+			glDrawElements(GL_TRIANGLES, _IndexBuffer->Count, GL_UNSIGNED_INT, nullptr);
 
 			for (Layer* layer : _LayerStack)
 				layer->OnUpdate();
