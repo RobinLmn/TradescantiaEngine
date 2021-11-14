@@ -4,6 +4,7 @@
 
 namespace TradescantiaEngine
 {
+
 	class OpenGLVertexBuffer : public VertexBuffer
 	{
 	public:

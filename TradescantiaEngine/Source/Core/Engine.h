@@ -12,6 +12,7 @@ namespace TradescantiaEngine {
 	class Shader;
 	class VertexBuffer;
 	class IndexBuffer;
+	class VertexArray;
 
 	class Engine
 	{
@@ -34,17 +35,18 @@ namespace TradescantiaEngine {
 
 		bool _Running = true;
 
-		std::unique_ptr<Window> _Window;
-		std::unique_ptr<VertexBuffer> _VertexBuffer;
-		std::unique_ptr<IndexBuffer> _IndexBuffer;
-		std::unique_ptr<Shader> _Shader;
+		std::shared_ptr<Window> _Window;
+		std::shared_ptr<VertexBuffer> _VertexBuffer;
+		std::shared_ptr<VertexArray> _VertexArray;
+		std::shared_ptr<IndexBuffer> _IndexBuffer;
+		std::shared_ptr<Shader> _Shader;
+
+		std::shared_ptr<VertexArray> _SquareVertexArray;
 
 		LayerStack _LayerStack;
 		ImGuiLayer* _ImGuiLayer;
 
 		static Engine* _Instance;
-
-		unsigned int _VertexArray;
 	};
 
 	Engine* CreateEngine();

@@ -88,6 +88,9 @@
       <Filter>Window\Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="Source\Platforms\OpenGL\OpenGLContext.h" />
+    <ClInclude Include="Source\Renderer\Renderer.h" />
+    <ClInclude Include="Source\Renderer\VertexArray.h" />
+    <ClInclude Include="Source\Platforms\OpenGL\OpenGLVertexArray.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Core\Engine.cpp">
@@ -115,6 +118,9 @@
       <Filter>Window\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="Source\Platforms\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="Source\Renderer\Renderer.cpp" />
+    <ClCompile Include="Source\Renderer\VertexArray.cpp" />
+    <ClCompile Include="Source\Platforms\OpenGL\OpenGLVertexArray.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\VertexShader.vs" />

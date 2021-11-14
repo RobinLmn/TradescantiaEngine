@@ -5,7 +5,8 @@
 #include "Log.h"
 
 #include "Renderer/Shader.h"
-#include "Platforms/OpenGL/OpenGLBuffer.h"
+#include "Renderer/Buffer.h"
+#include "Renderer/VertexArray.h"
 
 
 namespace TradescantiaEngine 
@@ -25,26 +26,44 @@ namespace TradescantiaEngine
 		_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(_ImGuiLayer);
 
-		glGenVertexArrays(1, &_VertexArray);
-		glBindVertexArray(_VertexArray);
+		BufferLayout layout = {
+			{ShaderDataType::Float3, "a_Position"},
+			{ShaderDataType::Float3, "a_Color"}
+		};
+
+		_VertexArray.reset(VertexArray::Create());
 
 		float vertices[] = {
 			// positions         // colors
-			 0.5f, -0.5f, 0.0f,  1.0f, 0.5f, 1.0f,  // bottom right
-			-0.5f, -0.5f, 0.0f,  0.5f, 1.0f, 1.0f,  // bottom left
-			 0.0f,  0.5f, 0.0f,  1.0f, 0.5f, 1.0f   // top 
+			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f,   // bottom right
+			-0.5f, -0.5f, 0.0f, 0.f, 1.0f, 1.0f,   // bottom left
+			-0.5f,  0.5f, 0.0f, 1.0f, 1.0f, 0.0f   // top left
 		};
+		_VertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
+		_VertexBuffer->Layout = layout;
+		_VertexArray->AddVertexBuffer(_VertexBuffer);
 
 		unsigned int indices[3] = { 0, 1, 2 };
-
-		_VertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
 		_IndexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices)));
+		_VertexArray->SetIndexBuffer(_IndexBuffer);
 
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0); 
+		_SquareVertexArray.reset(VertexArray::Create());
 
-		glEnableVertexAttribArray(1);
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+		float squareVertices[] = {
+			0.5f, 0.5f, 0.0f, 1.f, 0.2f, 0.2f,   // top right
+			-0.5f,  0.5f, 0.0f, 1.0f, 1.0f, 0.0f,   // top left
+			-0.5f, -0.5f, 0.0f, 0.f, 1.0f, 1.0f,   // bottom left
+			0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f,   // bottom right
+		};
+		std::shared_ptr<VertexBuffer> squareVertexBuffer;
+		squareVertexBuffer.reset(VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+		squareVertexBuffer->Layout = layout;
+		_SquareVertexArray->AddVertexBuffer(squareVertexBuffer);
+
+		unsigned int squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
+		std::shared_ptr<IndexBuffer> squareIndexBuffer;
+		squareIndexBuffer.reset(IndexBuffer::Create(squareIndices, sizeof(squareIndices)));
+		_SquareVertexArray->SetIndexBuffer(squareIndexBuffer);
 
 		_Shader = std::unique_ptr<Shader>(new Shader("C:/Users/Shadow/Documents/GitHub/TradescantiaEngine/TradescantiaEngine/Content/VertexShader.vs", 
 								"C:/Users/Shadow/Documents/GitHub/TradescantiaEngine/TradescantiaEngine/Content/FragmentShader.fs"));
@@ -91,11 +110,14 @@ namespace TradescantiaEngine
 		{
 			_Shader->Use();
 
-			glClearColor(0.1f, 0.1f, 0.1f, 1);
+			glClearColor(1.f, 1.f, 1.f, 1.f);
 			glClear(GL_COLOR_BUFFER_BIT);
 
-			glBindVertexArray(_VertexArray);
-			glDrawElements(GL_TRIANGLES, _IndexBuffer->Count, GL_UNSIGNED_INT, nullptr);
+			_SquareVertexArray->Bind();
+			glDrawElements(GL_TRIANGLES, _SquareVertexArray->GetIndexBuffer()->Count, GL_UNSIGNED_INT, nullptr);
+
+			//_VertexArray->Bind();
+			//glDrawElements(GL_TRIANGLES, _IndexBuffer->Count, GL_UNSIGNED_INT, nullptr);
 
 			for (Layer* layer : _LayerStack)
 				layer->OnUpdate();

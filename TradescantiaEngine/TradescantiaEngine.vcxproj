@@ -155,11 +155,13 @@
     <ClInclude Include="Source\ImGui\ImGuiLayer.h" />
     <ClInclude Include="Source\Core\Layer.h" />
     <ClInclude Include="Source\Core\LayerStack.h" />
+    <ClInclude Include="Source\Platforms\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="Source\Renderer\Renderer.h" />
     <ClInclude Include="Source\Renderer\Buffer.h" />
     <ClInclude Include="Source\Renderer\GraphicsContext.h" />
     <ClInclude Include="Source\Platforms\OpenGL\OpenGLContext.h" />
     <ClInclude Include="Source\Renderer\Shader.h" />
+    <ClInclude Include="Source\Renderer\VertexArray.h" />
     <ClInclude Include="Source\TradescantiaEngine.h" />
     <ClInclude Include="Source\Platforms\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="Source\Platforms\Windows\WindowsInput.h" />
@@ -173,12 +175,14 @@
     <ClCompile Include="Source\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="Source\Core\Layer.cpp" />
     <ClCompile Include="Source\Core\LayerStack.cpp" />
+    <ClCompile Include="Source\Platforms\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="Source\Renderer\Buffer.cpp" />
     <ClCompile Include="Source\Platforms\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="Source\Platforms\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="Source\Platforms\Windows\WindowsInput.cpp" />
     <ClCompile Include="Source\Platforms\Windows\WindowsWindow.cpp" />
     <ClCompile Include="Source\Renderer\Renderer.cpp" />
+    <ClCompile Include="Source\Renderer\VertexArray.cpp" />
     <ClCompile Include="Source\tscpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>

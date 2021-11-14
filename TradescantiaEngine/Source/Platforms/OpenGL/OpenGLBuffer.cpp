@@ -2,9 +2,11 @@
 #include "OpenGLBuffer.h"
 
 #include <glad/glad.h>
+#include "OpenGLVertexArray.h"
 
 namespace TradescantiaEngine
 {
+
 	OpenGLVertexBuffer::OpenGLVertexBuffer(float* vertices, uint32_t size)
 	{
 		glCreateBuffers(1, &_RendererID);
