@@ -1,16 +1,13 @@
 #pragma once
+#include "VertexArray.h"
 
 namespace TradescantiaEngine
 {
-	enum class ERendererAPI
-	{
-		None = 0,
-		OpenGL = 1
-	};
-
 	class Renderer
 	{
 	public:
-		static ERendererAPI RendererAPI;
+		static void BeginScene();
+		static void EndScene();
+		static void Submit(const std::shared_ptr<VertexArray>& vertexArray);
 	};
 }

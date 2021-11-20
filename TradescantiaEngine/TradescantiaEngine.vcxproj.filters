@@ -13,17 +13,17 @@
     <Filter Include="ImGui">
       <UniqueIdentifier>{C0FF640D-2C14-8DBE-F595-301E616989EF}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Layers">
-      <UniqueIdentifier>{157446C0-0116-7196-EAD0-84EAD611F8E6}</UniqueIdentifier>
+    <Filter Include="Platforms">
+      <UniqueIdentifier>{DDACA145-4917-56BC-9255-0762FEFE3311}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Window">
-      <UniqueIdentifier>{3DEA79DA-298C-A4B0-1247-B804FE872B01}</UniqueIdentifier>
+    <Filter Include="Platforms\OpenGL">
+      <UniqueIdentifier>{719BB998-5D94-D8EA-86C6-BD6F721EB8F6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Window\Platform">
-      <UniqueIdentifier>{31FB73ED-9D86-E1B1-A697-64A612A23DB2}</UniqueIdentifier>
+    <Filter Include="Platforms\Windows">
+      <UniqueIdentifier>{17E40808-83FA-069E-CC71-92BF38C7D725}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Window\Platform\Windows">
-      <UniqueIdentifier>{6B461E85-D77D-661C-E087-CA3F4C3E8D15}</UniqueIdentifier>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{7CCE658F-689B-C09A-91B4-AE427DE0F528}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -42,10 +42,19 @@
     <ClInclude Include="Source\Core\KeyCodes.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Core\Layer.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\LayerStack.h">
+      <Filter>Core</Filter>
+    </ClInclude>
     <ClInclude Include="Source\Core\Log.h">
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="Source\Core\MouseButtonCodes.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\Window.h">
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="Source\EventSystem\Event.h">
@@ -66,34 +75,56 @@
     <ClInclude Include="Source\ImGui\ImGuiLayer.h">
       <Filter>ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="Source\TradescantiaEngine.h" />
-    <ClInclude Include="Source\tscpch.h" />
-    <ClInclude Include="Source\Renderer\GraphicsContext.h" />
-    <ClInclude Include="Source\Core\Layer.h">
-      <Filter>Layers</Filter>
+    <ClInclude Include="Source\Platforms\OpenGL\OpenGLBuffer.h">
+      <Filter>Platforms\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Core\LayerStack.h">
-      <Filter>Layers</Filter>
+    <ClInclude Include="Source\Platforms\OpenGL\OpenGLContext.h">
+      <Filter>Platforms\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Renderer\Shader.h" />
-    <ClInclude Include="Source\Renderer\Buffer.h" />
-    <ClInclude Include="Source\Core\Window.h">
-      <Filter>Window</Filter>
+    <ClInclude Include="Source\Platforms\OpenGL\OpenGLRendererAPI.h">
+      <Filter>Platforms\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Platforms\OpenGL\OpenGLBuffer.h" />
+    <ClInclude Include="Source\Platforms\OpenGL\OpenGLVertexArray.h">
+      <Filter>Platforms\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="Source\Platforms\Windows\WindowsInput.h">
-      <Filter>Window\Platform\Windows</Filter>
+      <Filter>Platforms\Windows</Filter>
     </ClInclude>
     <ClInclude Include="Source\Platforms\Windows\WindowsWindow.h">
-      <Filter>Window\Platform\Windows</Filter>
+      <Filter>Platforms\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Platforms\OpenGL\OpenGLContext.h" />
-    <ClInclude Include="Source\Renderer\Renderer.h" />
-    <ClInclude Include="Source\Renderer\VertexArray.h" />
-    <ClInclude Include="Source\Platforms\OpenGL\OpenGLVertexArray.h" />
+    <ClInclude Include="Source\Renderer\Buffer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer\GraphicsContext.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer\RenderCommand.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer\Renderer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer\RendererAPI.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer\Shader.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer\VertexArray.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TradescantiaEngine.h" />
+    <ClInclude Include="Source\tscpch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Core\Engine.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Core\Layer.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Core\LayerStack.cpp">
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Source\Core\Log.cpp">
@@ -102,28 +133,35 @@
     <ClCompile Include="Source\ImGui\ImGuiLayer.cpp">
       <Filter>ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="Source\tscpch.cpp" />
-    <ClCompile Include="Source\Core\Layer.cpp">
-      <Filter>Layers</Filter>
+    <ClCompile Include="Source\Platforms\OpenGL\OpenGLBuffer.cpp">
+      <Filter>Platforms\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Core\LayerStack.cpp">
-      <Filter>Layers</Filter>
+    <ClCompile Include="Source\Platforms\OpenGL\OpenGLContext.cpp">
+      <Filter>Platforms\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Renderer\Buffer.cpp" />
-    <ClCompile Include="Source\Platforms\OpenGL\OpenGLBuffer.cpp" />
+    <ClCompile Include="Source\Platforms\OpenGL\OpenGLRendererAPI.cpp">
+      <Filter>Platforms\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Platforms\OpenGL\OpenGLVertexArray.cpp">
+      <Filter>Platforms\OpenGL</Filter>
+    </ClCompile>
     <ClCompile Include="Source\Platforms\Windows\WindowsInput.cpp">
-      <Filter>Window\Platform\Windows</Filter>
+      <Filter>Platforms\Windows</Filter>
     </ClCompile>
     <ClCompile Include="Source\Platforms\Windows\WindowsWindow.cpp">
-      <Filter>Window\Platform\Windows</Filter>
+      <Filter>Platforms\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Platforms\OpenGL\OpenGLContext.cpp" />
-    <ClCompile Include="Source\Renderer\Renderer.cpp" />
-    <ClCompile Include="Source\Renderer\VertexArray.cpp" />
-    <ClCompile Include="Source\Platforms\OpenGL\OpenGLVertexArray.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Content\VertexShader.vs" />
-    <None Include="Content\FragmentShader.fs" />
+    <ClCompile Include="Source\Renderer\Buffer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\Renderer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\VertexArray.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\tscpch.cpp" />
+    <ClCompile Include="Source\Renderer\RendererCommand.cpp" />
+    <ClCompile Include="Source\Renderer\RendererAPI.cpp" />
   </ItemGroup>
 </Project>

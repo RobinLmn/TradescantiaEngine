@@ -4,6 +4,8 @@
 #include "Input.h"
 #include "Log.h"
 
+#include "Renderer/Renderer.h"
+#include "Renderer/RenderCommand.h"
 #include "Renderer/Shader.h"
 #include "Renderer/Buffer.h"
 #include "Renderer/VertexArray.h"
@@ -50,7 +52,7 @@ namespace TradescantiaEngine
 		_SquareVertexArray.reset(VertexArray::Create());
 
 		float squareVertices[] = {
-			0.5f, 0.5f, 0.0f, 1.f, 0.2f, 0.2f,   // top right
+			0.5f, 0.5f, 0.0f, 1.f, 0.f, 0.f,   // top right
 			-0.5f,  0.5f, 0.0f, 1.0f, 1.0f, 0.0f,   // top left
 			-0.5f, -0.5f, 0.0f, 0.f, 1.0f, 1.0f,   // bottom left
 			0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f,   // bottom right
@@ -108,16 +110,15 @@ namespace TradescantiaEngine
 	{
 		while (_Running)
 		{
+			RenderCommand::SetClearColor({ 1.f, 1.f, 1.f, 1.f });
+			RenderCommand::Clear();
+
+			Renderer::BeginScene();
+
 			_Shader->Use();
+			Renderer::Submit(_SquareVertexArray);
 
-			glClearColor(1.f, 1.f, 1.f, 1.f);
-			glClear(GL_COLOR_BUFFER_BIT);
-
-			_SquareVertexArray->Bind();
-			glDrawElements(GL_TRIANGLES, _SquareVertexArray->GetIndexBuffer()->Count, GL_UNSIGNED_INT, nullptr);
-
-			//_VertexArray->Bind();
-			//glDrawElements(GL_TRIANGLES, _IndexBuffer->Count, GL_UNSIGNED_INT, nullptr);
+			Renderer::EndScene();
 
 			for (Layer* layer : _LayerStack)
 				layer->OnUpdate();

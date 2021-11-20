@@ -20,7 +20,10 @@ namespace TradescantiaEngine
 		case ShaderDataType::Mat3: return GL_FLOAT;
 		case ShaderDataType::Mat4: return GL_FLOAT;
 		case ShaderDataType::Bool: return GL_INT;
+		default: TSC_ASSERT(false, "Unkown ShaderDataType");
 		}
+
+		return GL_NONE;
 	}
 
 	OpenGLVertexArray::OpenGLVertexArray()
