@@ -1,8 +1,15 @@
 #include "tscpch.h"
+
 #include "Engine.h"
 #include "Input.h"
 #include "Log.h"
-#include <glad/glad.h>
+
+#include "Renderer/Renderer.h"
+#include "Renderer/RenderCommand.h"
+#include "Renderer/Shader.h"
+#include "Renderer/Buffer.h"
+#include "Renderer/VertexArray.h"
+
 
 namespace TradescantiaEngine 
 {
@@ -18,11 +25,39 @@ namespace TradescantiaEngine
 		_Window = std::unique_ptr<Window>(Window::Create());
 		_Window->SetEventCallback(BIND_EVENT_FN(Engine::OnEvent));
 
-		ImGuiLayer* m_ImGuiLayer = new ImGuiLayer();
-		PushOverlay(m_ImGuiLayer);
+		_ImGuiLayer = new ImGuiLayer();
+		PushOverlay(_ImGuiLayer);
+
+		BufferLayout layout = {
+			{ShaderDataType::Float3, "a_Position"},
+			{ShaderDataType::Float3, "a_Color"}
+		};
+
+		_VertexArray.reset(VertexArray::Create());
+
+		float squareVertices[] = {
+			0.5f, 0.5f, 0.0f,		1.f, .0f, 1.f,		// top right
+			-0.5f,  0.5f, 0.0f,		.0f, 1.f, 1.f,		// top left
+			-0.5f, -0.5f, 0.0f,		1.f, 1.f, 0.f,		// bottom left
+			0.5f, -0.5f, 0.0f,		1.f, 0.f, 0.f,		// bottom right
+		};
+		std::shared_ptr<VertexBuffer> squareVertexBuffer;
+		squareVertexBuffer.reset(VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+		squareVertexBuffer->Layout = layout;
+		_VertexArray->AddVertexBuffer(squareVertexBuffer);
+
+		unsigned int squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
+		std::shared_ptr<IndexBuffer> squareIndexBuffer;
+		squareIndexBuffer.reset(IndexBuffer::Create(squareIndices, sizeof(squareIndices)));
+		_VertexArray->SetIndexBuffer(squareIndexBuffer);
+
+		_Shader = std::unique_ptr<Shader>(new Shader("C:/Users/Shadow/Documents/GitHub/TradescantiaEngine/TradescantiaEngine/Content/VertexShader.vs", 
+								"C:/Users/Shadow/Documents/GitHub/TradescantiaEngine/TradescantiaEngine/Content/FragmentShader.fs"));
 	}
 
-	Engine::~Engine() {}
+	Engine::~Engine() 
+	{
+	}
 
 	bool Engine::OnWindowClose(WindowCloseEvent& e)
 	{
@@ -59,8 +94,15 @@ namespace TradescantiaEngine
 	{
 		while (_Running)
 		{
-			glClearColor(1, 1, 1, 1);
-			glClear(GL_COLOR_BUFFER_BIT);
+			RenderCommand::SetClearColor({ 1.f, 1.f, 1.f, 1.f });
+			RenderCommand::Clear();
+
+			Renderer::BeginScene();
+
+			_Shader->Use();
+			Renderer::Submit(_VertexArray);
+
+			Renderer::EndScene();
 
 			for (Layer* layer : _LayerStack)
 				layer->OnUpdate();

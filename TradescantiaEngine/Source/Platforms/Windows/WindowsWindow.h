@@ -1,6 +1,7 @@
 #pragma once
 
-#include "Window/Window.h"
+#include "Core/Window.h"
+#include "Platforms/OpenGL/OpenGLContext.h"
 #include <GLFW/glfw3.h>
 
 namespace TradescantiaEngine
@@ -27,14 +28,14 @@ namespace TradescantiaEngine
 		virtual void Shutdown();
 
 		GLFWwindow* _Window;
+		OpenGLContext* _Context;
 
 		struct WindowData
 		{
+			bool VSync = false;
 			unsigned int Width = 0;
 			unsigned int Height = 0;
 			std::string Title;
-			bool VSync = false;
-			
 			EventCallbackFn EventCallback;
 		};
 

@@ -2,12 +2,18 @@
 
 #include "Core.h"
 
-#include "Window/Window.h"
-#include "Layers/LayerStack.h"
+#include "LayerStack.h"
+#include "Window.h"
 #include "EventSystem/Events/WindowEvent.h"
 #include "ImGui/ImGuiLayer.h"
 
 namespace TradescantiaEngine {
+
+	class Shader;
+	class VertexBuffer;
+	class IndexBuffer;
+	class VertexArray;
+
 	class Engine
 	{
 	public:
@@ -27,10 +33,14 @@ namespace TradescantiaEngine {
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
 
-		std::unique_ptr<Window> _Window;
-		std::unique_ptr<ImGuiLayer> _ImGuiLayer;
 		bool _Running = true;
+
+		std::shared_ptr<Window> _Window;
+		std::shared_ptr<Shader> _Shader;
+		std::shared_ptr<VertexArray> _VertexArray;
+
 		LayerStack _LayerStack;
+		ImGuiLayer* _ImGuiLayer;
 
 		static Engine* _Instance;
 	};
