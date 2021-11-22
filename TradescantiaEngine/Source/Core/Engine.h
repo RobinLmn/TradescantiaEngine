@@ -36,12 +36,8 @@ namespace TradescantiaEngine {
 		bool _Running = true;
 
 		std::shared_ptr<Window> _Window;
-		std::shared_ptr<VertexBuffer> _VertexBuffer;
-		std::shared_ptr<VertexArray> _VertexArray;
-		std::shared_ptr<IndexBuffer> _IndexBuffer;
 		std::shared_ptr<Shader> _Shader;
-
-		std::shared_ptr<VertexArray> _SquareVertexArray;
+		std::shared_ptr<VertexArray> _VertexArray;
 
 		LayerStack _LayerStack;
 		ImGuiLayer* _ImGuiLayer;

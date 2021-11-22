@@ -35,37 +35,21 @@ namespace TradescantiaEngine
 
 		_VertexArray.reset(VertexArray::Create());
 
-		float vertices[] = {
-			// positions         // colors
-			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f,   // bottom right
-			-0.5f, -0.5f, 0.0f, 0.f, 1.0f, 1.0f,   // bottom left
-			-0.5f,  0.5f, 0.0f, 1.0f, 1.0f, 0.0f   // top left
-		};
-		_VertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
-		_VertexBuffer->Layout = layout;
-		_VertexArray->AddVertexBuffer(_VertexBuffer);
-
-		unsigned int indices[3] = { 0, 1, 2 };
-		_IndexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices)));
-		_VertexArray->SetIndexBuffer(_IndexBuffer);
-
-		_SquareVertexArray.reset(VertexArray::Create());
-
 		float squareVertices[] = {
-			0.5f, 0.5f, 0.0f, 1.f, 0.f, 0.f,   // top right
-			-0.5f,  0.5f, 0.0f, 1.0f, 1.0f, 0.0f,   // top left
-			-0.5f, -0.5f, 0.0f, 0.f, 1.0f, 1.0f,   // bottom left
-			0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f,   // bottom right
+			0.5f, 0.5f, 0.0f,		1.f, .0f, 1.f,		// top right
+			-0.5f,  0.5f, 0.0f,		.0f, 1.f, 1.f,		// top left
+			-0.5f, -0.5f, 0.0f,		1.f, 1.f, 0.f,		// bottom left
+			0.5f, -0.5f, 0.0f,		1.f, 0.f, 0.f,		// bottom right
 		};
 		std::shared_ptr<VertexBuffer> squareVertexBuffer;
 		squareVertexBuffer.reset(VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 		squareVertexBuffer->Layout = layout;
-		_SquareVertexArray->AddVertexBuffer(squareVertexBuffer);
+		_VertexArray->AddVertexBuffer(squareVertexBuffer);
 
 		unsigned int squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
 		std::shared_ptr<IndexBuffer> squareIndexBuffer;
 		squareIndexBuffer.reset(IndexBuffer::Create(squareIndices, sizeof(squareIndices)));
-		_SquareVertexArray->SetIndexBuffer(squareIndexBuffer);
+		_VertexArray->SetIndexBuffer(squareIndexBuffer);
 
 		_Shader = std::unique_ptr<Shader>(new Shader("C:/Users/Shadow/Documents/GitHub/TradescantiaEngine/TradescantiaEngine/Content/VertexShader.vs", 
 								"C:/Users/Shadow/Documents/GitHub/TradescantiaEngine/TradescantiaEngine/Content/FragmentShader.fs"));
@@ -116,7 +100,7 @@ namespace TradescantiaEngine
 			Renderer::BeginScene();
 
 			_Shader->Use();
-			Renderer::Submit(_SquareVertexArray);
+			Renderer::Submit(_VertexArray);
 
 			Renderer::EndScene();
 
