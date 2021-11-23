@@ -12,7 +12,7 @@ namespace TradescantiaEngine
 		unsigned int Width;
 		unsigned int Height;
 
-		WindowProperties(const std::string& title = "Tradescantia Engine", unsigned int width = 720, unsigned int height = 720)
+		WindowProperties(const std::string& title = "Tradescantia Engine", unsigned int width = 675, unsigned int height = 675)
 			: Height(height), Width(width), Title(title)
 		{}
 	};

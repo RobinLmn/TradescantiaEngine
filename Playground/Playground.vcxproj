@@ -79,7 +79,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>TSC_PLATFORM_WINDOWS;TSC_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\TradescantiaEngine\ThirdParty\spdlog\include;..\TradescantiaEngine\Source;..\TradescantiaEngine\ThirdParty\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\TradescantiaEngine\ThirdParty\spdlog\include;..\TradescantiaEngine\ThirdParty;..\TradescantiaEngine\Source;..\TradescantiaEngine\ThirdParty\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -95,7 +95,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>TSC_PLATFORM_WINDOWS;TSC_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\TradescantiaEngine\ThirdParty\spdlog\include;..\TradescantiaEngine\Source;..\TradescantiaEngine\ThirdParty\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\TradescantiaEngine\ThirdParty\spdlog\include;..\TradescantiaEngine\ThirdParty;..\TradescantiaEngine\Source;..\TradescantiaEngine\ThirdParty\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -115,7 +115,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>TSC_PLATFORM_WINDOWS;TSC_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\TradescantiaEngine\ThirdParty\spdlog\include;..\TradescantiaEngine\Source;..\TradescantiaEngine\ThirdParty\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\TradescantiaEngine\ThirdParty\spdlog\include;..\TradescantiaEngine\ThirdParty;..\TradescantiaEngine\Source;..\TradescantiaEngine\ThirdParty\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -131,7 +131,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Playground.h" />
+    <ClInclude Include="Source\ParticleSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Playground.cpp" />

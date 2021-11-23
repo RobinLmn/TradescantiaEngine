@@ -54,6 +54,9 @@
     <ClInclude Include="Source\Core\MouseButtonCodes.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Core\Particle.h">
+      <Filter>Core</Filter>
+    </ClInclude>
     <ClInclude Include="Source\Core\Window.h">
       <Filter>Core</Filter>
     </ClInclude>
@@ -84,6 +87,9 @@
     <ClInclude Include="Source\Platforms\OpenGL\OpenGLRendererAPI.h">
       <Filter>Platforms\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Platforms\OpenGL\OpenGLShader.h">
+      <Filter>Platforms\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="Source\Platforms\OpenGL\OpenGLVertexArray.h">
       <Filter>Platforms\OpenGL</Filter>
     </ClInclude>
@@ -94,6 +100,9 @@
       <Filter>Platforms\Windows</Filter>
     </ClInclude>
     <ClInclude Include="Source\Renderer\Buffer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Renderer\Camera.h">
       <Filter>Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Source\Renderer\GraphicsContext.h">
@@ -142,6 +151,9 @@
     <ClCompile Include="Source\Platforms\OpenGL\OpenGLRendererAPI.cpp">
       <Filter>Platforms\OpenGL</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Platforms\OpenGL\OpenGLShader.cpp">
+      <Filter>Platforms\OpenGL</Filter>
+    </ClCompile>
     <ClCompile Include="Source\Platforms\OpenGL\OpenGLVertexArray.cpp">
       <Filter>Platforms\OpenGL</Filter>
     </ClCompile>
@@ -154,14 +166,24 @@
     <ClCompile Include="Source\Renderer\Buffer.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Renderer\Camera.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="Source\Renderer\Renderer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\RendererAPI.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\RendererCommand.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\Shader.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Source\Renderer\VertexArray.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Source\tscpch.cpp" />
-    <ClCompile Include="Source\Renderer\RendererCommand.cpp" />
-    <ClCompile Include="Source\Renderer\RendererAPI.cpp" />
   </ItemGroup>
 </Project>

@@ -149,6 +149,7 @@
     <ClInclude Include="Source\Core\LayerStack.h" />
     <ClInclude Include="Source\Core\Log.h" />
     <ClInclude Include="Source\Core\MouseButtonCodes.h" />
+    <ClInclude Include="Source\Core\Particle.h" />
     <ClInclude Include="Source\Core\Window.h" />
     <ClInclude Include="Source\EventSystem\Event.h" />
     <ClInclude Include="Source\EventSystem\Events\KeyEvent.h" />
@@ -159,10 +160,12 @@
     <ClInclude Include="Source\Platforms\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="Source\Platforms\OpenGL\OpenGLContext.h" />
     <ClInclude Include="Source\Platforms\OpenGL\OpenGLRendererAPI.h" />
+    <ClInclude Include="Source\Platforms\OpenGL\OpenGLShader.h" />
     <ClInclude Include="Source\Platforms\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="Source\Platforms\Windows\WindowsInput.h" />
     <ClInclude Include="Source\Platforms\Windows\WindowsWindow.h" />
     <ClInclude Include="Source\Renderer\Buffer.h" />
+    <ClInclude Include="Source\Renderer\Camera.h" />
     <ClInclude Include="Source\Renderer\GraphicsContext.h" />
     <ClInclude Include="Source\Renderer\RenderCommand.h" />
     <ClInclude Include="Source\Renderer\Renderer.h" />
@@ -181,13 +184,16 @@
     <ClCompile Include="Source\Platforms\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="Source\Platforms\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="Source\Platforms\OpenGL\OpenGLRendererAPI.cpp" />
+    <ClCompile Include="Source\Platforms\OpenGL\OpenGLShader.cpp" />
     <ClCompile Include="Source\Platforms\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="Source\Platforms\Windows\WindowsInput.cpp" />
     <ClCompile Include="Source\Platforms\Windows\WindowsWindow.cpp" />
     <ClCompile Include="Source\Renderer\Buffer.cpp" />
+    <ClCompile Include="Source\Renderer\Camera.cpp" />
     <ClCompile Include="Source\Renderer\Renderer.cpp" />
     <ClCompile Include="Source\Renderer\RendererAPI.cpp" />
     <ClCompile Include="Source\Renderer\RendererCommand.cpp" />
+    <ClCompile Include="Source\Renderer\Shader.cpp" />
     <ClCompile Include="Source\Renderer\VertexArray.cpp" />
     <ClCompile Include="Source\tscpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

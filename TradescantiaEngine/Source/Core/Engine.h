@@ -7,13 +7,8 @@
 #include "EventSystem/Events/WindowEvent.h"
 #include "ImGui/ImGuiLayer.h"
 
-namespace TradescantiaEngine {
-
-	class Shader;
-	class VertexBuffer;
-	class IndexBuffer;
-	class VertexArray;
-
+namespace TradescantiaEngine 
+{
 	class Engine
 	{
 	public:
@@ -35,12 +30,10 @@ namespace TradescantiaEngine {
 
 		bool _Running = true;
 
-		std::shared_ptr<Window> _Window;
-		std::shared_ptr<Shader> _Shader;
-		std::shared_ptr<VertexArray> _VertexArray;
-
 		LayerStack _LayerStack;
 		ImGuiLayer* _ImGuiLayer;
+		
+		std::shared_ptr<Window> _Window;
 
 		static Engine* _Instance;
 	};

@@ -14,7 +14,7 @@ namespace TradescantiaEngine
 	}
 	void OpenGLRendererAPI::DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray)
 	{
-		glPointSize(20);
+		glPointSize(1);
 		glEnable(GL_POINT_SPRITE);
 		glDrawElements(GL_POINTS, vertexArray->GetIndexBuffer()->Count, GL_UNSIGNED_INT, nullptr);
 	}

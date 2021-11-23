@@ -4,16 +4,8 @@
 #include "Input.h"
 #include "Log.h"
 
-#include "Renderer/Renderer.h"
-#include "Renderer/RenderCommand.h"
-#include "Renderer/Shader.h"
-#include "Renderer/Buffer.h"
-#include "Renderer/VertexArray.h"
-
-
 namespace TradescantiaEngine 
 {
-
 	Engine* Engine::_Instance = nullptr;
 	
 #define BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
@@ -27,34 +19,11 @@ namespace TradescantiaEngine
 
 		_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(_ImGuiLayer);
-
-		BufferLayout layout = {
-			{ShaderDataType::Float3, "a_Position"},
-			{ShaderDataType::Float, "a_Size"},
-		};
-
-		_VertexArray.reset(VertexArray::Create());
-
-		float squareVertices[] = {
-			0.0, 0.0, 0.0, 3.0
-		};
-
-		std::shared_ptr<VertexBuffer> squareVertexBuffer;
-		squareVertexBuffer.reset(VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
-		squareVertexBuffer->Layout = layout;
-		_VertexArray->AddVertexBuffer(squareVertexBuffer);
-
-		unsigned int squareIndices[] = { 0 };
-		std::shared_ptr<IndexBuffer> squareIndexBuffer;
-		squareIndexBuffer.reset(IndexBuffer::Create(squareIndices, sizeof(squareIndices)));
-		_VertexArray->SetIndexBuffer(squareIndexBuffer);
-
-		_Shader = std::unique_ptr<Shader>(new Shader("C:/Users/Shadow/Documents/GitHub/TradescantiaEngine/TradescantiaEngine/Content/VertexShader.vs", 
-								"C:/Users/Shadow/Documents/GitHub/TradescantiaEngine/TradescantiaEngine/Content/FragmentShader.fs"));
 	}
 
-	Engine::~Engine() 
+	Engine::~Engine()
 	{
+
 	}
 
 	bool Engine::OnWindowClose(WindowCloseEvent& e)
@@ -92,16 +61,6 @@ namespace TradescantiaEngine
 	{
 		while (_Running)
 		{
-			RenderCommand::SetClearColor({ 1.f, 1.f, 1.f, 1.f });
-			RenderCommand::Clear();
-
-			Renderer::BeginScene();
-
-			_Shader->Use();
-			Renderer::Submit(_VertexArray);
-
-			Renderer::EndScene();
-
 			for (Layer* layer : _LayerStack)
 				layer->OnUpdate();
 
