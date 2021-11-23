@@ -6,7 +6,7 @@ namespace TradescantiaEngine
 {
 	void OpenGLRendererAPI::SetClearColor(const glm::vec4& color)
 	{
-		glClearColor(1.f, 1.f, 1.f, 1.f);
+		glClearColor(0.f, 0.f, 0.f, 1.f);
 	}
 	void OpenGLRendererAPI::Clear()
 	{
@@ -14,6 +14,8 @@ namespace TradescantiaEngine
 	}
 	void OpenGLRendererAPI::DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray)
 	{
-		glDrawElements(GL_TRIANGLES, vertexArray->GetIndexBuffer()->Count, GL_UNSIGNED_INT, nullptr);
+		glPointSize(20);
+		glEnable(GL_POINT_SPRITE);
+		glDrawElements(GL_POINTS, vertexArray->GetIndexBuffer()->Count, GL_UNSIGNED_INT, nullptr);
 	}
 }

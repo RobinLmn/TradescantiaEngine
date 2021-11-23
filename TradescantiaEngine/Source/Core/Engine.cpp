@@ -30,23 +30,21 @@ namespace TradescantiaEngine
 
 		BufferLayout layout = {
 			{ShaderDataType::Float3, "a_Position"},
-			{ShaderDataType::Float3, "a_Color"}
+			{ShaderDataType::Float, "a_Size"},
 		};
 
 		_VertexArray.reset(VertexArray::Create());
 
 		float squareVertices[] = {
-			0.5f, 0.5f, 0.0f,		1.f, .0f, 1.f,		// top right
-			-0.5f,  0.5f, 0.0f,		.0f, 1.f, 1.f,		// top left
-			-0.5f, -0.5f, 0.0f,		1.f, 1.f, 0.f,		// bottom left
-			0.5f, -0.5f, 0.0f,		1.f, 0.f, 0.f,		// bottom right
+			0.0, 0.0, 0.0, 3.0
 		};
+
 		std::shared_ptr<VertexBuffer> squareVertexBuffer;
 		squareVertexBuffer.reset(VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 		squareVertexBuffer->Layout = layout;
 		_VertexArray->AddVertexBuffer(squareVertexBuffer);
 
-		unsigned int squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
+		unsigned int squareIndices[] = { 0 };
 		std::shared_ptr<IndexBuffer> squareIndexBuffer;
 		squareIndexBuffer.reset(IndexBuffer::Create(squareIndices, sizeof(squareIndices)));
 		_VertexArray->SetIndexBuffer(squareIndexBuffer);
