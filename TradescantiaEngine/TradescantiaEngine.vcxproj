@@ -146,9 +146,10 @@
     <ClInclude Include="Source\Core\EntryPoint.h" />
     <ClInclude Include="Source\Core\Input.h" />
     <ClInclude Include="Source\Core\KeyCodes.h" />
+    <ClInclude Include="Source\Systems\ParticleSystem.h" />
     <ClInclude Include="Source\Systems\System.h" />
     <ClInclude Include="Source\Core\Log.h" />
-    <ClInclude Include="Source\Core\Particle.h" />
+    <ClInclude Include="Source\Entities\Particle.h" />
     <ClInclude Include="Source\Core\Window.h" />
     <ClInclude Include="Source\EventSystem\Event.h" />
     <ClInclude Include="Source\EventSystem\Events\KeyEvent.h" />
@@ -177,6 +178,7 @@
   <ItemGroup>
     <ClCompile Include="Source\Systems\CameraSystem.cpp" />
     <ClCompile Include="Source\Core\Engine.cpp" />
+    <ClCompile Include="Source\Systems\ParticleSystem.cpp" />
     <ClCompile Include="Source\Systems\System.cpp" />
     <ClCompile Include="Source\Core\Log.cpp" />
     <ClCompile Include="Source\ImGui\ImGuiSystem.cpp" />

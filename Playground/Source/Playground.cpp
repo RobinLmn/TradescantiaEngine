@@ -1,12 +1,10 @@
 #include <TradescantiaEngine.h>
-#include "ParticleSystem.h"
 
 class Playground : public TradescantiaEngine::Engine
 {
 public:
 	Playground()
 	{
-		PushSystem(new ParticleSystem);
 	};
 
 	~Playground() {};

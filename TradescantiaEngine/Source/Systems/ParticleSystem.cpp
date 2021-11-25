@@ -1,12 +1,11 @@
-#pragma once
+#include "tscpch.h"
+#include "ParticleSystem.h"
+#include "Entities/Particle.h"
+#include "Renderer/Renderer.h"
 
-#include <TradescantiaEngine.h>
-
-class ParticleSystem : public TradescantiaEngine::System
+namespace TradescantiaEngine
 {
-public:
-
-	ParticleSystem()
+	ParticleSystem::ParticleSystem()
 	{
 		TradescantiaEngine::BufferLayout layout =
 		{
@@ -72,21 +71,8 @@ public:
 				"C:/Users/Shadow/Documents/GitHub/TradescantiaEngine/TradescantiaEngine/Content/FragmentShader.fs"));
 	}
 
-	virtual ~ParticleSystem() = default;
-
-	virtual void Init() override {}
-	virtual void Terminate() override {}
-
-	virtual void Update(float deltaTime) override
+	void ParticleSystem::Update(float deltaTime)
 	{
 		TradescantiaEngine::Renderer::Submit(_Shader, _VertexArray);
 	}
-
-	virtual void ImGuiRender() override {}
-	virtual void OnEvent(TradescantiaEngine::Event& e) override {}
-
-private:
-
-	std::shared_ptr<TradescantiaEngine::VertexArray> _VertexArray;
-	std::shared_ptr<TradescantiaEngine::Shader> _Shader;
-};
+}

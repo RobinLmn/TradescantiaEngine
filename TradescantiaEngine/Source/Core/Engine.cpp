@@ -7,6 +7,8 @@
 #include "Renderer/RenderCommand.h"
 #include "Renderer/Renderer.h"
 
+#include "Systems/ParticleSystem.h"
+
 namespace TradescantiaEngine 
 {
 	Engine* Engine::_Instance = nullptr;
@@ -20,11 +22,9 @@ namespace TradescantiaEngine
 		_Window = Window::Create(WindowProperties("TradescantiaEngine", /* width = */ 720, /* height = */ 720));
 		_Window->SetEventCallback(BIND_EVENT_FN(Engine::OnEvent));
 
-		_ImGuiSystem = new ImGuiSystem();
-		_CameraSystem = new CameraSystem();
-
-		PushSystem(_CameraSystem);
-		PushSystem(_ImGuiSystem);
+		PushSystem(_CameraSystem = new CameraSystem());
+		PushSystem(_ImGuiSystem = new ImGuiSystem());
+		PushSystem(new ParticleSystem);
 	}
 
 	Engine::~Engine()

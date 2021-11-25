@@ -4,7 +4,6 @@
 #include "Core/Log.h"
 #include "Core/Input.h"
 #include "Core/KeyCodes.h"
-#include "Core/Particle.h"
 
 #include "Systems/System.h"
 
