@@ -1,5 +1,5 @@
 # TradescantiaEngine
 
-3D Game Engine based from TheCherno "Game Engine" series. Made in C++, rendering with OpenGL
+3D Game Engine for particle simulation and other cool stuff. Made in C++, rendering with OpenGL, inspired from TheCherno "Game Engine" series.
 
-![Tradescantia Engine](https://user-images.githubusercontent.com/55120018/141655816-9f62fa3e-c7e8-44e0-8044-8783caf865b9.png)
+![Tradescantia Engine](https://user-images.githubusercontent.com/55120018/143492383-3fb2eae1-d975-423a-bd8f-18512a4ec2b4.png)
