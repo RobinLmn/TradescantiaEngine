@@ -6,7 +6,7 @@ class Playground : public TradescantiaEngine::Engine
 public:
 	Playground()
 	{
-		PushLayer(new ParticleSystem);
+		PushSystem(new ParticleSystem);
 	};
 
 	~Playground() {};

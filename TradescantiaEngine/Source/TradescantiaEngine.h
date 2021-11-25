@@ -2,7 +2,7 @@
 
 #include "Core/Engine.h"
 #include "Core/Log.h"
-#include "Core/Layer.h"
+#include "Core/System.h"
 #include "Core/Input.h"
 #include "Core/KeyCodes.h"
 #include "Core/MouseButtonCodes.h"
@@ -14,8 +14,6 @@
 #include "Renderer/Shader.h"
 #include "Renderer/Buffer.h"
 #include "Renderer/VertexArray.h"
-
-#include "ImGui/ImGuiLayer.h"
 
 // -------------------- ENTRY POINT ------------------------
 

@@ -145,8 +145,7 @@
     <ClInclude Include="Source\Core\EntryPoint.h" />
     <ClInclude Include="Source\Core\Input.h" />
     <ClInclude Include="Source\Core\KeyCodes.h" />
-    <ClInclude Include="Source\Core\Layer.h" />
-    <ClInclude Include="Source\Core\LayerStack.h" />
+    <ClInclude Include="Source\Core\System.h" />
     <ClInclude Include="Source\Core\Log.h" />
     <ClInclude Include="Source\Core\MouseButtonCodes.h" />
     <ClInclude Include="Source\Core\Particle.h" />
@@ -156,7 +155,7 @@
     <ClInclude Include="Source\EventSystem\Events\MouseEvent.h" />
     <ClInclude Include="Source\EventSystem\Events\WindowEvent.h" />
     <ClInclude Include="Source\ImGui\ImGuiBuild.h" />
-    <ClInclude Include="Source\ImGui\ImGuiLayer.h" />
+    <ClInclude Include="Source\ImGui\ImGuiSystem.h" />
     <ClInclude Include="Source\Platforms\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="Source\Platforms\OpenGL\OpenGLContext.h" />
     <ClInclude Include="Source\Platforms\OpenGL\OpenGLRendererAPI.h" />
@@ -177,10 +176,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Core\Engine.cpp" />
-    <ClCompile Include="Source\Core\Layer.cpp" />
-    <ClCompile Include="Source\Core\LayerStack.cpp" />
+    <ClCompile Include="Source\Core\System.cpp" />
     <ClCompile Include="Source\Core\Log.cpp" />
-    <ClCompile Include="Source\ImGui\ImGuiLayer.cpp" />
+    <ClCompile Include="Source\ImGui\ImGuiSystem.cpp" />
     <ClCompile Include="Source\Platforms\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="Source\Platforms\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="Source\Platforms\OpenGL\OpenGLRendererAPI.cpp" />

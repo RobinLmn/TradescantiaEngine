@@ -158,7 +158,7 @@ namespace TradescantiaEngine
 		glfwDestroyWindow(_Window);
 	}
 
-	void WindowsWindow::OnUpdate()
+	void WindowsWindow::Update()
 	{
 		glfwPollEvents();
 		_Context->SwapBuffers();

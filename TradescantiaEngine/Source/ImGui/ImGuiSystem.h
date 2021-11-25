@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core/Layer.h"
+#include "Core/System.h"
 
 #include "EventSystem/Events/WindowEvent.h"
 #include "EventSystem/Events/KeyEvent.h"
@@ -8,15 +8,15 @@
 
 namespace TradescantiaEngine
 {
-	class ImGuiLayer : public Layer
+	class ImGuiSystem : public System
 	{
 	public: 
-		ImGuiLayer();
-		~ImGuiLayer();
+		ImGuiSystem() = default;
+		~ImGuiSystem() = default;
 
-		void OnAttach() override;
-		void OnDetach() override;
-		void OnImGuiRender() override;
+		void Init() override;
+		void Terminate() override;
+		void Update(float deltaTime) override;
 
 		void Begin();
 		void End();

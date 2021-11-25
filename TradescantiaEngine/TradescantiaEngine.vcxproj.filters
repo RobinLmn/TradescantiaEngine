@@ -42,12 +42,6 @@
     <ClInclude Include="Source\Core\KeyCodes.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Core\Layer.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Core\LayerStack.h">
-      <Filter>Core</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Core\Log.h">
       <Filter>Core</Filter>
     </ClInclude>
@@ -73,9 +67,6 @@
       <Filter>EventSystem\Events</Filter>
     </ClInclude>
     <ClInclude Include="Source\ImGui\ImGuiBuild.h">
-      <Filter>ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ImGui\ImGuiLayer.h">
       <Filter>ImGui</Filter>
     </ClInclude>
     <ClInclude Include="Source\Platforms\OpenGL\OpenGLBuffer.h">
@@ -125,22 +116,19 @@
     </ClInclude>
     <ClInclude Include="Source\TradescantiaEngine.h" />
     <ClInclude Include="Source\tscpch.h" />
+    <ClInclude Include="Source\Core\System.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ImGui\ImGuiSystem.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Core\Engine.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Core\Layer.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Core\LayerStack.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Core\Log.cpp">
       <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ImGui\ImGuiLayer.cpp">
-      <Filter>ImGui</Filter>
     </ClCompile>
     <ClCompile Include="Source\Platforms\OpenGL\OpenGLBuffer.cpp">
       <Filter>Platforms\OpenGL</Filter>
@@ -185,5 +173,11 @@
       <Filter>Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Source\tscpch.cpp" />
+    <ClCompile Include="Source\Core\System.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ImGui\ImGuiSystem.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

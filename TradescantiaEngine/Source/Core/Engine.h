@@ -2,10 +2,10 @@
 
 #include "Core.h"
 
-#include "LayerStack.h"
+#include "System.h"
 #include "Window.h"
 #include "EventSystem/Events/WindowEvent.h"
-#include "ImGui/ImGuiLayer.h"
+#include "ImGui/ImGuiSystem.h"
 
 namespace TradescantiaEngine 
 {
@@ -16,11 +16,12 @@ namespace TradescantiaEngine
 		~Engine();
 
 		void Run();
+		void Update(float deltaTime);
+		void Init();
+		void Terminate();
 
 		void OnEvent(Event& e);
-
-		void PushLayer(Layer* layer);
-		void PushOverlay(Layer* layer);
+		void PushSystem(System* system);
 
 		inline Window& GetWindow() { return *_Window; }
 		inline static Engine& Get() { return *_Instance; }
@@ -30,10 +31,9 @@ namespace TradescantiaEngine
 
 		bool _Running = true;
 
-		LayerStack _LayerStack;
-		ImGuiLayer* _ImGuiLayer;
-		
-		std::shared_ptr<Window> _Window;
+		SystemStack _SystemStack;
+		ImGuiSystem* _ImGuiSystem;
+		Window* _Window;
 
 		static Engine* _Instance;
 	};

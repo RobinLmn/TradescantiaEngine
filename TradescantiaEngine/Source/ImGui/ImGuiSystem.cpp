@@ -1,5 +1,5 @@
 #include "tscpch.h"
-#include "ImGuiLayer.h"
+#include "ImGuiSystem.h"
 
 #include "Core/Engine.h"
 #include "ImGuiBuild.h"
@@ -7,17 +7,14 @@
 
 namespace TradescantiaEngine 
 {
-	ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer") {}
-	ImGuiLayer::~ImGuiLayer() {}
-
-	void ImGuiLayer::Begin()
+	void ImGuiSystem::Begin()
 	{
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
 	}
 
-	void ImGuiLayer::End()
+	void ImGuiSystem::End()
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		Engine& engine = Engine::Get();
@@ -34,7 +31,7 @@ namespace TradescantiaEngine
 		}
 	}
 
-	void ImGuiLayer::OnAttach()
+	void ImGuiSystem::Init()
 	{
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
@@ -51,14 +48,14 @@ namespace TradescantiaEngine
 		ImGui_ImplOpenGL3_Init("#version 410");
 	}
 
-	void ImGuiLayer::OnDetach()
+	void ImGuiSystem::Terminate()
 	{
 		ImGui_ImplOpenGL3_Shutdown();
 		ImGui_ImplGlfw_Shutdown();
 		ImGui::DestroyContext();
 	}
 
-	void ImGuiLayer::OnImGuiRender()
+	void ImGuiSystem::Update(float deltaTime)
 	{
 		//static bool show = true;
 		//ImGui::ShowDemoWindow(&show);

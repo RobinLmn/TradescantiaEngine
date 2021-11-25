@@ -9,6 +9,6 @@ namespace TradescantiaEngine
 	protected:
 		virtual bool IsKeyPressedImpl(int keycode) override;
 		virtual bool IsMouseButtonPressedImpl(int button) override;
-		virtual std::tuple<double, double> GetMousePosImpl() override;
+		virtual glm::vec2 GetMousePosImpl() override;
 	};
 }

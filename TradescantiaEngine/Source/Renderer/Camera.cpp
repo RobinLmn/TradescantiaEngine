@@ -5,16 +5,22 @@
 
 namespace TradescantiaEngine
 {
-	Camera::Camera(float l, float r, float t, float b)
-		: _ProjectionMatrix(glm::ortho(l, r, b, t, -20.f, 20.f)), _ViewMatrix(1.0f)
+	Camera::Camera(float fov, float width, float height, float nearPlane, float farPlane)
+		: _ProjectionMatrix(glm::perspective(glm::radians(fov), (float)width / (float)height, nearPlane, farPlane))
 	{
+		_ViewMatrix = glm::lookAt(_Position, _Position + _Front, _Up);
 		_ViewProjectionMatrix = _ProjectionMatrix * _ViewMatrix;
 	}
 
 	void Camera::RecalculateViewMatrix()
 	{
-		glm::mat4 transform = glm::translate(glm::mat4(1.0f), _Position) * glm::rotate(glm::mat4(1.0f), _Rotation, glm::vec3(0, 0, 1));
-		_ViewMatrix = glm::inverse(transform);
+		glm::vec3 front;
+		front.x = cos(glm::radians(_CameraYaw)) * cos(glm::radians(_CameraPitch));
+		front.y = sin(glm::radians(_CameraPitch));
+		front.z = sin(glm::radians(_CameraYaw)) * cos(glm::radians(_CameraPitch));
+		_Front = glm::normalize(front);
+
+		_ViewMatrix = glm::lookAt(_Position, _Position + _Front, _Up);
 		_ViewProjectionMatrix = _ProjectionMatrix * _ViewMatrix;
 	}
 }

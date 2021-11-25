@@ -14,11 +14,11 @@ namespace TradescantiaEngine
 	{
 		TSC_ASSERT(!_Instance, "Engine instance was already created");
 		_Instance = this;
-		_Window = std::unique_ptr<Window>(Window::Create());
+		_Window = Window::Create(WindowProperties("TradescantiaEngine", /* width = */ 720, /* height = */ 720));
 		_Window->SetEventCallback(BIND_EVENT_FN(Engine::OnEvent));
 
-		_ImGuiLayer = new ImGuiLayer();
-		PushOverlay(_ImGuiLayer);
+		_ImGuiSystem = new ImGuiSystem();
+		PushSystem(_ImGuiSystem);
 	}
 
 	Engine::~Engine()
@@ -37,39 +37,50 @@ namespace TradescantiaEngine
 		EventDispatcher  dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Engine::OnWindowClose));
 
-		for (auto it = _LayerStack.end(); it != _LayerStack.begin();)
+		for (auto iterator = _SystemStack.end(); iterator != _SystemStack.begin();)
 		{
-			(*--it)->OnEvent(e);
+			(*--iterator)->OnEvent(e);
 			if (e.isHandled())
 				break;
 		}
 	}
 
-	void Engine::PushLayer(Layer* layer)
+	void Engine::PushSystem(System* system)
 	{
-		_LayerStack.PushLayer(layer);
-		layer->OnAttach();
+		_SystemStack.PushSystem(system);
 	}
 
-	void Engine::PushOverlay(Layer* layer)
+	void Engine::Init()
 	{
-		_LayerStack.PushOverlay(layer);
-		layer->OnAttach();
+		for (System* system : _SystemStack)
+			system->Init();
+	}
+
+	void Engine::Update(float deltaTime)
+	{
+		_ImGuiSystem->Begin();
+
+		for (System* system : _SystemStack)
+			system->Update(deltaTime);
+
+		_ImGuiSystem->End();
+
+		_Window->Update();
+	}
+
+	void Engine::Terminate()
+	{
+		for (System* system : _SystemStack)
+			system->Terminate();
 	}
 
 	void Engine::Run()
 	{
+		Init();
 		while (_Running)
 		{
-			for (Layer* layer : _LayerStack)
-				layer->OnUpdate();
-
-			_ImGuiLayer->Begin();
-			for (Layer* layer : _LayerStack)
-				layer->OnImGuiRender();
-			_ImGuiLayer->End();
-
-			_Window->OnUpdate();
+			Update(0.0f);
 		}
+		Terminate();
 	}
 }
