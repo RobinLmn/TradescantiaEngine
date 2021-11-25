@@ -8,7 +8,6 @@ namespace TradescantiaEngine
 	class System
 	{
 	public:
-
 		System() = default;
 		virtual ~System() = default;
 

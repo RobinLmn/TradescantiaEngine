@@ -140,14 +140,14 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Systems\CameraSystem.h" />
     <ClInclude Include="Source\Core\Core.h" />
     <ClInclude Include="Source\Core\Engine.h" />
     <ClInclude Include="Source\Core\EntryPoint.h" />
     <ClInclude Include="Source\Core\Input.h" />
     <ClInclude Include="Source\Core\KeyCodes.h" />
-    <ClInclude Include="Source\Core\System.h" />
+    <ClInclude Include="Source\Systems\System.h" />
     <ClInclude Include="Source\Core\Log.h" />
-    <ClInclude Include="Source\Core\MouseButtonCodes.h" />
     <ClInclude Include="Source\Core\Particle.h" />
     <ClInclude Include="Source\Core\Window.h" />
     <ClInclude Include="Source\EventSystem\Event.h" />
@@ -175,8 +175,9 @@
     <ClInclude Include="Source\tscpch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Systems\CameraSystem.cpp" />
     <ClCompile Include="Source\Core\Engine.cpp" />
-    <ClCompile Include="Source\Core\System.cpp" />
+    <ClCompile Include="Source\Systems\System.cpp" />
     <ClCompile Include="Source\Core\Log.cpp" />
     <ClCompile Include="Source\ImGui\ImGuiSystem.cpp" />
     <ClCompile Include="Source\Platforms\OpenGL\OpenGLBuffer.cpp" />

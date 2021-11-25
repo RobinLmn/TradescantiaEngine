@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core/System.h"
+#include "Systems/System.h"
 
 #include "EventSystem/Events/WindowEvent.h"
 #include "EventSystem/Events/KeyEvent.h"

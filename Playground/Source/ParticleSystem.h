@@ -7,7 +7,6 @@ class ParticleSystem : public TradescantiaEngine::System
 public:
 
 	ParticleSystem()
-		: _Camera(45.0f, 1, 1, 0.1f, 100.0f)
 	{
 		TradescantiaEngine::BufferLayout layout =
 		{
@@ -68,9 +67,6 @@ public:
 		indexBuffer.reset(TradescantiaEngine::IndexBuffer::Create(indices, sizeof(indices)));
 		_VertexArray->SetIndexBuffer(indexBuffer);
 
-		_MousePosition = TradescantiaEngine::Input::GetMousePos();
-		_CameraPosition = glm::vec3(0.f, 0.f, 40.f);
-
 		_Shader.reset(
 			TradescantiaEngine::Shader::Create("C:/Users/Shadow/Documents/GitHub/TradescantiaEngine/TradescantiaEngine/Content/VertexShader.vs",
 				"C:/Users/Shadow/Documents/GitHub/TradescantiaEngine/TradescantiaEngine/Content/FragmentShader.fs"));
@@ -83,33 +79,7 @@ public:
 
 	virtual void Update(float deltaTime) override
 	{
-
-		if (TradescantiaEngine::Input::IsKeyPressed(TSC_KEY_A))
-			_CameraPosition -= glm::normalize(glm::cross(_Camera.GetFront(), _Camera.GetUp())) * _Camera.Speed;
-		if (TradescantiaEngine::Input::IsKeyPressed(TSC_KEY_D))
-			_CameraPosition += glm::normalize(glm::cross(_Camera.GetFront(), _Camera.GetUp())) * _Camera.Speed;
-		if (TradescantiaEngine::Input::IsKeyPressed(TSC_KEY_S))
-			_CameraPosition -= _Camera.Speed * _Camera.GetFront();
-		if (TradescantiaEngine::Input::IsKeyPressed(TSC_KEY_W))
-			_CameraPosition += _Camera.Speed * _Camera.GetFront();
-
-		if(TradescantiaEngine::Input::IsMouseButtonPressed(TSC_MOUSE_BUTTON_2))
-		{
-			_Camera.IncYaw((TradescantiaEngine::Input::GetMousePos().x - _MousePosition.x) * _Camera.Sensitivity);
-			_Camera.IncPitch((_MousePosition.y - TradescantiaEngine::Input::GetMousePos().y) * 0.1f);
-		}
-
-		_MousePosition = TradescantiaEngine::Input::GetMousePos();
-
-		_Camera.SetPosition(_CameraPosition);
-
-		TradescantiaEngine::RenderCommand::SetClearColor({ 1.f, 1.f, 1.f, 1.f });
-		TradescantiaEngine::RenderCommand::Clear();
-
-		TradescantiaEngine::Renderer::BeginScene(_Camera);
-
 		TradescantiaEngine::Renderer::Submit(_Shader, _VertexArray);
-		TradescantiaEngine::Renderer::EndScene();
 	}
 
 	virtual void ImGuiRender() override {}
@@ -119,9 +89,4 @@ private:
 
 	std::shared_ptr<TradescantiaEngine::VertexArray> _VertexArray;
 	std::shared_ptr<TradescantiaEngine::Shader> _Shader;
-
-	TradescantiaEngine::Camera _Camera;
-
-	glm::vec3 _CameraPosition;
-	glm::vec2 _MousePosition;
 };

@@ -2,10 +2,11 @@
 
 #include "Core.h"
 
-#include "System.h"
+#include "Systems/System.h"
 #include "Window.h"
 #include "EventSystem/Events/WindowEvent.h"
 #include "ImGui/ImGuiSystem.h"
+#include "Systems/CameraSystem.h"
 
 namespace TradescantiaEngine 
 {
@@ -31,8 +32,11 @@ namespace TradescantiaEngine
 
 		bool _Running = true;
 
-		SystemStack _SystemStack;
+		SystemStack _SystemStack; 
+
 		ImGuiSystem* _ImGuiSystem;
+		CameraSystem* _CameraSystem;
+		
 		Window* _Window;
 
 		static Engine* _Instance;

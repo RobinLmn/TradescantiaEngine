@@ -4,6 +4,9 @@
 #include "Input.h"
 #include "Log.h"
 
+#include "Renderer/RenderCommand.h"
+#include "Renderer/Renderer.h"
+
 namespace TradescantiaEngine 
 {
 	Engine* Engine::_Instance = nullptr;
@@ -18,12 +21,14 @@ namespace TradescantiaEngine
 		_Window->SetEventCallback(BIND_EVENT_FN(Engine::OnEvent));
 
 		_ImGuiSystem = new ImGuiSystem();
+		_CameraSystem = new CameraSystem();
+
+		PushSystem(_CameraSystem);
 		PushSystem(_ImGuiSystem);
 	}
 
 	Engine::~Engine()
 	{
-
 	}
 
 	bool Engine::OnWindowClose(WindowCloseEvent& e)
@@ -58,6 +63,11 @@ namespace TradescantiaEngine
 
 	void Engine::Update(float deltaTime)
 	{
+		TradescantiaEngine::RenderCommand::SetClearColor({ 1.f, 1.f, 1.f, 1.f });
+		TradescantiaEngine::RenderCommand::Clear();
+
+		TradescantiaEngine::Renderer::BeginScene(_CameraSystem->GetCamera());
+
 		_ImGuiSystem->Begin();
 
 		for (System* system : _SystemStack)
@@ -66,6 +76,8 @@ namespace TradescantiaEngine
 		_ImGuiSystem->End();
 
 		_Window->Update();
+
+		TradescantiaEngine::Renderer::EndScene();
 	}
 
 	void Engine::Terminate()
@@ -79,7 +91,7 @@ namespace TradescantiaEngine
 		Init();
 		while (_Running)
 		{
-			Update(0.0f);
+			Update(1.0f);
 		}
 		Terminate();
 	}
