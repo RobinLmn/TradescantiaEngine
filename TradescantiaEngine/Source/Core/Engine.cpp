@@ -4,16 +4,13 @@
 #include "Input.h"
 #include "Log.h"
 
-#include "Renderer/Renderer.h"
 #include "Renderer/RenderCommand.h"
-#include "Renderer/Shader.h"
-#include "Renderer/Buffer.h"
-#include "Renderer/VertexArray.h"
+#include "Renderer/Renderer.h"
 
+#include "Systems/ParticleSystem.h"
 
 namespace TradescantiaEngine 
 {
-
 	Engine* Engine::_Instance = nullptr;
 	
 #define BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
@@ -22,40 +19,15 @@ namespace TradescantiaEngine
 	{
 		TSC_ASSERT(!_Instance, "Engine instance was already created");
 		_Instance = this;
-		_Window = std::unique_ptr<Window>(Window::Create());
+		_Window = Window::Create(WindowProperties("TradescantiaEngine", /* width = */ 1080, /* height = */ 1080));
 		_Window->SetEventCallback(BIND_EVENT_FN(Engine::OnEvent));
 
-		_ImGuiLayer = new ImGuiLayer();
-		PushOverlay(_ImGuiLayer);
-
-		BufferLayout layout = {
-			{ShaderDataType::Float3, "a_Position"},
-			{ShaderDataType::Float3, "a_Color"}
-		};
-
-		_VertexArray.reset(VertexArray::Create());
-
-		float squareVertices[] = {
-			0.5f, 0.5f, 0.0f,		1.f, .0f, 1.f,		// top right
-			-0.5f,  0.5f, 0.0f,		.0f, 1.f, 1.f,		// top left
-			-0.5f, -0.5f, 0.0f,		1.f, 1.f, 0.f,		// bottom left
-			0.5f, -0.5f, 0.0f,		1.f, 0.f, 0.f,		// bottom right
-		};
-		std::shared_ptr<VertexBuffer> squareVertexBuffer;
-		squareVertexBuffer.reset(VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
-		squareVertexBuffer->Layout = layout;
-		_VertexArray->AddVertexBuffer(squareVertexBuffer);
-
-		unsigned int squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
-		std::shared_ptr<IndexBuffer> squareIndexBuffer;
-		squareIndexBuffer.reset(IndexBuffer::Create(squareIndices, sizeof(squareIndices)));
-		_VertexArray->SetIndexBuffer(squareIndexBuffer);
-
-		_Shader = std::unique_ptr<Shader>(new Shader("C:/Users/Shadow/Documents/GitHub/TradescantiaEngine/TradescantiaEngine/Content/VertexShader.vs", 
-								"C:/Users/Shadow/Documents/GitHub/TradescantiaEngine/TradescantiaEngine/Content/FragmentShader.fs"));
+		PushSystem(_CameraSystem = new CameraSystem());
+		PushSystem(_ImGuiSystem = new ImGuiSystem());
+		PushSystem(new ParticleSystem);
 	}
 
-	Engine::~Engine() 
+	Engine::~Engine()
 	{
 	}
 
@@ -70,49 +42,57 @@ namespace TradescantiaEngine
 		EventDispatcher  dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Engine::OnWindowClose));
 
-		for (auto it = _LayerStack.end(); it != _LayerStack.begin();)
+		for (auto iterator = _SystemStack.end(); iterator != _SystemStack.begin();)
 		{
-			(*--it)->OnEvent(e);
+			(*--iterator)->OnEvent(e);
 			if (e.isHandled())
 				break;
 		}
 	}
 
-	void Engine::PushLayer(Layer* layer)
+	void Engine::PushSystem(System* system)
 	{
-		_LayerStack.PushLayer(layer);
-		layer->OnAttach();
+		_SystemStack.PushSystem(system);
 	}
 
-	void Engine::PushOverlay(Layer* layer)
+	void Engine::Init()
 	{
-		_LayerStack.PushOverlay(layer);
-		layer->OnAttach();
+		for (System* system : _SystemStack)
+			system->Init();
+	}
+
+	void Engine::Update(float deltaTime)
+	{
+		TradescantiaEngine::RenderCommand::SetClearColor({ 0.f, 0.f, 0.06f, 1.f });
+		TradescantiaEngine::RenderCommand::Clear();
+
+		TradescantiaEngine::Renderer::BeginScene(_CameraSystem->GetCamera());
+
+		_ImGuiSystem->Begin();
+
+		for (System* system : _SystemStack)
+			system->Update(deltaTime);
+
+		_ImGuiSystem->End();
+
+		_Window->Update();
+
+		TradescantiaEngine::Renderer::EndScene();
+	}
+
+	void Engine::Terminate()
+	{
+		for (System* system : _SystemStack)
+			system->Terminate();
 	}
 
 	void Engine::Run()
 	{
+		Init();
 		while (_Running)
 		{
-			RenderCommand::SetClearColor({ 1.f, 1.f, 1.f, 1.f });
-			RenderCommand::Clear();
-
-			Renderer::BeginScene();
-
-			_Shader->Use();
-			Renderer::Submit(_VertexArray);
-
-			Renderer::EndScene();
-
-			for (Layer* layer : _LayerStack)
-				layer->OnUpdate();
-
-			_ImGuiLayer->Begin();
-			for (Layer* layer : _LayerStack)
-				layer->OnImGuiRender();
-			_ImGuiLayer->End();
-
-			_Window->OnUpdate();
+			Update(1.0f);
 		}
+		Terminate();
 	}
 }

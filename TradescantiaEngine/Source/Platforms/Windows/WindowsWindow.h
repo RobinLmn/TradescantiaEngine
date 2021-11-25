@@ -12,7 +12,7 @@ namespace TradescantiaEngine
 		WindowsWindow(const WindowProperties& props);
 		virtual ~WindowsWindow();
 
-		void OnUpdate() override;
+		void Update() override;
 	
 		inline unsigned int GetWidth() const override { return _Data.Width; }
 		inline unsigned int GetHeight() const override { return _Data.Height; }

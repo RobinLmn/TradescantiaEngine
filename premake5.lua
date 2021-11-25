@@ -37,6 +37,8 @@ project "TradescantiaEngine"
 	{
 		"TradescantiaEngine/Source/**.h",
 		"TradescantiaEngine/Source/**.cpp",
+		"%{prj.name}/vendor/glm/glm/**.hpp",
+		"%{prj.name}/vendor/glm/glm/**.inl",
 	}
 
 	includedirs
@@ -105,8 +107,9 @@ project "Playground"
 	includedirs
 	{
 		"TradescantiaEngine/ThirdParty/spdlog/include",
+		"TradescantiaEngine/ThirdParty",
 		"TradescantiaEngine/Source",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
 	}
 
 	links

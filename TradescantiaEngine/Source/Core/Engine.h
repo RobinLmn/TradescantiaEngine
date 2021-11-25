@@ -2,18 +2,14 @@
 
 #include "Core.h"
 
-#include "LayerStack.h"
+#include "Systems/System.h"
 #include "Window.h"
 #include "EventSystem/Events/WindowEvent.h"
-#include "ImGui/ImGuiLayer.h"
+#include "ImGui/ImGuiSystem.h"
+#include "Systems/CameraSystem.h"
 
-namespace TradescantiaEngine {
-
-	class Shader;
-	class VertexBuffer;
-	class IndexBuffer;
-	class VertexArray;
-
+namespace TradescantiaEngine 
+{
 	class Engine
 	{
 	public:
@@ -21,11 +17,12 @@ namespace TradescantiaEngine {
 		~Engine();
 
 		void Run();
+		void Update(float deltaTime);
+		void Init();
+		void Terminate();
 
 		void OnEvent(Event& e);
-
-		void PushLayer(Layer* layer);
-		void PushOverlay(Layer* layer);
+		void PushSystem(System* system);
 
 		inline Window& GetWindow() { return *_Window; }
 		inline static Engine& Get() { return *_Instance; }
@@ -35,12 +32,12 @@ namespace TradescantiaEngine {
 
 		bool _Running = true;
 
-		std::shared_ptr<Window> _Window;
-		std::shared_ptr<Shader> _Shader;
-		std::shared_ptr<VertexArray> _VertexArray;
+		SystemStack _SystemStack; 
 
-		LayerStack _LayerStack;
-		ImGuiLayer* _ImGuiLayer;
+		ImGuiSystem* _ImGuiSystem;
+		CameraSystem* _CameraSystem;
+		
+		Window* _Window;
 
 		static Engine* _Instance;
 	};
