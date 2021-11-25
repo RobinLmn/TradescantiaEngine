@@ -6,7 +6,7 @@ namespace TradescantiaEngine
 {
 	void OpenGLRendererAPI::SetClearColor(const glm::vec4& color)
 	{
-		glClearColor(0.f, 0.f, 0.f, 1.f);
+		glClearColor(color.r, color.g, color.b, color.a);
 	}
 	void OpenGLRendererAPI::Clear()
 	{

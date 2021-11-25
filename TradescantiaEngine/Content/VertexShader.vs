@@ -1,14 +1,14 @@
 #version 330 core
 
 layout (location = 0) in vec3 aPos;   
-layout (location = 1) in float aSize;
+layout (location = 1) in vec3 aColor;
 
 uniform mat4 u_ViewProjection;
 
-out float ourSize;
+out vec3 myColor;
 
 void main()
 {
     gl_Position = u_ViewProjection * vec4(aPos, 1.0);
-    ourSize = aSize;
+    myColor = aColor;
 }

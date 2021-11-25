@@ -19,7 +19,7 @@ namespace TradescantiaEngine
 	{
 		TSC_ASSERT(!_Instance, "Engine instance was already created");
 		_Instance = this;
-		_Window = Window::Create(WindowProperties("TradescantiaEngine", /* width = */ 720, /* height = */ 720));
+		_Window = Window::Create(WindowProperties("TradescantiaEngine", /* width = */ 1080, /* height = */ 1080));
 		_Window->SetEventCallback(BIND_EVENT_FN(Engine::OnEvent));
 
 		PushSystem(_CameraSystem = new CameraSystem());
@@ -63,7 +63,7 @@ namespace TradescantiaEngine
 
 	void Engine::Update(float deltaTime)
 	{
-		TradescantiaEngine::RenderCommand::SetClearColor({ 1.f, 1.f, 1.f, 1.f });
+		TradescantiaEngine::RenderCommand::SetClearColor({ 0.f, 0.f, 0.06f, 1.f });
 		TradescantiaEngine::RenderCommand::Clear();
 
 		TradescantiaEngine::Renderer::BeginScene(_CameraSystem->GetCamera());

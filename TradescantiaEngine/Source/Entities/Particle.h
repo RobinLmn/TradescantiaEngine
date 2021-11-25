@@ -4,5 +4,5 @@
 struct Particle
 {
 	glm::vec3 Position;
-	float Brightness;
+	glm::vec3 Color;
 };

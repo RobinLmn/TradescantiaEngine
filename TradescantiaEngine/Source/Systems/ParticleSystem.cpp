@@ -3,6 +3,8 @@
 #include "Entities/Particle.h"
 #include "Renderer/Renderer.h"
 
+#include <glm/gtc/random.hpp>
+
 namespace TradescantiaEngine
 {
 	ParticleSystem::ParticleSystem()
@@ -10,12 +12,12 @@ namespace TradescantiaEngine
 		TradescantiaEngine::BufferLayout layout =
 		{
 			{TradescantiaEngine::ShaderDataType::Float3, "a_Position"},
-			{TradescantiaEngine::ShaderDataType::Float, "a_Size"},
+			{TradescantiaEngine::ShaderDataType::Float3, "a_Color"},
 		};
 
 		_VertexArray.reset(TradescantiaEngine::VertexArray::Create());
 
-		const int size = 10000;
+		const int size = 26000;
 		Particle* _Particles[size];
 
 		int min = -10;
@@ -23,32 +25,41 @@ namespace TradescantiaEngine
 		int dist = max - min;
 		int r = 10;
 
-		for (int i = 0; i < size; i++)
+		for (int i = 0; i < size - 5000; i++)
 		{
-			float x;
-			float y;
-			float z;
-
-			do
-			{
-				x = std::rand() / static_cast<float>(RAND_MAX) * dist + min;
-				y = std::rand() / static_cast<float>(RAND_MAX) * dist + min;
-				z = std::rand() / static_cast<float>(RAND_MAX) * dist + min;
-			} while (x * x + y * y + z * z > r * r);
+			float x = glm::gaussRand(0.0f, 0.1f) * 8.0f;
+			float y = glm::gaussRand(0.0f, 0.2f) * 0.2f;
+			float z = glm::gaussRand(0.0f, 0.1f) * 8.0f;
 
 			_Particles[i] = new Particle();
 			_Particles[i]->Position = glm::vec3(x, y, z);
-			_Particles[i]->Brightness = std::rand() / static_cast<float>(RAND_MAX);
+			float brightness = std::rand() / static_cast<float>(RAND_MAX);
+			_Particles[i]->Color = glm::vec3(brightness, 0.5f, 0.8f);
 		}
 
-		float vertices[size * 4];
 
-		for (int i = 0, j = 0; i < size * 4; i += 4, j++)
+		for (int i = size - 5000; i < size; i++)
+		{
+			float x = glm::gaussRand(0.0f, 0.1f) * 2.f;
+			float y = glm::gaussRand(0.0f, 0.2f) * 0.2f;
+			float z = glm::gaussRand(0.0f, 0.1f) * 2.f;
+
+			_Particles[i] = new Particle();
+			_Particles[i]->Position = glm::vec3(x, y, z);
+			float brightness = std::rand() / static_cast<float>(RAND_MAX) + 0.3;
+			_Particles[i]->Color = glm::vec3(1.0f, 0.7f, brightness);
+		}
+
+		float vertices[size * 6];
+
+		for (int i = 0, j = 0; i < size * 6; i += 6, j++)
 		{
 			vertices[i] = _Particles[j]->Position.x;
 			vertices[i + 1] = _Particles[j]->Position.y;
 			vertices[i + 2] = _Particles[j]->Position.z;
-			vertices[i + 3] = _Particles[j]->Brightness;
+			vertices[i + 3] = _Particles[j]->Color.r;
+			vertices[i + 4] = _Particles[j]->Color.g;
+			vertices[i + 5] = _Particles[j]->Color.b;
 		}
 
 		std::shared_ptr<TradescantiaEngine::VertexBuffer> vertexBuffer;
