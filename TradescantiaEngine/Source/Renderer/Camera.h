@@ -24,7 +24,7 @@ namespace  TradescantiaEngine
 		const glm::mat4& GetViewMatrix() const { return _ViewMatrix; }
 		const glm::mat4& GetViewProjectionMatrix() const { return _ViewProjectionMatrix; }
 
-		float Speed = 0.7f;
+		float Speed = 0.1f;
 		float Sensitivity = 0.1f;
 
 
@@ -41,6 +41,6 @@ namespace  TradescantiaEngine
 		glm::vec3 _Front = glm::vec3(0.0, 0.0, -1.0f);
 
 		float _CameraYaw = -90.0f;
-		float _CameraPitch = -25.f;
+		float _CameraPitch = -23.f;
 	};
 }
