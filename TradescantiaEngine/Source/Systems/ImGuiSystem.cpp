@@ -57,7 +57,8 @@ namespace TradescantiaEngine
 
 	void ImGuiSystem::Update(float deltaTime)
 	{
-		//static bool show = true;
-		//ImGui::ShowDemoWindow(&show);
+		ImGui::Begin("Statistics");
+		ImGui::Text("Frames: %d", static_cast<int>(1 / deltaTime));
+		ImGui::End();
 	}
 }

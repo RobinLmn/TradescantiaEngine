@@ -5,7 +5,7 @@
 #include "Systems/System.h"
 #include "Window.h"
 #include "EventSystem/Events/WindowEvent.h"
-#include "ImGui/ImGuiSystem.h"
+#include "Systems/ImGuiSystem.h"
 #include "Systems/CameraSystem.h"
 
 namespace TradescantiaEngine 
@@ -17,7 +17,10 @@ namespace TradescantiaEngine
 		~Engine();
 
 		void Run();
+		void PreUpdate(float deltaTime);
 		void Update(float deltaTime);
+		void FixedUpdate(float deltaTime);
+		void PostUpdate(float deltaTime);
 		void Init();
 		void Terminate();
 

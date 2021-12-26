@@ -7,7 +7,11 @@
 #include "Renderer/RenderCommand.h"
 #include "Renderer/Renderer.h"
 
+#include "Scene/Scene.h"
+
 #include "Systems/ParticleSystem.h"
+
+#define FIXED_UPDATE_TIME 0.20f
 
 namespace TradescantiaEngine 
 {
@@ -59,24 +63,36 @@ namespace TradescantiaEngine
 	{
 		for (System* system : _SystemStack)
 			system->Init();
+
+		Scene::SceneInstance->StartScene();
 	}
 
-	void Engine::Update(float deltaTime)
+	void Engine::PreUpdate(float deltaTime)
 	{
-		TradescantiaEngine::RenderCommand::SetClearColor({ 0.f, 0.f, 0.06f, 1.f });
+		TradescantiaEngine::RenderCommand::SetClearColor({ 0.f, 0.f, 0.f, 1.f });
 		TradescantiaEngine::RenderCommand::Clear();
 
 		TradescantiaEngine::Renderer::BeginScene(_CameraSystem->GetCamera());
 
 		_ImGuiSystem->Begin();
+	}
 
+	void Engine::Update(float deltaTime)
+	{
 		for (System* system : _SystemStack)
 			system->Update(deltaTime);
+	}
 
+	void Engine::FixedUpdate(float deltaTime)
+	{
+		for (System* system : _SystemStack)
+			system->FixedUpdate(deltaTime);
+	}
+
+	void Engine::PostUpdate(float deltaTime)
+	{
 		_ImGuiSystem->End();
-
 		_Window->Update();
-
 		TradescantiaEngine::Renderer::EndScene();
 	}
 
@@ -89,10 +105,34 @@ namespace TradescantiaEngine
 	void Engine::Run()
 	{
 		Init();
+		
+		std::chrono::high_resolution_clock clock;
+
+		using seconds = std::chrono::duration<float, std::ratio<1>>;
+		auto lastTime = clock.now();
+		float lag = 0.0;
+
 		while (_Running)
 		{
-			Update(1.0f);
+			const float deltaTime = std::chrono::duration_cast<seconds>(clock.now() - lastTime).count();
+			lastTime = clock.now();
+			lag += deltaTime;
+
+			PreUpdate(deltaTime);
+
+			while (lag >= FIXED_UPDATE_TIME)
+			{
+				lag -= FIXED_UPDATE_TIME;
+				FixedUpdate(FIXED_UPDATE_TIME);
+			}
+
+			Update(deltaTime);
+
+			Scene::SceneInstance->Render();
+
+			PostUpdate(deltaTime);
 		}
+
 		Terminate();
 	}
 }
