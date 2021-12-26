@@ -15,13 +15,13 @@ namespace TradescantiaEngine
 	void CameraSystem::Update(float deltaTime)
 	{
 		if (TradescantiaEngine::Input::IsKeyPressed(TSC_KEY_A))
-			_CameraPosition -= glm::normalize(glm::cross(_Camera.GetFront(), _Camera.GetUp())) * _Camera.Speed;
+			_CameraPosition -= glm::normalize(glm::cross(_Camera.GetFront(), _Camera.GetUp())) * _Camera.Speed * deltaTime;
 		if (TradescantiaEngine::Input::IsKeyPressed(TSC_KEY_D))
-			_CameraPosition += glm::normalize(glm::cross(_Camera.GetFront(), _Camera.GetUp())) * _Camera.Speed;
+			_CameraPosition += glm::normalize(glm::cross(_Camera.GetFront(), _Camera.GetUp())) * _Camera.Speed * deltaTime;
 		if (TradescantiaEngine::Input::IsKeyPressed(TSC_KEY_S))
-			_CameraPosition -= _Camera.Speed * _Camera.GetFront();
+			_CameraPosition -= _Camera.Speed * _Camera.GetFront() * deltaTime;
 		if (TradescantiaEngine::Input::IsKeyPressed(TSC_KEY_W))
-			_CameraPosition += _Camera.Speed * _Camera.GetFront();
+			_CameraPosition += _Camera.Speed * _Camera.GetFront() * deltaTime;
 
 		if (TradescantiaEngine::Input::IsMouseButtonPressed(TSC_MOUSE_BUTTON_2))
 		{

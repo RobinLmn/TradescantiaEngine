@@ -140,6 +140,8 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Scene\Entity.h" />
+    <ClInclude Include="Source\Scene\Scene.h" />
     <ClInclude Include="Source\Systems\CameraSystem.h" />
     <ClInclude Include="Source\Core\Core.h" />
     <ClInclude Include="Source\Core\Engine.h" />
@@ -149,14 +151,13 @@
     <ClInclude Include="Source\Systems\ParticleSystem.h" />
     <ClInclude Include="Source\Systems\System.h" />
     <ClInclude Include="Source\Core\Log.h" />
-    <ClInclude Include="Source\Entities\Particle.h" />
     <ClInclude Include="Source\Core\Window.h" />
     <ClInclude Include="Source\EventSystem\Event.h" />
     <ClInclude Include="Source\EventSystem\Events\KeyEvent.h" />
     <ClInclude Include="Source\EventSystem\Events\MouseEvent.h" />
     <ClInclude Include="Source\EventSystem\Events\WindowEvent.h" />
-    <ClInclude Include="Source\ImGui\ImGuiBuild.h" />
-    <ClInclude Include="Source\ImGui\ImGuiSystem.h" />
+    <ClInclude Include="Source\Systems\ImGuiBuild.h" />
+    <ClInclude Include="Source\Systems\ImGuiSystem.h" />
     <ClInclude Include="Source\Platforms\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="Source\Platforms\OpenGL\OpenGLContext.h" />
     <ClInclude Include="Source\Platforms\OpenGL\OpenGLRendererAPI.h" />
@@ -176,12 +177,13 @@
     <ClInclude Include="Source\tscpch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Scene\Scene.cpp" />
     <ClCompile Include="Source\Systems\CameraSystem.cpp" />
     <ClCompile Include="Source\Core\Engine.cpp" />
     <ClCompile Include="Source\Systems\ParticleSystem.cpp" />
     <ClCompile Include="Source\Systems\System.cpp" />
     <ClCompile Include="Source\Core\Log.cpp" />
-    <ClCompile Include="Source\ImGui\ImGuiSystem.cpp" />
+    <ClCompile Include="Source\Systems\ImGuiSystem.cpp" />
     <ClCompile Include="Source\Platforms\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="Source\Platforms\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="Source\Platforms\OpenGL\OpenGLRendererAPI.cpp" />
