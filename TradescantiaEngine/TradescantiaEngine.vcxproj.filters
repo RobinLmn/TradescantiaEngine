@@ -33,9 +33,6 @@
     <ClInclude Include="Source\Core\Engine.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Core\EntryPoint.h">
-      <Filter>Core</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Core\Input.h">
       <Filter>Core</Filter>
     </ClInclude>
@@ -156,12 +153,6 @@
       <Filter>Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Source\Renderer\Renderer.cpp">
-      <Filter>Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Renderer\RendererAPI.cpp">
-      <Filter>Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Renderer\RendererCommand.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Source\Renderer\Shader.cpp">

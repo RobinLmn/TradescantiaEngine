@@ -8,7 +8,7 @@ namespace TradescantiaEngine
 	{
 	public:
 		WindowCloseEvent() = default;
-		SET_EVENTTYPE(EventType::WindowClose);
+		TSC_SET_EVENT_TYPE(EventType::WindowClose);
 		virtual int GetCategoryFlags() const override { return EventCategoryWindow; }
 	
 		virtual std::string ToString() const override
@@ -25,7 +25,7 @@ namespace TradescantiaEngine
 		WindowResizeEvent(unsigned int width, unsigned int height)
 			: Width(width), Height(height) {}
 
-		SET_EVENTTYPE(EventType::WindowResize);
+		TSC_SET_EVENT_TYPE(EventType::WindowResize);
 		virtual int GetCategoryFlags() const override { return EventCategoryWindow; }
 
 		virtual std::string ToString() const override

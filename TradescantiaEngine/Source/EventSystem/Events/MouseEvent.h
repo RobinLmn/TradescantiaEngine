@@ -22,7 +22,7 @@ namespace TradescantiaEngine
 			return ss.str();
 		}
 
-		SET_EVENTTYPE(EventType::MouseMoved);
+		TSC_SET_EVENT_TYPE(EventType::MouseMoved);
 
 		float X;
 		float Y;
@@ -39,7 +39,7 @@ namespace TradescantiaEngine
 			return EventCategoryInput | EventCategoryMouse;
 		}
 
-		SET_EVENTTYPE(EventType::MouseScrolled);
+		TSC_SET_EVENT_TYPE(EventType::MouseScrolled);
 
 		virtual std::string ToString() const override
 		{
@@ -72,7 +72,7 @@ namespace TradescantiaEngine
 		MouseButtonReleasedEvent(int button)
 			: MouseButtonEvent(button) {}
 
-		SET_EVENTTYPE(EventType::MouseButtonReleased);
+		TSC_SET_EVENT_TYPE(EventType::MouseButtonReleased);
 
 		virtual std::string ToString() const override
 		{
@@ -88,7 +88,7 @@ namespace TradescantiaEngine
 		MouseButtonPressedEvent(int button, int repeatedCount)
 			: MouseButtonEvent(button), RepeatedCount(repeatedCount) {}
 
-		SET_EVENTTYPE(EventType::MouseButtonPressed);
+		TSC_SET_EVENT_TYPE(EventType::MouseButtonPressed);
 		
 		virtual std::string ToString() const override
 		{

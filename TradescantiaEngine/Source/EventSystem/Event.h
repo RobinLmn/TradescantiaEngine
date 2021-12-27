@@ -23,7 +23,8 @@ namespace TradescantiaEngine
 		EventCategoryMouseButton = BIT(4)
 	};
 
-#define SET_EVENTTYPE(type) static EventType GetStaticEventType() { return  type; } virtual EventType GetEventType() const override { return GetStaticEventType(); }
+#define TSC_BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
+#define TSC_SET_EVENT_TYPE(type) static EventType GetStaticEventType() { return  type; } virtual EventType GetEventType() const override { return GetStaticEventType(); }
 
 	class Event
 	{

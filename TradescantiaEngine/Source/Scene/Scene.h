@@ -7,9 +7,13 @@ namespace TradescantiaEngine
 {
 	class Scene
 	{
-	public:
+	private:
 		Scene() = default;
+
+	public:
 		~Scene();
+		Scene(Scene const&) = delete;
+		Scene operator=(Scene const&) = delete;
 
 		void StartScene();
 
@@ -19,7 +23,7 @@ namespace TradescantiaEngine
 
 		void Render();
 
-		static Scene* SceneInstance;
+		static Scene& Get() { static Scene instance; return instance; }
 
 	private:
 		Particle* _Particles = nullptr;

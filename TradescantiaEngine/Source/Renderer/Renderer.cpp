@@ -4,11 +4,9 @@
 
 namespace TradescantiaEngine
 {
-	Renderer::SceneData* Renderer::_SceneData = new Renderer::SceneData();
-
 	void Renderer::BeginScene(Camera& camera)
 	{
-		_SceneData->ViewProjectionMatrix = camera.GetViewProjectionMatrix();
+		GetSceneData().ViewProjectionMatrix = camera.GetViewProjectionMatrix();
 	}
 
 	void Renderer::EndScene()
@@ -18,7 +16,7 @@ namespace TradescantiaEngine
 	void Renderer::Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray)
 	{
 		shader->Use();
-		shader->SetMat4("u_ViewProjection", _SceneData->ViewProjectionMatrix);
+		shader->SetMat4("u_ViewProjection", GetSceneData().ViewProjectionMatrix);
 		vertexArray->Bind();
 		RenderCommand::DrawIndexed(vertexArray);
 	}

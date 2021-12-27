@@ -17,6 +17,6 @@ namespace TradescantiaEngine
 		virtual void Clear() = 0;
 		virtual void DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray) = 0;
 
-		static ERendererAPI API;
+		static ERendererAPI GetRenderAPI() { return ERendererAPI::OpenGL; }
 	};
 }

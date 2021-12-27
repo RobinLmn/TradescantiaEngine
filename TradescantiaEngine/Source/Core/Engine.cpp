@@ -15,26 +15,6 @@
 
 namespace TradescantiaEngine 
 {
-	Engine* Engine::_Instance = nullptr;
-	
-#define BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
-
-	Engine::Engine() 
-	{
-		TSC_ASSERT(!_Instance, "Engine instance was already created");
-		_Instance = this;
-		_Window = Window::Create(WindowProperties("TradescantiaEngine", /* width = */ 1080, /* height = */ 1080));
-		_Window->SetEventCallback(BIND_EVENT_FN(Engine::OnEvent));
-
-		PushSystem(_CameraSystem = new CameraSystem());
-		PushSystem(_ImGuiSystem = new ImGuiSystem());
-		PushSystem(new ParticleSystem);
-	}
-
-	Engine::~Engine()
-	{
-	}
-
 	bool Engine::OnWindowClose(WindowCloseEvent& e)
 	{
 		_Running = false;
@@ -44,7 +24,7 @@ namespace TradescantiaEngine
 	void Engine::OnEvent(Event& e)
 	{
 		EventDispatcher  dispatcher(e);
-		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Engine::OnWindowClose));
+		dispatcher.Dispatch<WindowCloseEvent>(TSC_BIND_EVENT_FN(Engine::OnWindowClose));
 
 		for (auto iterator = _SystemStack.end(); iterator != _SystemStack.begin();)
 		{
@@ -61,15 +41,24 @@ namespace TradescantiaEngine
 
 	void Engine::Init()
 	{
+		Log::Init();
+
+		_Window = Window::Create(WindowProperties("TradescantiaEngine", /* width = */ 1080, /* height = */ 1080));
+		_Window->SetEventCallback(TSC_BIND_EVENT_FN(Engine::OnEvent));
+
+		PushSystem(_CameraSystem = new CameraSystem());
+		PushSystem(_ImGuiSystem = new ImGuiSystem());
+		PushSystem(new ParticleSystem);
+
 		for (System* system : _SystemStack)
 			system->Init();
 
-		Scene::SceneInstance->StartScene();
+		Scene::Get().StartScene();
+		TradescantiaEngine::RenderCommand::SetClearColor({ 0.f, 0.f, 0.f, 1.f });
 	}
 
 	void Engine::PreUpdate(float deltaTime)
 	{
-		TradescantiaEngine::RenderCommand::SetClearColor({ 0.f, 0.f, 0.f, 1.f });
 		TradescantiaEngine::RenderCommand::Clear();
 
 		TradescantiaEngine::Renderer::BeginScene(_CameraSystem->GetCamera());
@@ -128,7 +117,7 @@ namespace TradescantiaEngine
 
 			Update(deltaTime);
 
-			Scene::SceneInstance->Render();
+			Scene::Get().Render();
 
 			PostUpdate(deltaTime);
 		}

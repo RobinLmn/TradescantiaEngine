@@ -30,7 +30,7 @@ namespace TradescantiaEngine
 			return ss.str();
 		}
 
-		SET_EVENTTYPE(EventType::KeyPressed);
+		TSC_SET_EVENT_TYPE(EventType::KeyPressed);
 
 		int RepeatedCount;
 	};
@@ -48,7 +48,7 @@ namespace TradescantiaEngine
 			return ss.str();
 		}
 
-		SET_EVENTTYPE(EventType::KeyReleased);
+		TSC_SET_EVENT_TYPE(EventType::KeyReleased);
 	};
 
 	class KeyTypedEvent : public KeyEvent
@@ -64,6 +64,6 @@ namespace TradescantiaEngine
 			return ss.str();
 		}
 
-		SET_EVENTTYPE(EventType::KeyTyped);
+		TSC_SET_EVENT_TYPE(EventType::KeyTyped);
 	};
 }

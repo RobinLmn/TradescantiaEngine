@@ -145,7 +145,6 @@
     <ClInclude Include="Source\Systems\CameraSystem.h" />
     <ClInclude Include="Source\Core\Core.h" />
     <ClInclude Include="Source\Core\Engine.h" />
-    <ClInclude Include="Source\Core\EntryPoint.h" />
     <ClInclude Include="Source\Core\Input.h" />
     <ClInclude Include="Source\Core\KeyCodes.h" />
     <ClInclude Include="Source\Systems\ParticleSystem.h" />
@@ -194,8 +193,6 @@
     <ClCompile Include="Source\Renderer\Buffer.cpp" />
     <ClCompile Include="Source\Renderer\Camera.cpp" />
     <ClCompile Include="Source\Renderer\Renderer.cpp" />
-    <ClCompile Include="Source\Renderer\RendererAPI.cpp" />
-    <ClCompile Include="Source\Renderer\RendererCommand.cpp" />
     <ClCompile Include="Source\Renderer\Shader.cpp" />
     <ClCompile Include="Source\Renderer\VertexArray.cpp" />
     <ClCompile Include="Source\tscpch.cpp">

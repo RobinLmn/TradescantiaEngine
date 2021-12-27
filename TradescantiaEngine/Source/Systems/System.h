@@ -15,7 +15,6 @@ namespace TradescantiaEngine
 		virtual void Terminate() {}
 		virtual void Update(float deltaTime) {}
 		virtual void FixedUpdate(float deltaTime) {}
-		virtual void ImGuiRender() {}
 		virtual void OnEvent(Event& event) {}
 	};
 

@@ -18,6 +18,6 @@ namespace TradescantiaEngine
 			glm::mat4 ViewProjectionMatrix;
 		};
 
-		static SceneData* _SceneData;
+		static SceneData& GetSceneData() { static SceneData sceneData; return sceneData; }
 	};
 }

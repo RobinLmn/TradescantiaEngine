@@ -7,7 +7,7 @@ namespace TradescantiaEngine
 {
 	VertexArray* VertexArray::Create()
 	{
-		switch (RendererAPI::API)
+		switch (RendererAPI::GetRenderAPI())
 		{
 		case ERendererAPI::None: TSC_ASSERT(false, "RendererAPI::None is invalid.");
 		case ERendererAPI::OpenGL: return new OpenGLVertexArray();

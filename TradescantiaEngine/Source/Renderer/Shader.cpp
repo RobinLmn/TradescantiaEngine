@@ -7,7 +7,7 @@ namespace TradescantiaEngine
 {
 	Shader* Shader::Create(const char* vertexPath, const char* fragmentPath)
 	{
-		switch (RendererAPI::API)
+		switch (RendererAPI::GetRenderAPI())
 		{
 		case ERendererAPI::None: TSC_ASSERT(false, "RendererAPI::None is invalid.");
 		case ERendererAPI::OpenGL: return new OpenGLShader(vertexPath, fragmentPath);

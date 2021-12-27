@@ -28,7 +28,7 @@ namespace TradescantiaEngine
 			particles[i] = particle;
 		}
 
-		Scene::SceneInstance->AddParticles(particles, size);
+		Scene::Get().AddParticles(particles, size);
 	}
 
 	ParticleSystem::~ParticleSystem()

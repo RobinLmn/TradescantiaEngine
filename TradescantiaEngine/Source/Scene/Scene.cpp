@@ -4,8 +4,6 @@
 
 namespace TradescantiaEngine
 {
-	Scene* Scene::SceneInstance = new Scene();
-
 	void Scene::AddParticles(Particle* particles, const int count)
 	{ 
 		_Particles = particles;
@@ -34,8 +32,8 @@ namespace TradescantiaEngine
 
 		_VertexArray.reset(VertexArray::Create());
 
-		std::shared_ptr<TradescantiaEngine::VertexBuffer> vertexBuffer;
-		vertexBuffer.reset(TradescantiaEngine::VertexBuffer::Create(_Vertices, _Count * 6));
+		std::shared_ptr<VertexBuffer> vertexBuffer;
+		vertexBuffer.reset(VertexBuffer::Create(_Vertices, _Count * 6));
 		vertexBuffer->Layout = layout;
 		_VertexArray->AddVertexBuffer(vertexBuffer);
 
