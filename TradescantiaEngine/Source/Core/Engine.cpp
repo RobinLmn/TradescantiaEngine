@@ -26,9 +26,9 @@ namespace TradescantiaEngine
 		EventDispatcher  dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(TSC_BIND_EVENT_FN(Engine::OnWindowClose));
 
-		for (auto iterator = _SystemStack.end(); iterator != _SystemStack.begin();)
+		for (System* system : _SystemCollection)
 		{
-			(*--iterator)->OnEvent(e);
+			system->OnEvent(e);
 			if (e.isHandled())
 				break;
 		}
@@ -36,7 +36,7 @@ namespace TradescantiaEngine
 
 	void Engine::PushSystem(System* system)
 	{
-		_SystemStack.PushSystem(system);
+		_SystemCollection.PushSystem(system);
 	}
 
 	void Engine::Init()
@@ -50,7 +50,7 @@ namespace TradescantiaEngine
 		PushSystem(_ImGuiSystem = new ImGuiSystem());
 		PushSystem(new ParticleSystem);
 
-		for (System* system : _SystemStack)
+		for (System* system : _SystemCollection)
 			system->Init();
 
 		Scene::Get().StartScene();
@@ -68,13 +68,13 @@ namespace TradescantiaEngine
 
 	void Engine::Update(float deltaTime)
 	{
-		for (System* system : _SystemStack)
+		for (System* system : _SystemCollection)
 			system->Update(deltaTime);
 	}
 
 	void Engine::FixedUpdate(float deltaTime)
 	{
-		for (System* system : _SystemStack)
+		for (System* system : _SystemCollection)
 			system->FixedUpdate(deltaTime);
 	}
 
@@ -87,7 +87,7 @@ namespace TradescantiaEngine
 
 	void Engine::Terminate()
 	{
-		for (System* system : _SystemStack)
+		for (System* system : _SystemCollection)
 			system->Terminate();
 	}
 

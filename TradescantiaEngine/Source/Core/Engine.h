@@ -44,7 +44,7 @@ namespace TradescantiaEngine
 
 		Window* _Window;
 
-		SystemStack _SystemStack;
+		SystemCollection _SystemCollection;
 	};
 }
 

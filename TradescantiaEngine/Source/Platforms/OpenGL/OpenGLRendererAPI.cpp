@@ -12,14 +12,14 @@ namespace TradescantiaEngine
 	{
 		glClear(GL_COLOR_BUFFER_BIT);
 	}
-	void OpenGLRendererAPI::DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray)
+	void OpenGLRendererAPI::DrawInstanced(const int count)
 	{
-		glPointSize(1);
+		glPointSize(4);
 		glDisable(GL_POINT_SMOOTH);
 		glDisable(GL_LINE_SMOOTH);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_ONE, GL_ONE);
 		glEnable(GL_POINT_SPRITE);
-		glDrawElements(GL_POINTS, vertexArray->GetIndexBuffer()->Count, GL_UNSIGNED_INT, nullptr);
+		glDrawArraysInstanced(GL_POINTS, 0, 1, count);
 	}
 }

@@ -1,7 +1,7 @@
 #pragma once
 #include "Core/Core.h"
 #include "Systems/System.h"
-#include "Scene/Entity.h"
+#include "Scene/Particle.h"
 
 namespace TradescantiaEngine
 {
@@ -9,9 +9,9 @@ namespace TradescantiaEngine
 	{
 	public:
 		ParticleSystem() = default;
-		virtual ~ParticleSystem();
+		virtual ~ParticleSystem() = default;
 
 		virtual void Init() override;
-		virtual void Update(float deltaTime) override;
+		virtual void FixedUpdate(float deltaTime) override;
 	};
 }

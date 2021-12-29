@@ -1,5 +1,5 @@
 #pragma once
-#include "Entity.h"
+#include "Particle.h"
 #include "Renderer/VertexArray.h"
 #include "Renderer/Shader.h"
 
@@ -11,27 +11,27 @@ namespace TradescantiaEngine
 		Scene() = default;
 
 	public:
-		~Scene();
+		~Scene() = default;
 		Scene(Scene const&) = delete;
 		Scene operator=(Scene const&) = delete;
 
 		void StartScene();
 
-		void AddParticles(Particle* particles, const int count);
-		Particle* GetParticle() const { return _Particles; }
-		int GetCount() const { return _Count; }
+		void Reserve(int size) { _Particles.reserve(size); }
+		void AddParticle(Particle& particle);
+		int GetCount() const { return _Particles.size(); }
+		std::vector<Particle>& GetParticles() { return _Particles; }
 
 		void Render();
 
 		static Scene& Get() { static Scene instance; return instance; }
 
 	private:
-		Particle* _Particles = nullptr;
-		int _Count = 0;
+		unsigned int _ParticleBufferID = 0;
+		std::vector<Particle> _Particles;
 
 		std::shared_ptr<VertexArray> _VertexArray;
 		std::shared_ptr<Shader> _Shader;
-		float* _Vertices = nullptr;
 	};
 }
 

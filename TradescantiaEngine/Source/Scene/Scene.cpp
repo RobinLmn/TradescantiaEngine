@@ -1,65 +1,42 @@
 #include "tscpch.h"
 #include "Scene.h"
 #include "Renderer/Renderer.h"
+#include "glad/glad.h"
 
 namespace TradescantiaEngine
 {
-	void Scene::AddParticles(Particle* particles, const int count)
+	void Scene::AddParticle(Particle& particle)
 	{ 
-		_Particles = particles;
-		_Count = count;
+		_Particles.emplace_back(particle);
 	}
 
 	void Scene::StartScene()
 	{
 		BufferLayout layout =
 		{
-			{TradescantiaEngine::ShaderDataType::Float3, "a_Position"},
-			{TradescantiaEngine::ShaderDataType::Float3, "a_Color"},
+			{TradescantiaEngine::ShaderDataType::Float3, "aPosition"}
 		};
-		 
-		_Vertices = new float[_Count * 6];
 
-		for (int i = 0, j = 0; i < _Count * 6; i += 6, j++)
-		{
-			_Vertices[i] = _Particles[j].Position.x;
-			_Vertices[i + 1] = _Particles[j].Position.y;
-			_Vertices[i + 2] = _Particles[j].Position.z;
-			_Vertices[i + 3] = _Particles[j].Color.r;
-			_Vertices[i + 4] = _Particles[j].Color.g;
-			_Vertices[i + 5] = _Particles[j].Color.b;
-		}
+		glGenBuffers(1, &_ParticleBufferID); 
+		glBindBuffer(GL_SHADER_STORAGE_BUFFER, _ParticleBufferID);
+		glBufferData(GL_SHADER_STORAGE_BUFFER, sizeof(Particle) * _Particles.size(), _Particles.data(), GL_DYNAMIC_DRAW);
+		glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
+		 
+		const int size = _Particles.size();
+
+		float vertices[] = { 0.f, 0.f, 0.f };
 
 		_VertexArray.reset(VertexArray::Create());
 
-		std::shared_ptr<VertexBuffer> vertexBuffer;
-		vertexBuffer.reset(VertexBuffer::Create(_Vertices, _Count * 6));
+		std::shared_ptr<VertexBuffer> vertexBuffer(VertexBuffer::Create(vertices, 3));
 		vertexBuffer->Layout = layout;
 		_VertexArray->AddVertexBuffer(vertexBuffer);
 
-		unsigned int* indices = new unsigned int[_Count];
-		for (int i = 0; i < _Count; i++)
-			indices[i] = i;
-
-		std::shared_ptr<TradescantiaEngine::IndexBuffer> indexBuffer;
-		indexBuffer.reset(TradescantiaEngine::IndexBuffer::Create(indices, _Count));
-		_VertexArray->SetIndexBuffer(indexBuffer);
-
-		_Shader.reset(
-			TradescantiaEngine::Shader::Create("C:/Users/Shadow/Documents/GitHub/TradescantiaEngine/TradescantiaEngine/Content/VertexShader.vs",
-				"C:/Users/Shadow/Documents/GitHub/TradescantiaEngine/TradescantiaEngine/Content/FragmentShader.fs"));
-
-		delete[] indices;
-	}
-
-	Scene::~Scene()
-	{
-		delete[] _Particles;
-		delete[] _Vertices;
+		_Shader.reset(Shader::Create("Content/VertexShader.vs", "Content/FragmentShader.fs"));
 	}
 
 	void Scene::Render()
 	{
-		TradescantiaEngine::Renderer::Submit(_Shader, _VertexArray);
+		TradescantiaEngine::Renderer::Submit(_Shader, _ParticleBufferID, _VertexArray, _Particles.size());
 	}
 }

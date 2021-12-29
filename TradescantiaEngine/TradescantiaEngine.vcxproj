@@ -140,7 +140,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Scene\Entity.h" />
+    <ClInclude Include="Source\Scene\Particle.h" />
     <ClInclude Include="Source\Scene\Scene.h" />
     <ClInclude Include="Source\Systems\CameraSystem.h" />
     <ClInclude Include="Source\Core\Core.h" />

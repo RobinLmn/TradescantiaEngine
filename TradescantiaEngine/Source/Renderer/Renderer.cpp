@@ -2,6 +2,9 @@
 #include "Renderer.h"
 #include "RenderCommand.h"
 
+// TEMP
+#include "glad/glad.h"
+
 namespace TradescantiaEngine
 {
 	void Renderer::BeginScene(Camera& camera)
@@ -13,11 +16,12 @@ namespace TradescantiaEngine
 	{
 	}
 
-	void Renderer::Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray)
+	void Renderer::Submit(const std::shared_ptr<Shader>& shader, const int ParticleBufferID, const std::shared_ptr<VertexArray>& vertexArray, const int count)
 	{
 		shader->Use();
 		shader->SetMat4("u_ViewProjection", GetSceneData().ViewProjectionMatrix);
+		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, ParticleBufferID);
 		vertexArray->Bind();
-		RenderCommand::DrawIndexed(vertexArray);
+		RenderCommand::DrawInstanced(count);
 	}
 }

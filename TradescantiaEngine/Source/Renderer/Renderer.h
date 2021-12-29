@@ -10,7 +10,7 @@ namespace TradescantiaEngine
 	public:
 		static void BeginScene(Camera& Camera);
 		static void EndScene();
-		static void Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray);
+		static void Submit(const std::shared_ptr<Shader>& shader, const int ParticleBufferID, const std::shared_ptr<VertexArray>& vertexArray, const int count);
 
 	private:
 		struct SceneData

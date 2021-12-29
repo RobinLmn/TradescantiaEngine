@@ -7,11 +7,11 @@
 namespace TradescantiaEngine
 {
 
-	OpenGLVertexBuffer::OpenGLVertexBuffer(float* vertices, uint32_t size)
+	OpenGLVertexBuffer::OpenGLVertexBuffer(float* vertices, uint32_t count)
 	{
 		glCreateBuffers(1, &_RendererID);
 		Bind();
-		glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, count * sizeof(float), vertices, GL_STATIC_DRAW);
 	}
 
 	OpenGLVertexBuffer::~OpenGLVertexBuffer()
@@ -31,12 +31,12 @@ namespace TradescantiaEngine
 
 	/* --------------------------------------- INDEX BUFFER --------------------------------------- */
 
-	OpenGLIndexBuffer::OpenGLIndexBuffer(uint32_t* indices, uint32_t size)
+	OpenGLIndexBuffer::OpenGLIndexBuffer(uint32_t* indices, uint32_t count)
 	{
 		glCreateBuffers(1, &_RendererID);
 		Bind();
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, indices, GL_STATIC_DRAW);
-		Count = size / sizeof(uint32_t);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(uint32_t), indices, GL_STATIC_DRAW);
+		Count = count;
 	}
 
 	OpenGLIndexBuffer::~OpenGLIndexBuffer()

@@ -18,9 +18,9 @@ namespace TradescantiaEngine
 			GetRendererAPI().Clear();
 		}
 
-		inline static void DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray)
+		inline static void DrawInstanced(const int count)
 		{
-			GetRendererAPI().DrawIndexed(vertexArray);
+			GetRendererAPI().DrawInstanced(count);
 		}
 
 	private:

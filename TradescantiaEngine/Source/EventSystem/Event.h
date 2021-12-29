@@ -5,41 +5,15 @@
 
 namespace TradescantiaEngine
 {
-	enum class EventType
-	{
-		None = 0,
-		WindowClose, WindowResize,
-		KeyPressed, KeyReleased, KeyTyped,
-		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled
-	};
-
-	enum EventCategory
-	{
-		None = 0,
-		EventCategoryWindow		 = BIT(0),
-		EventCategoryInput		 = BIT(1),
-		EventCategoryKeyboard    = BIT(2),
-		EventCategoryMouse		 = BIT(3),
-		EventCategoryMouseButton = BIT(4)
-	};
-
 #define TSC_BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
-#define TSC_SET_EVENT_TYPE(type) static EventType GetStaticEventType() { return  type; } virtual EventType GetEventType() const override { return GetStaticEventType(); }
+#define TSC_SET_EVENT_NAME(name) static std::string GetStaticEventName() { return  name; } virtual std::string GetEventName() const override { return name; }
 
 	class Event
 	{
 		friend class EventDispatcher;
 	public:
-		virtual EventType GetEventType() const = 0;
-		virtual std::string ToString() const = 0;
-		virtual int GetCategoryFlags() const = 0;
-
+		virtual std::string GetEventName() const = 0;
 		const bool isHandled() const { return _Handled; }
-
-		inline bool IsInCategory(EventCategory category)
-		{
-			return GetCategoryFlags() & category;
-		}
 
 	protected:
 		bool _Handled = false;
@@ -51,13 +25,12 @@ namespace TradescantiaEngine
 		using EventFn = std::function<bool(T&)>;
 
 	public:
-
 		EventDispatcher(Event& e) : _Event(e) {}
 
 		template<typename T>
 		bool Dispatch(EventFn<T> func)
 		{
-			if (_Event.GetEventType() == T::GetStaticEventType())
+			if (_Event.GetEventName() == T::GetStaticEventName())
 			{
 				_Event._Handled = func(*(T*)&_Event);
 				return true;
@@ -71,6 +44,6 @@ namespace TradescantiaEngine
 
 	inline std::ostream& operator<<(std::ostream& os, const Event& e)
 	{
-		return os << e.ToString();
+		return os << e.GetEventName();
 	}
 }

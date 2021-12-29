@@ -9,11 +9,6 @@ namespace TradescantiaEngine
 		KeyEvent(int keycode) 
 			: KeyCode(keycode) {}
 
-		virtual int GetCategoryFlags() const override
-		{
-			return EventCategoryInput | EventCategoryKeyboard;
-		}
-
 		int KeyCode;
 	};
 
@@ -23,14 +18,7 @@ namespace TradescantiaEngine
 		KeyPressedEvent(int keycode, int repeatedCount) 
 			: KeyEvent(keycode), RepeatedCount(repeatedCount) {}
 
-		virtual std::string ToString() const override
-		{
-			std::stringstream ss;
-			ss << "KeyPressedEvent: " << KeyCode << " (" << RepeatedCount << " repeats)";
-			return ss.str();
-		}
-
-		TSC_SET_EVENT_TYPE(EventType::KeyPressed);
+		TSC_SET_EVENT_NAME("KeyPressed");
 
 		int RepeatedCount;
 	};
@@ -41,14 +29,7 @@ namespace TradescantiaEngine
 		KeyReleasedEvent(int keycode)
 			: KeyEvent(keycode) {}
 
-		virtual std::string ToString() const override
-		{
-			std::stringstream ss;
-			ss << "KeyReleasedEvent: " << KeyCode;
-			return ss.str();
-		}
-
-		TSC_SET_EVENT_TYPE(EventType::KeyReleased);
+		TSC_SET_EVENT_NAME("KeyReleased");
 	};
 
 	class KeyTypedEvent : public KeyEvent
@@ -57,13 +38,6 @@ namespace TradescantiaEngine
 		KeyTypedEvent(int keycode)
 			: KeyEvent(keycode) {}
 
-		virtual std::string ToString() const override
-		{
-			std::stringstream ss;
-			ss << "KeyTypedEvent: " << KeyCode;
-			return ss.str();
-		}
-
-		TSC_SET_EVENT_TYPE(EventType::KeyTyped);
+		TSC_SET_EVENT_NAME("KeyTyped");
 	};
 }

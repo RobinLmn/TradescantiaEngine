@@ -116,7 +116,7 @@
       <Filter>ImGui</Filter>
     </ClInclude>
     <ClInclude Include="Source\Scene\Scene.h" />
-    <ClInclude Include="Source\Scene\Entity.h" />
+    <ClInclude Include="Source\Scene\Particle.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Core\Engine.cpp">

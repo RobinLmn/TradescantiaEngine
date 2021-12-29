@@ -18,11 +18,11 @@ namespace TradescantiaEngine
 		virtual void OnEvent(Event& event) {}
 	};
 
-	class SystemStack
+	class SystemCollection
 	{
 	public:
-		SystemStack() = default;
-		~SystemStack();
+		SystemCollection() = default;
+		~SystemCollection();
 
 		void PushSystem(System* System);
 		void PopSystem(System* System);
