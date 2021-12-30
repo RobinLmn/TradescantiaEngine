@@ -20,7 +20,6 @@ namespace TradescantiaEngine
 	{
 		shader->Use();
 		shader->SetMat4("u_ViewProjection", GetSceneData().ViewProjectionMatrix);
-		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, ParticleBufferID);
 		vertexArray->Bind();
 		RenderCommand::DrawInstanced(count);
 		glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);

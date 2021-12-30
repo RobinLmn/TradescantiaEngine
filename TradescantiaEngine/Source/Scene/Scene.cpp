@@ -37,6 +37,9 @@ namespace TradescantiaEngine
 
 	void Scene::Render()
 	{
+		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, _ParticleBufferID);
+		glBufferData(GL_SHADER_STORAGE_BUFFER, sizeof(Particle) * _Particles.size(), _Particles.data(), GL_DYNAMIC_DRAW);
+
 		TradescantiaEngine::Renderer::Submit(_Shader, _ParticleBufferID, _VertexArray, _Particles.size());
 	}
 }
