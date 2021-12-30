@@ -22,6 +22,10 @@ namespace TradescantiaEngine
 			_CameraPosition -= _Camera.Speed * _Camera.GetFront() * deltaTime;
 		if (TradescantiaEngine::Input::IsKeyPressed(TSC_KEY_W))
 			_CameraPosition += _Camera.Speed * _Camera.GetFront() * deltaTime;
+		if (TradescantiaEngine::Input::IsKeyPressed(TSC_KEY_E))
+			_CameraPosition += _Camera.Speed * _Camera.GetUp() * deltaTime;
+		if (TradescantiaEngine::Input::IsKeyPressed(TSC_KEY_Q))
+			_CameraPosition -= _Camera.Speed * _Camera.GetUp() * deltaTime;
 
 		if (TradescantiaEngine::Input::IsMouseButtonPressed(TSC_MOUSE_BUTTON_2))
 		{
