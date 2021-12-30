@@ -39,8 +39,9 @@ namespace TradescantiaEngine
 	void Scene::Render()
 	{
 		ZoneScoped
-		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, _ParticleBufferID);
+		glBindBuffer(GL_SHADER_STORAGE_BUFFER, _ParticleBufferID);
 		glBufferData(GL_SHADER_STORAGE_BUFFER, sizeof(Particle) * _Particles.size(), _Particles.data(), GL_DYNAMIC_DRAW);
+		glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
 		TradescantiaEngine::Renderer::Submit(_Shader, _ParticleBufferID, _VertexArray, _Particles.size());
 	}
 }
