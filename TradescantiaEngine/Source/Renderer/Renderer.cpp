@@ -18,6 +18,7 @@ namespace TradescantiaEngine
 
 	void Renderer::Submit(const std::shared_ptr<Shader>& shader, const int ParticleBufferID, const std::shared_ptr<VertexArray>& vertexArray, const int count)
 	{
+		ZoneScoped
 		shader->Use();
 		shader->SetMat4("u_ViewProjection", GetSceneData().ViewProjectionMatrix);
 		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, ParticleBufferID);

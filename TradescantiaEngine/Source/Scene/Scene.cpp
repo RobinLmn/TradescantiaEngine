@@ -12,6 +12,7 @@ namespace TradescantiaEngine
 
 	void Scene::StartScene()
 	{
+		ZoneScoped
 		BufferLayout layout =
 		{
 			{TradescantiaEngine::ShaderDataType::Float3, "aPosition"}
@@ -37,6 +38,7 @@ namespace TradescantiaEngine
 
 	void Scene::Render()
 	{
+		ZoneScoped
 		TradescantiaEngine::Renderer::Submit(_Shader, _ParticleBufferID, _VertexArray, _Particles.size());
 	}
 }

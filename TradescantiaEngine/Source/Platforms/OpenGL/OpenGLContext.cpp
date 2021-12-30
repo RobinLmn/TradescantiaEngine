@@ -80,5 +80,6 @@ void TradescantiaEngine::OpenGLContext::Init()
 
 void TradescantiaEngine::OpenGLContext::SwapBuffers()
 {
+	ZoneScoped
 	glfwSwapBuffers(_WindowHandle);
 }

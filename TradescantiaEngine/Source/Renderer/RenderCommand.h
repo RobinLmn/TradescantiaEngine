@@ -20,6 +20,7 @@ namespace TradescantiaEngine
 
 		inline static void DrawInstanced(const int count)
 		{
+			ZoneScoped
 			GetRendererAPI().DrawInstanced(count);
 		}
 

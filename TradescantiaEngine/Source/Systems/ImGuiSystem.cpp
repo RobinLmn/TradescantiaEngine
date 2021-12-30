@@ -9,6 +9,7 @@ namespace TradescantiaEngine
 {
 	void ImGuiSystem::Begin()
 	{
+		ZoneScoped
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
@@ -16,6 +17,7 @@ namespace TradescantiaEngine
 
 	void ImGuiSystem::End()
 	{
+		ZoneScoped
 		ImGuiIO& io = ImGui::GetIO();
 		Engine& engine = Engine::Get();
 		io.DisplaySize = ImVec2(static_cast<float>(engine.GetWindow().GetWidth()), static_cast<float>(engine.GetWindow().GetHeight()));
@@ -24,6 +26,7 @@ namespace TradescantiaEngine
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
 		{
+			ZoneScopedN("ImGuiSystem_UpdateViewports")
 			GLFWwindow* backup_current_context = glfwGetCurrentContext();
 			ImGui::UpdatePlatformWindows();
 			ImGui::RenderPlatformWindowsDefault();
@@ -57,6 +60,7 @@ namespace TradescantiaEngine
 
 	void ImGuiSystem::Update(float deltaTime)
 	{
+		ZoneScoped
 		ImGui::Begin("Statistics");
 		ImGui::Text("Frames: %d", static_cast<int>(1 / deltaTime));
 		ImGui::End();
