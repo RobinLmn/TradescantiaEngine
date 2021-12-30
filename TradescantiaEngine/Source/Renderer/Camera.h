@@ -41,6 +41,6 @@ namespace  TradescantiaEngine
 		glm::vec3 _Front = glm::vec3(0.0, 0.0, -1.0f);
 
 		float _CameraYaw = -90.0f;
-		float _CameraPitch = -20.f;
+		float _CameraPitch = -30.f;
 	};
 }

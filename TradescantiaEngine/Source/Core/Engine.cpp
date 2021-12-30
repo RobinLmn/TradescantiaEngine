@@ -11,7 +11,7 @@
 
 #include "Systems/ParticleSystem.h"
 
-#define FIXED_UPDATE_TIME 0.05f
+#define FIXED_UPDATE_TIME 0.02f
 
 namespace TradescantiaEngine 
 {
@@ -43,7 +43,7 @@ namespace TradescantiaEngine
 	{
 		Log::Init();
 
-		_Window = Window::Create(WindowProperties("TradescantiaEngine", /* width = */ 1080, /* height = */ 1080));
+		_Window = Window::Create(WindowProperties("TradescantiaEngine", /* width = */ 1920, /* height = */ 1080));
 		_Window->SetEventCallback(TSC_BIND_EVENT_FN(Engine::OnEvent));
 
 		PushSystem(_CameraSystem = new CameraSystem());

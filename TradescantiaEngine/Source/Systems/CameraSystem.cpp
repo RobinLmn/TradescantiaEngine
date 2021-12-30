@@ -7,8 +7,8 @@ namespace TradescantiaEngine
 {
 	CameraSystem::CameraSystem()
 		: _MousePosition(TradescantiaEngine::Input::GetMousePos()),
-		  _CameraPosition(glm::vec3(0.f, 30.f, 100.f)),
-		  _Camera(45.0f, 1080, 1080, 0.1f, 1000.0f)
+		  _CameraPosition(glm::vec3(0.f, 60.f, 115.f)),
+		  _Camera(45.0f, 1920, 1080, 0.1f, 1000.0f)
 	{
 	}
 
