@@ -7,7 +7,7 @@ namespace TradescantiaEngine
 {
 	void ParticleSystem::Init()
 	{
-		const int size = 400;
+		const int size = 300;
 
 		Scene& scene = Scene::Get();
 		scene.Reserve(size);
@@ -19,14 +19,17 @@ namespace TradescantiaEngine
 
 		for (int i = 0; i < size; i++)
 		{
-			const float x = glm::gaussRand(0.0f, 0.1f) * 12.0f;
-			const float y = glm::gaussRand(0.0f, 0.2f) * 0.2f;
-			const float z = glm::gaussRand(0.0f, 0.1f) * 12.0f;
+			glm::vec3 position = glm::ballRand(25.f);
+			position.y *= 0.1f;
+			const float brightness = std::rand() / static_cast<float>(RAND_MAX);
+			const float dist = glm::length(position) / 20.f;
 
 			Particle particle;
-			particle.Position = glm::vec4(x, y, z, 0);
-			const float brightness = std::rand() / static_cast<float>(RAND_MAX);
-			particle.Color = glm::vec4(brightness * 0.3f, 0.2f, 0.4f, 1.f);
+			particle.Position = glm::vec4(position, 0);
+			particle.Color = glm::vec3(1.f - dist, 0.4f, dist);
+			particle.Velocity = glm::vec3(0.f);
+			particle.Force = glm::vec3(0.f);
+
 			scene.AddParticle(particle);
 		}
 	}
@@ -35,7 +38,7 @@ namespace TradescantiaEngine
 	{
 		std::vector<Particle>& particles = Scene::Get().GetParticles();
 
-		for (int i = 0; i < particles.size(); i++)
+		for (int i = 0; i < particles.size() - 1; i++)
 		{
 			Particle& particle = particles[i];
 
@@ -49,15 +52,19 @@ namespace TradescantiaEngine
 				if (Dist != 0)
 				{
 					const glm::vec3 UnitVec = (PosB - PosA) / Dist;
-					const glm::vec3 GravForce = UnitVec / (Dist * Dist);
+					const glm::vec3 GravForce = UnitVec / (Dist * Dist + 100.f);
 
 					particle.Force += GravForce;
 					particles[j].Force -= GravForce;
 				}
 			}
+		}
 
-			particle.Position += particle.Force * deltaTime * deltaTime;
-			particle.Force = glm::vec3(0.f, 0.f, 0.f);
+		for (int i = 0; i < particles.size(); i++)
+		{
+			particles[i].Velocity += particles[i].Force * deltaTime;
+			particles[i].Position += particles[i].Velocity * deltaTime;
+			particles[i].Force = glm::vec3(0.f);
 		}
 	}
 }

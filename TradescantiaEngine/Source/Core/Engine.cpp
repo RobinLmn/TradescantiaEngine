@@ -11,7 +11,7 @@
 
 #include "Systems/ParticleSystem.h"
 
-#define FIXED_UPDATE_TIME 0.20f
+#define FIXED_UPDATE_TIME 0.05f
 
 namespace TradescantiaEngine 
 {
@@ -54,7 +54,7 @@ namespace TradescantiaEngine
 			system->Init();
 
 		Scene::Get().StartScene();
-		TradescantiaEngine::RenderCommand::SetClearColor({ 0.f, 0.f, 0.f, 1.f });
+		TradescantiaEngine::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.f });
 	}
 
 	void Engine::PreUpdate(float deltaTime)
