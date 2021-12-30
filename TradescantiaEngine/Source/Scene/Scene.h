@@ -19,7 +19,7 @@ namespace TradescantiaEngine
 
 		void Reserve(int size) { _Particles.reserve(size); }
 		void AddParticle(Particle& particle);
-		int GetCount() const { return _Particles.size(); }
+		size_t GetCount() const { return _Particles.size(); }
 		std::vector<Particle>& GetParticles() { return _Particles; }
 
 		void Render();

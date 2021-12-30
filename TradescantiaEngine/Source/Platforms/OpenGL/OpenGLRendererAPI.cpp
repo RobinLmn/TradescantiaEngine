@@ -14,12 +14,8 @@ namespace TradescantiaEngine
 	}
 	void OpenGLRendererAPI::DrawInstanced(const int count)
 	{
+		glEnable(GL_PROGRAM_POINT_SIZE);
 		glPointSize(4);
-		glDisable(GL_POINT_SMOOTH);
-		glDisable(GL_LINE_SMOOTH);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_ONE, GL_ONE);
-		glEnable(GL_POINT_SPRITE);
 		glDrawArraysInstanced(GL_POINTS, 0, 1, count);
 	}
 }

@@ -7,11 +7,11 @@
 namespace TradescantiaEngine
 {
 
-	OpenGLVertexBuffer::OpenGLVertexBuffer(float* vertices, uint32_t count)
+	OpenGLVertexBuffer::OpenGLVertexBuffer(float* vertices, uint32_t size)
 	{
 		glCreateBuffers(1, &_RendererID);
 		Bind();
-		glBufferData(GL_ARRAY_BUFFER, count * sizeof(float), vertices, GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
 	}
 
 	OpenGLVertexBuffer::~OpenGLVertexBuffer()

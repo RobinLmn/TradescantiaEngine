@@ -51,13 +51,13 @@ namespace TradescantiaEngine
 					const glm::vec3 UnitVec = (PosB - PosA) / Dist;
 					const glm::vec3 GravForce = UnitVec / (Dist * Dist);
 
-					particle.Force += glm::vec4(GravForce, 0);
-					particles[j].Force -= glm::vec4(GravForce, 0);
+					particle.Force += GravForce;
+					particles[j].Force -= GravForce;
 				}
 			}
 
 			particle.Position += particle.Force * deltaTime * deltaTime;
-			particle.Force = glm::vec4(0.f, 0.f, 0.f, 0.f);
+			particle.Force = glm::vec3(0.f, 0.f, 0.f);
 		}
 	}
 }

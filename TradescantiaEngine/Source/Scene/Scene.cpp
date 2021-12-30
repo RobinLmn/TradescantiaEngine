@@ -22,13 +22,13 @@ namespace TradescantiaEngine
 		glBufferData(GL_SHADER_STORAGE_BUFFER, sizeof(Particle) * _Particles.size(), _Particles.data(), GL_DYNAMIC_DRAW);
 		glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
 		 
-		const int size = _Particles.size();
+		const size_t size = _Particles.size();
 
 		float vertices[] = { 0.f, 0.f, 0.f };
 
 		_VertexArray.reset(VertexArray::Create());
 
-		std::shared_ptr<VertexBuffer> vertexBuffer(VertexBuffer::Create(vertices, 3));
+		std::shared_ptr<VertexBuffer> vertexBuffer(VertexBuffer::Create(vertices, sizeof(vertices)));
 		vertexBuffer->Layout = layout;
 		_VertexArray->AddVertexBuffer(vertexBuffer);
 
