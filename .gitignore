@@ -12,6 +12,4 @@ bin-int/
 
 # Files
 *.user
-TradescantiaEngine/ThirdParty/ImGui
-TradescantiaEngine/ThirdParty/GLFW
 
