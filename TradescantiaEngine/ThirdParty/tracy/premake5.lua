@@ -5,8 +5,6 @@ project "tracy"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
-	
-	defines {"TRACY_ENABLE"}
 
 	files
 	{
@@ -20,3 +18,9 @@ project "tracy"
 	filter "configurations:Release"
 		runtime "Release"
 		optimize "on"
+		
+	filter "configurations:Profile"
+		defines {"TRACY_ENABLE"}
+		runtime "Release"
+		optimize "on"
+		symbols "on"

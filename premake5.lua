@@ -66,7 +66,6 @@ project "TradescantiaEngine"
 	defines
 	{
 		"_CRT_SECURE_NO_WARNINGS",
-		"TRACY_ENABLE",
 	}
 
 	filter "system:windows"
@@ -124,11 +123,6 @@ project "Playground"
 		"TradescantiaEngine",
 		"tracy",
 	}
-	
-	defines 
-	{
-		"TRACY_ENABLE"
-	}
 
 	filter "system:windows"
 		systemversion "10.0"
@@ -147,3 +141,9 @@ project "Playground"
 		defines {"TSC_RELEASE"}
 		runtime "Release"
 		optimize "on"
+		
+	filter "configurations:Profile"
+		defines {"TRACY_ENABLE"}
+		runtime "Release"
+		optimize "on"
+		symbols "on"
