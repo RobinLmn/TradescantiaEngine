@@ -7,7 +7,7 @@ namespace TradescantiaEngine
 {
 	void ParticleSystem::Init()
 	{
-		const int size = 300;
+		const int size = 5000;
 
 		Scene& scene = Scene::Get();
 		scene.Reserve(size);
@@ -36,35 +36,62 @@ namespace TradescantiaEngine
 
 	void ParticleSystem::FixedUpdate(float deltaTime)
 	{
-		std::vector<Particle>& particles = Scene::Get().GetParticles();
+		ZoneScoped
+		std::vector<Particle>& scene_particles = Scene::Get().GetParticles();
 
-		for (int i = 0; i < particles.size() - 1; i++)
+		auto update_particle_set_forces = [](std::vector<Particle>* particles, size_t start_index, size_t end_index)
 		{
-			Particle& particle = particles[i];
-
-			for (int j = i; j < particles.size(); j++)
+			ZoneScoped
+			for (int i = start_index; i < end_index; i++)
 			{
-				const glm::vec3 PosA = particle.Position;
-				const glm::vec3 PosB = particles[j].Position;
+				Particle& particle = particles->at(i);
 
-				const float Dist = std::abs(glm::distance(PosA, PosB));
-
-				if (Dist != 0)
+				for (int j = i; j < particles->size(); j++)
 				{
-					const glm::vec3 UnitVec = (PosB - PosA) / Dist;
-					const glm::vec3 GravForce = UnitVec / (Dist * Dist + 100.f);
+					const glm::vec3 PosA = particle.Position;
+					const glm::vec3 PosB = particles->at(j).Position;
 
-					particle.Force += GravForce;
-					particles[j].Force -= GravForce;
+					const float Dist = glm::abs(glm::distance(PosA, PosB));
+
+					if (Dist != 0)
+					{
+						const glm::vec3 UnitVec = glm::normalize(PosB - PosA);
+						const glm::vec3 GravForce = UnitVec / (Dist * Dist + 100.f);
+
+						particle.Force += GravForce;
+						particles->at(j).Force -= GravForce;
+					}
 				}
+			}
+		};
+
+		{
+			ZoneScopedN("ComputeForces")
+
+			std::vector<std::thread> threads;
+			const size_t num_workers = std::thread::hardware_concurrency();
+			
+			const size_t particles_per_thread = scene_particles.size() / num_workers;
+			for (size_t i = 0; i < num_workers - 1; ++i)
+			{
+				threads.emplace_back(update_particle_set_forces, &scene_particles, i * particles_per_thread, (i+1)*particles_per_thread);
+			}
+			threads.emplace_back(update_particle_set_forces, &scene_particles, (num_workers - 1) * particles_per_thread, scene_particles.size());
+
+			for (std::thread& thread : threads)
+			{
+				thread.join();
 			}
 		}
 
-		for (int i = 0; i < particles.size(); i++)
 		{
-			particles[i].Velocity += particles[i].Force * deltaTime;
-			particles[i].Position += particles[i].Velocity * deltaTime;
-			particles[i].Force = glm::vec3(0.f);
+			ZoneScopedN("ApplyForces")
+			for (int i = 0; i < scene_particles.size(); i++)
+			{
+				scene_particles[i].Velocity += scene_particles[i].Force * deltaTime;
+				scene_particles[i].Position += scene_particles[i].Velocity * deltaTime;
+				scene_particles[i].Force = glm::vec3(0.f);
+			}
 		}
 	}
 }

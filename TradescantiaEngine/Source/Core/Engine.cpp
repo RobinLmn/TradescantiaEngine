@@ -11,7 +11,7 @@
 
 #include "Systems/ParticleSystem.h"
 
-#define FIXED_UPDATE_TIME 0.05f
+#define FIXED_UPDATE_TIME 0.050f
 
 namespace TradescantiaEngine 
 {
