@@ -5,8 +5,8 @@ namespace TradescantiaEngine
 {
 	struct Particle
 	{
-		glm::vec4 Position;
-		glm::vec4 Color;
-		glm::vec4 Force;
+		alignas(16) glm::vec3 Position;
+		alignas(16) glm::vec3 Color;
+		alignas(16) glm::vec3 Force;
 	};
 }

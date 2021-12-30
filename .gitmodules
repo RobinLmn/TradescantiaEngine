@@ -1,12 +1,6 @@
 [submodule "TradescantiaEngine/ThirdParty/spdlog"]
 	path = TradescantiaEngine/ThirdParty/spdlog
 	url = https://github.com/gabime/spdlog
-[submodule "TradescantiaEngine/ThirdParty/GLFW"]
-	path = TradescantiaEngine/ThirdParty/GLFW
-	url = https://github.com/glfw/glfw
-[submodule "TradescantiaEngine/ThirdParty/ImGui"]
-	path = TradescantiaEngine/ThirdParty/ImGui
-	url = https://github.com/ocornut/imgui
 [submodule "TradescantiaEngine/ThirdParty/glm"]
 	path = TradescantiaEngine/ThirdParty/glm
 	url = https://github.com/g-truc/glm
