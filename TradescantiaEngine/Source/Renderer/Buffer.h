@@ -100,6 +100,19 @@ namespace TradescantiaEngine
 		std::vector<BufferElement> _Elements;
 	};
 
+	class Buffer
+	{
+	public:
+		virtual ~Buffer() {}
+		virtual void Bind() = 0;
+		virtual void Unbind() = 0;
+		virtual void BindBase() = 0;
+		virtual void UnbindBase() = 0;
+		virtual void Reset(void* data, uint32_t size) = 0;
+
+		static Buffer* Create(void* data, uint32_t size);
+	};
+
 	class VertexBuffer
 	{
 	public:

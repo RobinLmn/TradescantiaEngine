@@ -27,10 +27,10 @@ namespace TradescantiaEngine
 		static Scene& Get() { static Scene instance; return instance; }
 
 	private:
-		unsigned int _ParticleBufferID = 0;
 		std::vector<Particle> _Particles;
 
 		std::shared_ptr<VertexArray> _VertexArray;
+		std::shared_ptr<Buffer> _ParticleBuffer;
 		std::shared_ptr<Shader> _Shader;
 	};
 }

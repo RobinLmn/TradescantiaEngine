@@ -16,14 +16,14 @@ namespace TradescantiaEngine
 	{
 	}
 
-	void Renderer::Submit(const std::shared_ptr<Shader>& shader, const int ParticleBufferID, const std::shared_ptr<VertexArray>& vertexArray, const int count)
+	void Renderer::Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<Buffer>& particleBuffer, const std::shared_ptr<VertexArray>& vertexArray, const int count)
 	{
 		ZoneScoped
 		shader->Use();
 		shader->SetMat4("u_ViewProjection", GetSceneData().ViewProjectionMatrix);
 		vertexArray->Bind();
-		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, ParticleBufferID);
+		particleBuffer->BindBase();
 		RenderCommand::DrawInstanced(count);
-		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, 0);
+		particleBuffer->UnbindBase();
 	}
 }

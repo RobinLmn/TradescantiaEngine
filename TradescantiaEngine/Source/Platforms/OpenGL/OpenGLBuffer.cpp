@@ -6,6 +6,47 @@
 
 namespace TradescantiaEngine
 {
+	OpenGLBuffer::OpenGLBuffer(void* data, uint32_t size)
+	{
+		glCreateBuffers(1, &_BufferID);
+		Bind();
+		glBufferData(GL_SHADER_STORAGE_BUFFER, size, data, GL_DYNAMIC_DRAW);
+	}
+
+	OpenGLBuffer::~OpenGLBuffer()
+	{
+		glDeleteBuffers(1, &_BufferID);
+	}
+
+	void OpenGLBuffer::Bind()
+	{
+		glBindBuffer(GL_SHADER_STORAGE_BUFFER, _BufferID);
+	}
+
+	void OpenGLBuffer::BindBase()
+	{
+		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, _BufferID);
+	}
+
+	void OpenGLBuffer::Unbind()
+	{
+		glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
+	}
+
+	void OpenGLBuffer::UnbindBase()
+	{
+		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, 0);
+	}
+
+	void OpenGLBuffer::Reset(void* data, uint32_t size)
+	{
+		glBindBuffer(GL_SHADER_STORAGE_BUFFER, _BufferID);
+		glBufferData(GL_SHADER_STORAGE_BUFFER, size, data, GL_DYNAMIC_DRAW);
+		glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
+	}
+
+
+	/* --------------------------------------- VERTEX BUFFER --------------------------------------- */
 
 	OpenGLVertexBuffer::OpenGLVertexBuffer(float* vertices, uint32_t size)
 	{

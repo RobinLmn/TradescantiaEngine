@@ -37,7 +37,7 @@ namespace TradescantiaEngine
 
 		Particle sbmh;
 		sbmh.Position = glm::vec3(0.f);
-		sbmh.Mass = 10.f;
+		sbmh.Mass = 1000.f;
 		sbmh.Color = glm::vec3(0.f, 0.f, 0.f);
 		sbmh.Velocity = glm::vec3(0.f);
 		sbmh.Force = glm::vec3(0.f);
@@ -66,7 +66,7 @@ namespace TradescantiaEngine
 					if (Dist != 0)
 					{
 					const glm::vec3 UnitVec = (PosB - PosA) / Dist;
-					const glm::vec3 GravForce = UnitVec * particles[j].Mass * particle.Mass / (Dist * Dist + 0.015f);
+					const glm::vec3 GravForce = UnitVec * particles->at(j).Mass * particle.Mass / (Dist * Dist + 0.015f);
 
 						particle.Force += GravForce;
 						particles->at(j).Force -= GravForce;
