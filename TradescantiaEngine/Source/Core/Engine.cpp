@@ -43,7 +43,7 @@ namespace TradescantiaEngine
 	{
 		Log::Init();
 
-		_Window = Window::Create(WindowProperties("TradescantiaEngine", /* width = */ 1080, /* height = */ 1080));
+		_Window = Window::Create(WindowProperties("TradescantiaEngine", /* width = */ 1920, /* height = */ 1080));
 		_Window->SetEventCallback(TSC_BIND_EVENT_FN(Engine::OnEvent));
 
 		PushSystem(_CameraSystem = new CameraSystem());

@@ -6,10 +6,11 @@ uniform mat4 u_ViewProjection;
 
 struct particle_data 
 {
-  vec4 pos;
-  vec4 color;
-  vec4 force;
-  vec4 velocity;
+    float mass;
+    vec4 pos;
+    vec4 color;
+    vec4 force;
+    vec4 velocity;
 };
 
 layout(std430, binding = 0) readonly buffer ParticleBuffer

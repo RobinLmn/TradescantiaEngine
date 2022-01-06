@@ -2,6 +2,7 @@
 #include "ParticleSystem.h"
 #include "Scene/Scene.h"
 #include <glm/gtc/random.hpp>
+#include <glm/gtx/rotate_vector.hpp>
 
 namespace TradescantiaEngine
 {
@@ -10,28 +11,37 @@ namespace TradescantiaEngine
 		const int size = 5000;
 
 		Scene& scene = Scene::Get();
-		scene.Reserve(size);
-
-		const int min = -10;
-		const int max = 10;
-		const int dist = max - min;
-		const int r = 10;
+		scene.Reserve(size + 1);
 
 		for (int i = 0; i < size; i++)
 		{
-			glm::vec3 position = glm::ballRand(25.f);
-			position.y *= 0.1f;
-			const float brightness = std::rand() / static_cast<float>(RAND_MAX);
-			const float dist = glm::length(position) / 20.f;
+			glm::vec3 position;
+			
+			do {
+				position = glm::ballRand(50.f);
+				position.y *= 0.01f;
+			} while (glm::length(position) < 2.0f);
+
+			const float brightness = glm::linearRand(0.f, 1.f);
+			const float dist = glm::length(position) / 50.f;
 
 			Particle particle;
-			particle.Position = glm::vec4(position, 0);
+			particle.Position = position;
+			particle.Mass = 1.f;
 			particle.Color = glm::vec3(1.f - dist, 0.4f, dist);
-			particle.Velocity = glm::vec3(0.f);
+			particle.Velocity = glm::normalize(glm::cross(position, glm::vec3(0.f, 1.f, 0.f)));
 			particle.Force = glm::vec3(0.f);
 
 			scene.AddParticle(particle);
 		}
+
+		Particle sbmh;
+		sbmh.Position = glm::vec3(0.f);
+		sbmh.Mass = 10.f;
+		sbmh.Color = glm::vec3(0.f, 0.f, 0.f);
+		sbmh.Velocity = glm::vec3(0.f);
+		sbmh.Force = glm::vec3(0.f);
+		scene.AddParticle(sbmh);
 	}
 
 	void ParticleSystem::FixedUpdate(float deltaTime)
@@ -55,8 +65,8 @@ namespace TradescantiaEngine
 
 					if (Dist != 0)
 					{
-						const glm::vec3 UnitVec = glm::normalize(PosB - PosA);
-						const glm::vec3 GravForce = UnitVec / (Dist * Dist + 100.f);
+					const glm::vec3 UnitVec = (PosB - PosA) / Dist;
+					const glm::vec3 GravForce = UnitVec * particles[j].Mass * particle.Mass / (Dist * Dist + 0.015f);
 
 						particle.Force += GravForce;
 						particles->at(j).Force -= GravForce;
@@ -88,7 +98,7 @@ namespace TradescantiaEngine
 			ZoneScopedN("ApplyForces")
 			for (int i = 0; i < scene_particles.size(); i++)
 			{
-				scene_particles[i].Velocity += scene_particles[i].Force * deltaTime;
+				scene_particles[i].Velocity += scene_particles[i].Force / scene_particles[i].Mass * deltaTime;
 				scene_particles[i].Position += scene_particles[i].Velocity * deltaTime;
 				scene_particles[i].Force = glm::vec3(0.f);
 			}
