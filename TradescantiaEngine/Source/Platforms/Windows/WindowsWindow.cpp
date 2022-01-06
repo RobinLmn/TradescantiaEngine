@@ -46,12 +46,19 @@ namespace TradescantiaEngine
 			_GLFWInitialized = true;
 		}
 
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
+		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+#ifndef _NDEBUG
+		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
+#endif
 		_Window = glfwCreateWindow(static_cast<int>(props.Width), static_cast<int>(props.Height), _Data.Title.c_str(), /*monitor = */ nullptr, /*window = */ nullptr);
 		_Context = new OpenGLContext(_Window);
 		_Context->Init();
 
 		glfwSetWindowUserPointer(_Window, &_Data);
-		SetVSync(true);
+
+		SetVSync(false);
 
 		// Set glfw callbacks
 
@@ -160,6 +167,7 @@ namespace TradescantiaEngine
 
 	void WindowsWindow::Update()
 	{
+		ZoneScoped
 		glfwPollEvents();
 		_Context->SwapBuffers();
 	}

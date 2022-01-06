@@ -11,30 +11,10 @@
 
 #include "Systems/ParticleSystem.h"
 
-#define FIXED_UPDATE_TIME 0.20f
+#define FIXED_UPDATE_TIME 0.050f
 
 namespace TradescantiaEngine 
 {
-	Engine* Engine::_Instance = nullptr;
-	
-#define BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
-
-	Engine::Engine() 
-	{
-		TSC_ASSERT(!_Instance, "Engine instance was already created");
-		_Instance = this;
-		_Window = Window::Create(WindowProperties("TradescantiaEngine", /* width = */ 1080, /* height = */ 1080));
-		_Window->SetEventCallback(BIND_EVENT_FN(Engine::OnEvent));
-
-		PushSystem(_CameraSystem = new CameraSystem());
-		PushSystem(_ImGuiSystem = new ImGuiSystem());
-		PushSystem(new ParticleSystem);
-	}
-
-	Engine::~Engine()
-	{
-	}
-
 	bool Engine::OnWindowClose(WindowCloseEvent& e)
 	{
 		_Running = false;
@@ -44,11 +24,11 @@ namespace TradescantiaEngine
 	void Engine::OnEvent(Event& e)
 	{
 		EventDispatcher  dispatcher(e);
-		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Engine::OnWindowClose));
+		dispatcher.Dispatch<WindowCloseEvent>(TSC_BIND_EVENT_FN(Engine::OnWindowClose));
 
-		for (auto iterator = _SystemStack.end(); iterator != _SystemStack.begin();)
+		for (System* system : _SystemCollection)
 		{
-			(*--iterator)->OnEvent(e);
+			system->OnEvent(e);
 			if (e.isHandled())
 				break;
 		}
@@ -56,20 +36,30 @@ namespace TradescantiaEngine
 
 	void Engine::PushSystem(System* system)
 	{
-		_SystemStack.PushSystem(system);
+		_SystemCollection.PushSystem(system);
 	}
 
 	void Engine::Init()
 	{
-		for (System* system : _SystemStack)
+		Log::Init();
+
+		_Window = Window::Create(WindowProperties("TradescantiaEngine", /* width = */ 1920, /* height = */ 1080));
+		_Window->SetEventCallback(TSC_BIND_EVENT_FN(Engine::OnEvent));
+
+		PushSystem(_CameraSystem = new CameraSystem());
+		PushSystem(_ImGuiSystem = new ImGuiSystem());
+		PushSystem(new ParticleSystem);
+
+		for (System* system : _SystemCollection)
 			system->Init();
 
-		Scene::SceneInstance->StartScene();
+		Scene::Get().StartScene();
+		TradescantiaEngine::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.f });
 	}
 
 	void Engine::PreUpdate(float deltaTime)
 	{
-		TradescantiaEngine::RenderCommand::SetClearColor({ 0.f, 0.f, 0.f, 1.f });
+		ZoneScoped
 		TradescantiaEngine::RenderCommand::Clear();
 
 		TradescantiaEngine::Renderer::BeginScene(_CameraSystem->GetCamera());
@@ -79,18 +69,21 @@ namespace TradescantiaEngine
 
 	void Engine::Update(float deltaTime)
 	{
-		for (System* system : _SystemStack)
+		ZoneScoped
+		for (System* system : _SystemCollection)
 			system->Update(deltaTime);
 	}
 
 	void Engine::FixedUpdate(float deltaTime)
 	{
-		for (System* system : _SystemStack)
+		ZoneScoped
+		for (System* system : _SystemCollection)
 			system->FixedUpdate(deltaTime);
 	}
 
 	void Engine::PostUpdate(float deltaTime)
 	{
+		ZoneScoped
 		_ImGuiSystem->End();
 		_Window->Update();
 		TradescantiaEngine::Renderer::EndScene();
@@ -98,7 +91,7 @@ namespace TradescantiaEngine
 
 	void Engine::Terminate()
 	{
-		for (System* system : _SystemStack)
+		for (System* system : _SystemCollection)
 			system->Terminate();
 	}
 
@@ -114,6 +107,7 @@ namespace TradescantiaEngine
 
 		while (_Running)
 		{
+			FrameMark
 			const float deltaTime = std::chrono::duration_cast<seconds>(clock.now() - lastTime).count();
 			lastTime = clock.now();
 			lag += deltaTime;
@@ -128,7 +122,7 @@ namespace TradescantiaEngine
 
 			Update(deltaTime);
 
-			Scene::SceneInstance->Render();
+			Scene::Get().Render();
 
 			PostUpdate(deltaTime);
 		}

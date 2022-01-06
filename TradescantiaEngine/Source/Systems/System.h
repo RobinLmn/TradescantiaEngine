@@ -15,15 +15,14 @@ namespace TradescantiaEngine
 		virtual void Terminate() {}
 		virtual void Update(float deltaTime) {}
 		virtual void FixedUpdate(float deltaTime) {}
-		virtual void ImGuiRender() {}
 		virtual void OnEvent(Event& event) {}
 	};
 
-	class SystemStack
+	class SystemCollection
 	{
 	public:
-		SystemStack() = default;
-		~SystemStack();
+		SystemCollection() = default;
+		~SystemCollection();
 
 		void PushSystem(System* System);
 		void PopSystem(System* System);

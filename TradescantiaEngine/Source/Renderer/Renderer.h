@@ -10,7 +10,7 @@ namespace TradescantiaEngine
 	public:
 		static void BeginScene(Camera& Camera);
 		static void EndScene();
-		static void Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray);
+		static void Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<Buffer>& particleBuffer, const std::shared_ptr<VertexArray>& vertexArray, const int count);
 
 	private:
 		struct SceneData
@@ -18,6 +18,6 @@ namespace TradescantiaEngine
 			glm::mat4 ViewProjectionMatrix;
 		};
 
-		static SceneData* _SceneData;
+		static SceneData& GetSceneData() { static SceneData sceneData; return sceneData; }
 	};
 }

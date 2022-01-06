@@ -13,7 +13,3 @@
 #include "Renderer/Shader.h"
 #include "Renderer/Buffer.h"
 #include "Renderer/VertexArray.h"
-
-// -------------------- ENTRY POINT ------------------------
-
-#include "Core/EntryPoint.h"

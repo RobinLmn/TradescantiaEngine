@@ -7,8 +7,8 @@ namespace TradescantiaEngine
 {
 	CameraSystem::CameraSystem()
 		: _MousePosition(TradescantiaEngine::Input::GetMousePos()),
-		  _CameraPosition(glm::vec3(0.f, 0.4f, 1.f)),
-		  _Camera(45.0f, 1, 1, 0.1f, 100.0f)
+		  _CameraPosition(glm::vec3(0.f, 60.f, 115.f)),
+		  _Camera(45.0f, 1920, 1080, 0.1f, 1000.0f)
 	{
 	}
 
@@ -22,6 +22,10 @@ namespace TradescantiaEngine
 			_CameraPosition -= _Camera.Speed * _Camera.GetFront() * deltaTime;
 		if (TradescantiaEngine::Input::IsKeyPressed(TSC_KEY_W))
 			_CameraPosition += _Camera.Speed * _Camera.GetFront() * deltaTime;
+		if (TradescantiaEngine::Input::IsKeyPressed(TSC_KEY_E))
+			_CameraPosition += _Camera.Speed * _Camera.GetUp() * deltaTime;
+		if (TradescantiaEngine::Input::IsKeyPressed(TSC_KEY_Q))
+			_CameraPosition -= _Camera.Speed * _Camera.GetUp() * deltaTime;
 
 		if (TradescantiaEngine::Input::IsMouseButtonPressed(TSC_MOUSE_BUTTON_2))
 		{

@@ -9,7 +9,7 @@ namespace TradescantiaEngine
 {
 	VertexBuffer* VertexBuffer::Create(float* vertices, uint32_t size)
 	{
-		switch (RendererAPI::API)
+		switch (RendererAPI::GetRenderAPI())
 		{
 		case ERendererAPI::None: TSC_ASSERT(false, "ERendererAPI::None is invalid.");
 		case ERendererAPI::OpenGL: return new OpenGLVertexBuffer(vertices, size);
@@ -21,10 +21,22 @@ namespace TradescantiaEngine
 
 	IndexBuffer* IndexBuffer::Create(uint32_t* vertices, uint32_t size)
 	{
-		switch (RendererAPI::API)
+		switch (RendererAPI::GetRenderAPI())
 		{
 		case ERendererAPI::None: TSC_ASSERT(false, "ERendererAPI::None is invalid.");
 		case ERendererAPI::OpenGL: return new OpenGLIndexBuffer(vertices, size);
+		default: TSC_ASSERT(false, "No RendererAPI specified.");
+		}
+
+		return nullptr;
+	}
+
+	Buffer* Buffer::Create(void* data, uint32_t size)
+	{
+		switch (RendererAPI::GetRenderAPI())
+		{
+		case ERendererAPI::None: TSC_ASSERT(false, "ERendererAPI::None is invalid.");
+		case ERendererAPI::OpenGL: return new OpenGLBuffer(data, size);
 		default: TSC_ASSERT(false, "No RendererAPI specified.");
 		}
 

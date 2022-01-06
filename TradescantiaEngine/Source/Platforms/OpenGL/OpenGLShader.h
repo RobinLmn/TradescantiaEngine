@@ -16,6 +16,7 @@ namespace TradescantiaEngine
         virtual void SetBool(const std::string& name, bool value) const override;
         virtual void SetInt(const std::string& name, int value) const override;
         virtual void SetFloat(const std::string & name, float value) const override;
+        virtual void SetFloat3(const std::string & name, glm::vec3 value) const override;
         virtual void SetMat4(const std::string& name, const glm::mat4& value) const override;
 
     private:

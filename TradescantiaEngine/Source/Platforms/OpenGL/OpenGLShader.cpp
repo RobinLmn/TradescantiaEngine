@@ -20,6 +20,9 @@ namespace TradescantiaEngine
         try
         {
             // open files
+            char tmp[256];
+            getcwd(tmp, 256);
+
             vShaderFile.open(vertexPath);
             fShaderFile.open(fragmentPath);
             std::stringstream vShaderStream, fShaderStream;
@@ -80,6 +83,11 @@ namespace TradescantiaEngine
     void OpenGLShader::SetFloat(const std::string& name, float value) const
     {
         glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
+    }
+
+    void OpenGLShader::SetFloat3(const std::string& name, glm::vec3 value) const
+    {
+        glUniform3f(glGetUniformLocation(ID, name.c_str()), value.x, value.y, value.z);
     }
 
     void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& value) const

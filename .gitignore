@@ -2,8 +2,14 @@
 .vs/
 bin/
 bin-int/
+.idea/
+
+# solution files
+**.sln
+**.vcxproj
+**.vcxproj.filters
+**.vcxproj.user
 
 # Files
 *.user
-TradescantiaEngine/ThirdParty/ImGui
-TradescantiaEngine/ThirdParty/GLFW
+

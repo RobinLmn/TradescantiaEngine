@@ -1,6 +1,7 @@
 #pragma once
 #include <glm/glm.hpp>
 #include "RendererAPI.h"
+#include "Platforms/OpenGL/OpenGLRendererAPI.h"
 
 namespace TradescantiaEngine
 {
@@ -9,20 +10,21 @@ namespace TradescantiaEngine
 	public:
 		inline static void SetClearColor(const glm::vec4& color)
 		{
-			_RendererAPI->SetClearColor(color);
+			GetRendererAPI().SetClearColor(color);
 		}
 
 		inline static void Clear()
 		{
-			_RendererAPI->Clear();
+			GetRendererAPI().Clear();
 		}
 
-		inline static void DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray)
+		inline static void DrawInstanced(const int count)
 		{
-			_RendererAPI->DrawIndexed(vertexArray);
+			ZoneScoped
+			GetRendererAPI().DrawInstanced(count);
 		}
 
 	private:
-		static RendererAPI* _RendererAPI;
+		static RendererAPI& GetRendererAPI() { static OpenGLRendererAPI rendererAPI; return rendererAPI; }
 	};
 }

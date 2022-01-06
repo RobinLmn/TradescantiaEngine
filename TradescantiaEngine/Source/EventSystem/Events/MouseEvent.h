@@ -10,19 +10,7 @@ namespace TradescantiaEngine
 		MouseMovedEvent(float x, float y)
 			: X(x), Y(y) {}
 
-		virtual int GetCategoryFlags() const override
-		{
-			return EventCategoryInput | EventCategoryMouse;
-		}
-
-		virtual std::string ToString() const override
-		{
-			std::stringstream ss;
-			ss << "MouseMovedEvent: " << X << ", " << Y;
-			return ss.str();
-		}
-
-		SET_EVENTTYPE(EventType::MouseMoved);
+		TSC_SET_EVENT_NAME("MouseMoved");
 
 		float X;
 		float Y;
@@ -34,19 +22,7 @@ namespace TradescantiaEngine
 		MouseScrolledEvent(double xOffset, double yOffset)
 			: XOffset(xOffset), YOffset(yOffset) {}
 
-		virtual int GetCategoryFlags() const override
-		{
-			return EventCategoryInput | EventCategoryMouse;
-		}
-
-		SET_EVENTTYPE(EventType::MouseScrolled);
-
-		virtual std::string ToString() const override
-		{
-			std::stringstream ss;
-			ss << "MouseScrolledEvent: " <<XOffset << ", " << YOffset;
-			return ss.str();
-		}
+		TSC_SET_EVENT_NAME("MouseScrolled");
 
 		double XOffset;
 		double YOffset;
@@ -58,11 +34,6 @@ namespace TradescantiaEngine
 		MouseButtonEvent(int button)
 			: Button(button) {}
 
-		virtual int GetCategoryFlags() const override
-		{
-			return EventCategoryInput | EventCategoryMouse | EventCategoryMouseButton;
-		}
-
 		int Button;
 	};
 
@@ -72,14 +43,7 @@ namespace TradescantiaEngine
 		MouseButtonReleasedEvent(int button)
 			: MouseButtonEvent(button) {}
 
-		SET_EVENTTYPE(EventType::MouseButtonReleased);
-
-		virtual std::string ToString() const override
-		{
-			std::stringstream ss;
-			ss << "MouseButtonReleasedEvent: " << Button;
-			return ss.str();
-		}
+		TSC_SET_EVENT_NAME("MouseButtonReleased");
 	};
 
 	class MouseButtonPressedEvent : public MouseButtonEvent
@@ -88,14 +52,7 @@ namespace TradescantiaEngine
 		MouseButtonPressedEvent(int button, int repeatedCount)
 			: MouseButtonEvent(button), RepeatedCount(repeatedCount) {}
 
-		SET_EVENTTYPE(EventType::MouseButtonPressed);
-		
-		virtual std::string ToString() const override
-		{
-			std::stringstream ss;
-			ss << "MouseButtonPressedEvent: " << Button;
-			return ss.str();
-		}
+		TSC_SET_EVENT_NAME("MouseButtonPressed");
 
 		int RepeatedCount;
 	};

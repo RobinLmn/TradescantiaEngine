@@ -12,9 +12,15 @@ namespace TradescantiaEngine
 {
 	class Engine
 	{
+	private:
+		Engine() = default;
+
+		bool OnWindowClose(WindowCloseEvent& e);
+
 	public:
-		Engine();
-		~Engine();
+		~Engine() = default;
+		Engine(Engine const&) = delete;
+		void operator=(Engine const&) = delete;
 
 		void Run();
 		void PreUpdate(float deltaTime);
@@ -28,23 +34,17 @@ namespace TradescantiaEngine
 		void PushSystem(System* system);
 
 		inline Window& GetWindow() { return *_Window; }
-		inline static Engine& Get() { return *_Instance; }
+		static Engine& Get() { static Engine instance; return instance; }
 
 	private:
-		bool OnWindowClose(WindowCloseEvent& e);
-
 		bool _Running = true;
 
-		SystemStack _SystemStack; 
+		ImGuiSystem* _ImGuiSystem = nullptr;
+		CameraSystem* _CameraSystem = nullptr;
 
-		ImGuiSystem* _ImGuiSystem;
-		CameraSystem* _CameraSystem;
-		
 		Window* _Window;
 
-		static Engine* _Instance;
+		SystemCollection _SystemCollection;
 	};
-
-	Engine* CreateEngine();
 }
 
