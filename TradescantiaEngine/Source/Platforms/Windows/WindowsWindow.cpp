@@ -57,7 +57,8 @@ namespace TradescantiaEngine
 		_Context->Init();
 
 		glfwSetWindowUserPointer(_Window, &_Data);
-		SetVSync(true);
+
+		SetVSync(false);
 
 		// Set glfw callbacks
 
@@ -166,6 +167,7 @@ namespace TradescantiaEngine
 
 	void WindowsWindow::Update()
 	{
+		ZoneScoped
 		glfwPollEvents();
 		_Context->SwapBuffers();
 	}

@@ -11,7 +11,7 @@
 
 #include "Systems/ParticleSystem.h"
 
-#define FIXED_UPDATE_TIME 0.02f
+#define FIXED_UPDATE_TIME 0.050f
 
 namespace TradescantiaEngine 
 {
@@ -59,6 +59,7 @@ namespace TradescantiaEngine
 
 	void Engine::PreUpdate(float deltaTime)
 	{
+		ZoneScoped
 		TradescantiaEngine::RenderCommand::Clear();
 
 		TradescantiaEngine::Renderer::BeginScene(_CameraSystem->GetCamera());
@@ -68,18 +69,21 @@ namespace TradescantiaEngine
 
 	void Engine::Update(float deltaTime)
 	{
+		ZoneScoped
 		for (System* system : _SystemCollection)
 			system->Update(deltaTime);
 	}
 
 	void Engine::FixedUpdate(float deltaTime)
 	{
+		ZoneScoped
 		for (System* system : _SystemCollection)
 			system->FixedUpdate(deltaTime);
 	}
 
 	void Engine::PostUpdate(float deltaTime)
 	{
+		ZoneScoped
 		_ImGuiSystem->End();
 		_Window->Update();
 		TradescantiaEngine::Renderer::EndScene();
@@ -103,6 +107,7 @@ namespace TradescantiaEngine
 
 		while (_Running)
 		{
+			FrameMark
 			const float deltaTime = std::chrono::duration_cast<seconds>(clock.now() - lastTime).count();
 			lastTime = clock.now();
 			lag += deltaTime;

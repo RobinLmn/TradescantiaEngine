@@ -14,6 +14,7 @@
 #include <unordered_set>
 
 #include <glm/glm.hpp>
+#include "Tracy.hpp"
 
 #include "Core/Log.h"
 

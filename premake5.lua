@@ -5,7 +5,7 @@ workspace "TradescantiaEngine"
 	{
 		"Debug",
 		"Release",
-		"Dist"
+		"Profile",
 	}
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
@@ -15,10 +15,12 @@ IncludeDir["GLFW"] = "TradescantiaEngine/ThirdParty/GLFW/include"
 IncludeDir["glad"] = "TradescantiaEngine/ThirdParty/glad/include"
 IncludeDir["ImGui"] = "TradescantiaEngine/ThirdParty/ImGui"
 IncludeDir["glm"] = "TradescantiaEngine/ThirdParty/glm"
+IncludeDir["tracy"] = "TradescantiaEngine/ThirdParty/tracy"
 
 include "TradescantiaEngine/ThirdParty/GLFW"
 include "TradescantiaEngine/ThirdParty/glad"
 include "TradescantiaEngine/ThirdParty/ImGui"
+include "TradescantiaEngine/ThirdParty/tracy"
 
 project "TradescantiaEngine"
 	location "TradescantiaEngine"
@@ -48,7 +50,8 @@ project "TradescantiaEngine"
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.glad}",
 		"%{IncludeDir.ImGui}",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.tracy}",
 	}
 
 	links
@@ -56,12 +59,13 @@ project "TradescantiaEngine"
 		"glad",
 		"GLFW",
 		"opengl32.lib",
-		"ImGui"
+		"ImGui",
+		"tracy",
 	}
 
 	defines
 	{
-		"_CRT_SECURE_NO_WARNINGS"
+		"_CRT_SECURE_NO_WARNINGS",
 	}
 
 	filter "system:windows"
@@ -74,19 +78,20 @@ project "TradescantiaEngine"
 		}
 
 	filter "configurations:Debug"
-		defines "TSC_DEBUG"
+		defines {"TSC_DEBUG"}
 		runtime "Debug"
 		symbols "on"
 	
 	filter "configurations:Release"
-		defines "TSC_RELEASE"
+		defines {"TSC_RELEASE"}
 		runtime "Release"
 		optimize "on"
-
-	filter "configurations:Dist"
-		defines "TSC_DIST"
+		
+	filter "configurations:Profile"
+		defines {"TSC_RELEASE", "TSC_PROFILE", "TRACY_ENABLE"}
 		runtime "Release"
 		optimize "on"
+		symbols "on"
 
 project "Playground"
 	location "Playground"
@@ -110,11 +115,13 @@ project "Playground"
 		"TradescantiaEngine/ThirdParty",
 		"TradescantiaEngine/Source",
 		"%{IncludeDir.glm}",
+		"%{IncludeDir.tracy}",
 	}
 
 	links
 	{
-		"TradescantiaEngine"
+		"TradescantiaEngine",
+		"tracy",
 	}
 
 	filter "system:windows"
@@ -126,16 +133,17 @@ project "Playground"
 		}
 
 	filter "configurations:Debug"
-		defines "TSC_DEBUG"
+		defines {"TSC_DEBUG"}
 		runtime "Debug"
 		symbols "on"
 	
 	filter "configurations:Release"
-		defines "TSC_RELEASE"
+		defines {"TSC_RELEASE"}
 		runtime "Release"
 		optimize "on"
-
-	filter "configurations:Dist"
-		defines "TSC_DIST"
+		
+	filter "configurations:Profile"
+		defines {"TRACY_ENABLE"}
 		runtime "Release"
 		optimize "on"
+		symbols "on"
